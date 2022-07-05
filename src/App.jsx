@@ -3,7 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 
 import { accountApi } from '@services';
 import { UserContext } from '@context/UserContext';
-import { Login, Register, Loader } from '@components';
+import { Login, Register, Loader, Welcome } from '@components';
 
 function App() {
   const [userContext, setUserContext] = useContext(UserContext);
@@ -28,13 +28,30 @@ function App() {
     verifyAccount();
   }, [verifyAccount]);
 
+  /**
+   * Sync logout across tabs
+   */
+  const syncLogout = useCallback((event) => {
+    if (event.key === 'logout') {
+      // If using react-router-dom, you may call history.push("/")
+      window.location.reload();
+    }
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener('storage', syncLogout);
+    return () => {
+      window.removeEventListener('storage', syncLogout);
+    };
+  }, [syncLogout]);
+
   return userContext.token === null ? (
     <Routes>
       <Route path="register" element={<Register />} />
       <Route path="*" element={<Login />} />
     </Routes>
   ) : userContext.token ? (
-    <div>Welcome</div>
+    <Welcome />
   ) : (
     <Loader />
   );

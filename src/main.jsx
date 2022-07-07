@@ -1,16 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
+import { Web3ReactProvider } from '@web3-react/core';
+
 import App from './App';
 import './index.css';
-
+import { getLibrary } from '@config/web3';
 import { UserProvider } from '@context/UserContext';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <UserProvider>
       <BrowserRouter>
-        <App />
+        <Web3ReactProvider getLibrary={getLibrary}>
+          <App />
+        </Web3ReactProvider>
       </BrowserRouter>
     </UserProvider>
   </React.StrictMode>

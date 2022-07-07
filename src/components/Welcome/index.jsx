@@ -57,7 +57,27 @@ export default () => {
   ) : (
     <div>
       <p>
-        Welcome <b>{userContext.details.username}</b>
+        Welcome <br />
+        Username: <b>{userContext.details.username}</b> <br />
+        DiscordUser:{' '}
+        <b>
+          {userContext.details.discordUser.discordTag ?? (
+            <div>
+              --- <Button variant="contained">Associate discord</Button>
+            </div>
+          )}
+        </b>{' '}
+        <br />
+        Wallets:{' '}
+        <b>
+          {' '}
+          {userContext.details.wallets.length > 0
+            ? userContext.details.wallets.forEach((wallet) => {
+                <div>{wallet.wallet}</div>;
+              })
+            : '---'}
+          <Button variant="contained">Add wallet</Button>
+        </b>
       </p>
       <Button variant="contained" onClick={reloadUserDetailsHandler}>
         Reload

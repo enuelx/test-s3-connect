@@ -3,7 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 
 import { accountApi } from '@services';
 import { UserContext } from '@context/UserContext';
-import { Login, Register, Loader, Welcome } from '@components';
+import { Login, Register, Loader, Welcome, NavBar } from '@components';
 
 function App() {
   const [userContext, setUserContext] = useContext(UserContext);
@@ -45,15 +45,20 @@ function App() {
     };
   }, [syncLogout]);
 
-  return userContext.token === null ? (
-    <Routes>
-      <Route path="register" element={<Register />} />
-      <Route path="*" element={<Login />} />
-    </Routes>
-  ) : userContext.token ? (
-    <Welcome />
-  ) : (
-    <Loader />
+  return (
+    <div>
+      <NavBar />
+      {userContext.token === null ? (
+        <Routes>
+          <Route path="register" element={<Register />} />
+          <Route path="*" element={<Login />} />
+        </Routes>
+      ) : userContext.token ? (
+        <Welcome />
+      ) : (
+        <Loader />
+      )}
+    </div>
   );
 }
 

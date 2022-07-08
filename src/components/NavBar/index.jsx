@@ -1,14 +1,4 @@
-import { useState } from 'react';
-import {
-  AppBar,
-  Menu,
-  Toolbar,
-  Typography,
-  Container,
-  IconButton,
-  Button
-} from '@mui/material';
-import { Menu as MenuIcon } from '@mui/icons-material';
+import { AppBar, Toolbar, Link } from '@mui/material';
 import { WalletData } from '@components';
 import { Box } from '@mui/system';
 
@@ -17,12 +7,18 @@ export default () => {
     <AppBar position="static">
       <Toolbar>
         <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-          <Button sx={{ my: 2, color: 'white', display: 'block' }}>
+          <Link
+            href="/"
+            sx={{ paddingRight: 2, color: 'white', display: 'block' }}
+          >
             Login
-          </Button>
-          <Button sx={{ my: 2, color: 'white', display: 'block' }}>
+          </Link>
+          <Link
+            href="/register"
+            sx={{ paddingRight: 2, color: 'white', display: 'block' }}
+          >
             Register
-          </Button>
+          </Link>
         </Box>
         <Box sx={{ flexGrow: 0 }}>
           <WalletData />

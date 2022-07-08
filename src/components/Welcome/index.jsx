@@ -1,12 +1,17 @@
 import React, { useCallback, useContext, useEffect } from 'react';
-import { Button } from '@mui/material';
+import { v4 as uuidv4 } from 'uuid';
+import { UnsupportedChainIdError, useWeb3React } from '@web3-react/core';
+import { Button, Typography } from '@mui/material';
 
 import { UserContext } from '@context/UserContext';
 import { Loader } from '@components';
-import { accountApi } from '@services';
+import { accountApi, walletApi } from '@services';
 
 export default () => {
   const [userContext, setUserContext] = useContext(UserContext);
+
+  const { active, library, account, error } = useWeb3React();
+  const isUnsupportedChain = error instanceof UnsupportedChainIdError;
 
   const getUserDetails = useCallback(async () => {
     try {
@@ -50,6 +55,19 @@ export default () => {
     window.localStorage.setItem('logout', Date.now());
   };
 
+  const associateWallet = async () => {
+    const message = `Welcome to Cyphanatics Dashboard!\n\nClick to sign in to sign a message and prove the ownership of the wallet.\n\nThis request will not trigger a blockchain transaction or cost any gas fees.\n\nWallet address:\n${account}\n\nNonce:\n${uuidv4()}`;
+    const signature = await library.getSigner().signMessage(message);
+    try {
+      await walletApi.associate(userContext.token, signature, message, account);
+      setUserContext((oldValues) => {
+        return { ...oldValues, details: undefined };
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return userContext.details === null ? (
     'Error loading user'
   ) : !userContext.details ? (
@@ -72,11 +90,23 @@ export default () => {
         <b>
           {' '}
           {userContext.details.wallets.length > 0
-            ? userContext.details.wallets.forEach((wallet) => {
-                <div>{wallet.wallet}</div>;
+            ? userContext.details.wallets.map((wallet) => {
+                return (
+                  <span key={wallet.wallet}>
+                    <br />
+                    {wallet.wallet}
+                  </span>
+                );
               })
             : '---'}
-          <Button variant="contained">Add wallet</Button>
+          <br />
+          <Button
+            onClick={associateWallet}
+            variant="contained"
+            disabled={!active || isUnsupportedChain}
+          >
+            Add wallet
+          </Button>
         </b>
       </p>
       <Button variant="contained" onClick={reloadUserDetailsHandler}>

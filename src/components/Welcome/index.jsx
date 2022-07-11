@@ -79,10 +79,10 @@ export default () => {
         Username: <b>{userContext.details.username}</b> <br />
         DiscordUser:{' '}
         <b>
-          {userContext.details.discordUser.discordTag ?? (
-            <div>
+          {userContext.details.discordUser?.discordTag ?? (
+            <span>
               --- <Button variant="contained">Associate discord</Button>
-            </div>
+            </span>
           )}
         </b>{' '}
         <br />

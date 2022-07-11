@@ -1,53 +1,21 @@
 import { useState, useContext } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { UnsupportedChainIdError, useWeb3React } from '@web3-react/core';
-import { Button, Input, Divider } from '@mui/material';
+import { Button, TextField, Divider, Box } from '@mui/material';
 
-import { UserContext } from '@context/UserContext';
-import { ToastContext } from '@context/ToastContext';
+import { UserContext, ToastContext } from '@context';
 import { accountApi, walletApi } from '@services';
+import config from '@config';
+import { AccountForm } from '@components';
 
 export default () => {
   const [userContext, setUserContext] = useContext(UserContext);
   const [toastContext, setToastContext] = useContext(ToastContext);
 
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
 
   const { active, account, library, error } = useWeb3React();
   const isUnsupportedChain = error instanceof UnsupportedChainIdError;
-
-  const handleLogin = async () => {
-    setIsSubmitting(true);
-
-    try {
-      const result = await accountApi.login(username, password);
-      setUserContext((oldValues) => {
-        return { ...oldValues, token: result.token };
-      });
-      setToastContext((oldValues) => {
-        return {
-          ...oldValues,
-          message: 'Login succesful',
-          severity: 'success'
-        };
-      });
-    } catch (err) {
-      let message;
-      if (err.response.status === 401) {
-        message = 'Invalid username or password';
-      } else if (err.response.data.error) {
-        message = err.response.data.error;
-      } else {
-        message = 'Something went wrong';
-      }
-      setToastContext((oldValues) => {
-        return { ...oldValues, message, severity: 'error' };
-      });
-    }
-    setIsSubmitting(false);
-  };
 
   const handleWeb3Login = async () => {
     setIsSubmitting(true);
@@ -60,32 +28,19 @@ export default () => {
       setUserContext((oldValues) => {
         return { ...oldValues, token: result.token };
       });
-    } catch (err) {}
+    } catch (err) {
+      const message = err.response.data?.error || 'Something went wrong';
+
+      setToastContext((oldValues) => {
+        return { ...oldValues, message, severity: 'error' };
+      });
+    }
     setIsSubmitting(false);
   };
 
   return (
-    <div style={{ padding: '40px', width: 'fit-content' }}>
-      <Input
-        placeholder="username"
-        value={username}
-        onChange={(e) => {
-          setUsername(e.target.value);
-        }}
-      />
-      <br />
-      <Input
-        placeholder="password"
-        value={password}
-        onChange={(e) => {
-          setPassword(e.target.value);
-        }}
-        type="password"
-      />
-      <br />
-      <Button disabled={isSubmitting} variant="contained" onClick={handleLogin}>
-        Login
-      </Button>
+    <div>
+      <AccountForm formActionName="Login" submitCallback={accountApi.login} />
       <Divider />
       <Button
         variant="contained"

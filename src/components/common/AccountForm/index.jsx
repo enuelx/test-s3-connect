@@ -1,6 +1,7 @@
 import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Box, Button, TextField } from '@mui/material';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
 
 import { UserContext, ToastContext } from '@context';
 import config from '@config';
@@ -14,6 +15,7 @@ export default ({ formActionName, submitCallback }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = async () => {
     setIsSubmitting(true);
@@ -71,7 +73,7 @@ export default ({ formActionName, submitCallback }) => {
         onChange={(e) => {
           setPassword(e.target.value);
         }}
-        type="password"
+        type={showPassword ? 'text' : 'password'}
         error={password !== '' && !config.passwordRegex.test(password)}
         helperText={
           password !== '' && !config.passwordRegex.test(password)
@@ -79,6 +81,9 @@ export default ({ formActionName, submitCallback }) => {
             : ''
         }
       />
+      <Box onClick={() => setShowPassword(!showPassword)}>
+        {showPassword ? <VisibilityOff /> : <Visibility />}
+      </Box>
       <br />
       <Button
         type="submit"

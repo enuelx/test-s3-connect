@@ -3,12 +3,13 @@ import { v4 as uuidv4 } from 'uuid';
 import { UnsupportedChainIdError, useWeb3React } from '@web3-react/core';
 import { Button, Typography } from '@mui/material';
 
-import { UserContext } from '@context/UserContext';
+import { UserContext, ToastContext } from '@context';
 import { Loader } from '@components';
 import { accountApi, walletApi } from '@services';
 
 export default () => {
   const [userContext, setUserContext] = useContext(UserContext);
+  const [toastContext, setToastContext] = useContext(ToastContext);
 
   const { active, library, account, error } = useWeb3React();
   const isUnsupportedChain = error instanceof UnsupportedChainIdError;
@@ -52,6 +53,13 @@ export default () => {
     setUserContext((oldValues) => {
       return { ...oldValues, details: undefined, token: null };
     });
+    setToastContext((oldValues) => {
+      return {
+        ...oldValues,
+        message: 'Logged out successfully',
+        severity: 'success'
+      };
+    });
     window.localStorage.setItem('logout', Date.now());
   };
 
@@ -63,8 +71,18 @@ export default () => {
       setUserContext((oldValues) => {
         return { ...oldValues, details: undefined };
       });
+      setToastContext((oldValues) => {
+        return {
+          ...oldValues,
+          message: 'Wallet associated successfully',
+          severity: 'success'
+        };
+      });
     } catch (err) {
-      console.log(err);
+      const message = err.response.data?.error || 'Something went wrong';
+      setToastContext((oldValues) => {
+        return { ...oldValues, message, severity: 'error' };
+      });
     }
   };
 

@@ -28,6 +28,14 @@ export default () => {
       setUserContext((oldValues) => {
         return { ...oldValues, token: result.token };
       });
+
+      setToastContext((oldValues) => {
+        return {
+          ...oldValues,
+          message: 'Login successful',
+          severity: 'success'
+        };
+      });
     } catch (err) {
       const message = err.response.data?.error || 'Something went wrong';
 

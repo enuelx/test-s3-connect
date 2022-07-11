@@ -1,7 +1,10 @@
 import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Box, Button, TextField } from '@mui/material';
-import { Visibility, VisibilityOff } from '@mui/icons-material';
+import {
+  VisibilityOutlined as ShowIcon,
+  VisibilityOffOutlined as HideIcon
+} from '@mui/icons-material';
 
 import { UserContext, ToastContext } from '@context';
 import config from '@config';
@@ -29,7 +32,7 @@ export default ({ formActionName, submitCallback }) => {
       setToastContext((oldValues) => {
         return {
           ...oldValues,
-          message: `${formActionName} succesful`,
+          message: `${formActionName} successful`,
           severity: 'success'
         };
       });
@@ -81,8 +84,8 @@ export default ({ formActionName, submitCallback }) => {
             : ''
         }
       />
-      <Box onClick={() => setShowPassword(!showPassword)}>
-        {showPassword ? <VisibilityOff /> : <Visibility />}
+      <Box component="div" onClick={() => setShowPassword(!showPassword)}>
+        {showPassword ? <HideIcon /> : <ShowIcon />}
       </Box>
       <br />
       <Button

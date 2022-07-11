@@ -7,15 +7,18 @@ import App from './App';
 import './index.css';
 import { getLibrary } from '@config/web3';
 import { UserProvider } from '@context/UserContext';
+import { ToastProvider } from '@context/ToastContext';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <UserProvider>
-      <BrowserRouter>
-        <Web3ReactProvider getLibrary={getLibrary}>
-          <App />
-        </Web3ReactProvider>
-      </BrowserRouter>
+      <ToastProvider>
+        <BrowserRouter>
+          <Web3ReactProvider getLibrary={getLibrary}>
+            <App />
+          </Web3ReactProvider>
+        </BrowserRouter>
+      </ToastProvider>
     </UserProvider>
   </React.StrictMode>
 );

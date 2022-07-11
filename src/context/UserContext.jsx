@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import { createContext, useState } from 'react';
 
-const UserContext = React.createContext([{}, () => {}]);
+const UserContext = createContext([{}, () => {}]);
 
 const UserProvider = ({ children }) => {
   const [state, setState] = useState({});

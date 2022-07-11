@@ -1,12 +1,25 @@
-import { useContext, useCallback, useEffect } from 'react';
+import { useContext, useCallback, useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 import { accountApi } from '@services';
 import { UserContext } from '@context/UserContext';
+import { ToastContext } from '@context/ToastContext';
 import { Login, Register, Loader, Welcome, NavBar } from '@components';
+import { Snackbar, Alert } from '@mui/material';
 
 function App() {
   const [userContext, setUserContext] = useContext(UserContext);
+  const [toastContext, setToastContext] = useContext(ToastContext);
+
+  const handleToastClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setToastContext((oldValues) => {
+      return { ...oldValues, message: null, severity: null };
+    });
+  };
 
   const verifyAccount = useCallback(async () => {
     try {
@@ -57,6 +70,18 @@ function App() {
         <Welcome />
       ) : (
         <Loader />
+      )}
+
+      {toastContext.message && (
+        <Snackbar
+          open={toastContext.message !== null}
+          onClose={handleToastClose}
+          autoHideDuration={5000}
+        >
+          <Alert severity={toastContext.severity} onClose={handleToastClose}>
+            {toastContext.message}
+          </Alert>
+        </Snackbar>
       )}
     </div>
   );

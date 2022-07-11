@@ -4,13 +4,16 @@ import { UnsupportedChainIdError, useWeb3React } from '@web3-react/core';
 import { Button, Input, Divider } from '@mui/material';
 
 import { UserContext } from '@context/UserContext';
+import { ToastContext } from '@context/ToastContext';
 import { accountApi, walletApi } from '@services';
 
 export default () => {
+  const [userContext, setUserContext] = useContext(UserContext);
+  const [toastContext, setToastContext] = useContext(ToastContext);
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [userContext, setUserContext] = useContext(UserContext);
 
   const { active, account, library, error } = useWeb3React();
   const isUnsupportedChain = error instanceof UnsupportedChainIdError;
@@ -23,9 +26,27 @@ export default () => {
       setUserContext((oldValues) => {
         return { ...oldValues, token: result.token };
       });
-    } catch (err) {}
+      setToastContext((oldValues) => {
+        return {
+          ...oldValues,
+          message: 'Login succesful',
+          severity: 'success'
+        };
+      });
+    } catch (err) {
+      let message;
+      if (err.response.status === 401) {
+        message = 'Invalid username or password';
+      } else if (err.response.data.error) {
+        message = err.response.data.error;
+      } else {
+        message = 'Something went wrong';
+      }
+      setToastContext((oldValues) => {
+        return { ...oldValues, message, severity: 'error' };
+      });
+    }
     setIsSubmitting(false);
-    return res.status(500).send({ error: err.message });
   };
 
   const handleWeb3Login = async () => {

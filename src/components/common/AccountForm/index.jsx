@@ -1,9 +1,10 @@
 import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Box, Button, TextField } from '@mui/material';
+import { Box, Button, TextField, Tooltip, Typography } from '@mui/material';
 import {
   VisibilityOutlined as ShowIcon,
-  VisibilityOffOutlined as HideIcon
+  VisibilityOffOutlined as HideIcon,
+  InfoOutlined as InfoIcon
 } from '@mui/icons-material';
 
 import { UserContext, ToastContext } from '@context';
@@ -61,12 +62,15 @@ export default ({ formActionName, submitCallback }) => {
         }}
         variant="standard"
         error={username !== '' && username.length < 4}
-        helperText={
-          username !== '' && username.length < 4
-            ? 'Username must be at least 4 characters long'
-            : ''
-        }
       />
+      <Tooltip
+        arrow
+        placement="right"
+        describeChild
+        title="Username must be at least 4 characters long"
+      >
+        <InfoIcon />
+      </Tooltip>
       <br />
       <TextField
         variant="standard"
@@ -78,12 +82,22 @@ export default ({ formActionName, submitCallback }) => {
         }}
         type={showPassword ? 'text' : 'password'}
         error={password !== '' && !config.passwordRegex.test(password)}
-        helperText={
-          password !== '' && !config.passwordRegex.test(password)
-            ? 'Password must be at least 8 characters long and contain a number, a lowercase letter, an uppercase letter and a special symbol'
-            : ''
-        }
       />
+      <Tooltip
+        sx={{ textTransform: 'none' }}
+        arrow
+        placement="right"
+        describeChild
+        title={
+          <span>
+            Password must: <br />- Be at least 8 characters long <br />- Contain
+            a number <br />- Contain a lowercase letter <br />- Contain an
+            uppercase letter <br />- Contain a special symbol
+          </span>
+        }
+      >
+        <InfoIcon />
+      </Tooltip>
       <Box component="div" onClick={() => setShowPassword(!showPassword)}>
         {showPassword ? <HideIcon /> : <ShowIcon />}
       </Box>

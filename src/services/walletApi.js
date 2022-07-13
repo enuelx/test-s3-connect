@@ -6,7 +6,7 @@ const axiosInstance = axios.create({
   withCredentials: true
 });
 
-const apiUrl = `${config.accountsApiUrl}/api/wallet`;
+const apiUrl = `${config.apiUrl}/api/wallet`;
 
 export default {
   async login(signature, message, account) {

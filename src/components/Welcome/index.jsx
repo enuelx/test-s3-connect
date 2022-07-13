@@ -1,15 +1,18 @@
-import React, { useCallback, useContext, useEffect } from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { UnsupportedChainIdError, useWeb3React } from '@web3-react/core';
-import { Button, Typography } from '@mui/material';
+import { Button } from '@mui/material';
 
 import { UserContext, ToastContext } from '@context';
+import CodeModal from './CodeModal';
 import { Loader } from '@components';
 import { accountApi, walletApi } from '@services';
 
 export default () => {
   const [userContext, setUserContext] = useContext(UserContext);
   const [toastContext, setToastContext] = useContext(ToastContext);
+
+  const [associateCode, setAssociateCode] = useState('');
 
   const { active, library, account, error } = useWeb3React();
   const isUnsupportedChain = error instanceof UnsupportedChainIdError;
@@ -99,7 +102,7 @@ export default () => {
         <b>
           {userContext.details.discordUser?.discordTag ?? (
             <span>
-              --- <Button variant="contained">Associate discord</Button>
+              --- <CodeModal />
             </span>
           )}
         </b>{' '}

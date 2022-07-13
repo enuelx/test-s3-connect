@@ -6,7 +6,7 @@ const axiosInstance = axios.create({
   withCredentials: true
 });
 
-const apiUrl = `${config.accountsApiUrl}/api/account`;
+const apiUrl = `${config.apiUrl}/api/account`;
 
 export default {
   async login(username, password) {

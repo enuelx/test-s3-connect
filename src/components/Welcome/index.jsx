@@ -129,6 +129,13 @@ export default () => {
             Add wallet
           </Button>
         </b>
+        <br />
+        Cyphers Hodling:{' '}
+        <b>
+          {userContext.details.wallets.reduce((prev, { cypherHoldings }) => {
+            return prev + cypherHoldings.length;
+          }, 0)}
+        </b>
       </p>
       <Button variant="contained" onClick={reloadUserDetailsHandler}>
         Reload

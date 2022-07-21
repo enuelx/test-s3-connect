@@ -22,7 +22,7 @@ export default () => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const { activate, library, error } = useWeb3React();
+  const { activate, error } = useWeb3React();
   const isUnsupportedChain = error instanceof UnsupportedChainIdError;
 
   useEffect(() => {
@@ -48,6 +48,7 @@ export default () => {
             <ListItemButton
               onClick={async () => {
                 activate(connectors.Metamask);
+                localStorage.setItem('previouslyConnectedMetamask', 'true')
                 handleClose();
               }}
               disabled={

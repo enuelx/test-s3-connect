@@ -13,8 +13,8 @@ import config from '@config';
 export default ({ formActionName, submitCallback }) => {
   const navigate = useNavigate();
 
-  const [userContext, setUserContext] = useContext(UserContext);
-  const [toastContext, setToastContext] = useContext(ToastContext);
+  const userContext = useContext(UserContext);
+  const toastContext = useContext(ToastContext);
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [username, setUsername] = useState('');
@@ -27,16 +27,8 @@ export default ({ formActionName, submitCallback }) => {
     try {
       const result = await submitCallback(username, password);
 
-      setUserContext((oldValues) => {
-        return { ...oldValues, token: result.token };
-      });
-      setToastContext((oldValues) => {
-        return {
-          ...oldValues,
-          message: `${formActionName} successful`,
-          severity: 'success'
-        };
-      });
+      userContext.setToken(result.token);
+      toastContext.successMessage(`${formActionName} successful`);
       navigate('/');
     } catch (err) {
       const message =
@@ -44,9 +36,7 @@ export default ({ formActionName, submitCallback }) => {
           ? 'Invalid username or password'
           : err.response.data?.error || 'Something went wrong';
 
-      setToastContext((oldValues) => {
-        return { ...oldValues, message, severity: 'error' };
-      });
+      toastContext.errorMessage(message);
     }
     setIsSubmitting(false);
   };

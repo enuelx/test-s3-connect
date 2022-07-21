@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { UnsupportedChainIdError, useWeb3React } from '@web3-react/core';
 import { Button } from '@mui/material';
@@ -8,61 +8,23 @@ import CodeModal from './CodeModal';
 import { Loader } from '@components';
 import { accountApi, walletApi } from '@services';
 
-export default () => {
-  const [userContext, setUserContext] = useContext(UserContext);
-  const [toastContext, setToastContext] = useContext(ToastContext);
-
-  const [associateCode, setAssociateCode] = useState('');
+const Welcome = () => {
+  const userContext = useContext(UserContext);
+  const toastContext = useContext(ToastContext);
 
   const { active, library, account, error } = useWeb3React();
   const isUnsupportedChain = error instanceof UnsupportedChainIdError;
 
-  const getUserDetails = useCallback(async () => {
-    try {
-      const userDetails = await accountApi.userDetails(userContext.token);
-      setUserContext((oldValues) => {
-        return { ...oldValues, details: userDetails };
-      });
-    } catch (err) {
-      if (err.status === 401) {
-        // Edge case: when the token has expired.
-        // This could happen if the refreshToken calls have failed due to network error or
-        // User has had the tab open from previous day and tries to click on the Fetch button
-        window.location.reload();
-      } else {
-        setUserContext((oldValues) => {
-          return { ...oldValues, details: null };
-        });
-      }
-    }
-  }, [setUserContext, userContext.token]);
-
-  useEffect(() => {
-    if (!userContext.details) {
-      getUserDetails();
-    }
-  }, [userContext.details, getUserDetails]);
-
   const reloadUserDetailsHandler = () => {
     // set details to undefined so that spinner will be displayed and
     // getUserDetails will be invoked from useEffect
-    setUserContext((oldValues) => {
-      return { ...oldValues, details: undefined };
-    });
+    userContext.setUser(undefined);
   };
 
   const logoutHandler = async () => {
     await accountApi.logout(userContext.token);
-    setUserContext((oldValues) => {
-      return { ...oldValues, details: undefined, token: null };
-    });
-    setToastContext((oldValues) => {
-      return {
-        ...oldValues,
-        message: 'Logged out successfully',
-        severity: 'success'
-      };
-    });
+    userContext.clear();
+    toastContext.successMessage('Logout successful');
     window.localStorage.setItem('logout', Date.now());
   };
 
@@ -71,36 +33,26 @@ export default () => {
     const signature = await library.getSigner().signMessage(message);
     try {
       await walletApi.associate(userContext.token, signature, message, account);
-      setUserContext((oldValues) => {
-        return { ...oldValues, details: undefined };
-      });
-      setToastContext((oldValues) => {
-        return {
-          ...oldValues,
-          message: 'Wallet associated successfully',
-          severity: 'success'
-        };
-      });
+      userContext.setUser(undefined); // To force reload
+      toastContext.successMessage('Wallet associated successfully');
     } catch (err) {
       const message = err.response.data?.error || 'Something went wrong';
-      setToastContext((oldValues) => {
-        return { ...oldValues, message, severity: 'error' };
-      });
+      toastContext.errorMessage(message);
     }
   };
 
-  return userContext.details === null ? (
+  return userContext.user === null ? (
     'Error loading user'
-  ) : !userContext.details ? (
+  ) : !userContext.user ? (
     <Loader />
   ) : (
     <div>
       <p>
         Welcome <br />
-        Username: <b>{userContext.details.username}</b> <br />
+        Username: <b>{userContext.user.username}</b> <br />
         DiscordUser:{' '}
         <b>
-          {userContext.details.discordUser?.discordTag ?? (
+          {userContext.user.discordUser?.discordTag ?? (
             <span>
               --- <CodeModal />
             </span>
@@ -110,15 +62,15 @@ export default () => {
         Wallets:{' '}
         <b>
           {' '}
-          {userContext.details.wallets.length > 0
-            ? userContext.details.wallets.map((wallet) => {
-                return (
-                  <span key={wallet.wallet}>
-                    <br />
-                    {wallet.wallet}
-                  </span>
-                );
-              })
+          {userContext.user.wallets.length > 0
+            ? userContext.user.wallets.map((wallet) => {
+              return (
+                <span key={wallet.wallet}>
+                  <br />
+                  {wallet.wallet}
+                </span>
+              );
+            })
             : '---'}
           <br />
           <Button
@@ -132,7 +84,7 @@ export default () => {
         <br />
         Cyphers Hodling:{' '}
         <b>
-          {userContext.details.wallets.reduce((prev, { cypherHoldings }) => {
+          {userContext.user.wallets.reduce((prev, { cypherHoldings }) => {
             return prev + cypherHoldings.length;
           }, 0)}
         </b>
@@ -146,3 +98,5 @@ export default () => {
     </div>
   );
 };
+
+export default Welcome;

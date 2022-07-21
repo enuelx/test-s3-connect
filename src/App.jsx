@@ -1,41 +1,53 @@
-import { useContext, useCallback, useEffect, useState } from 'react';
+import { useContext, useCallback, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 import { accountApi } from '@services';
 import { UserContext } from '@context/UserContext';
-import { ToastContext } from '@context/ToastContext';
-import { Login, Register, Loader, Welcome, NavBar } from '@components';
-import { Snackbar, Alert } from '@mui/material';
+import {
+  Login,
+  Register,
+  Loader,
+  Welcome,
+  NavBar,
+  ManualVerify
+} from '@components';
 
 function App() {
-  const [userContext, setUserContext] = useContext(UserContext);
-  const [toastContext, setToastContext] = useContext(ToastContext);
+  const userContext = useContext(UserContext);
 
-  const handleToastClose = (event, reason) => {
-    if (reason === 'clickaway') {
-      return;
+  const getAccountDetails = useCallback(async () => {
+    try {
+      if (userContext.token) {
+        const userDetails = await accountApi.userDetails(userContext.token);
+        userContext.setUser(userDetails);
+      }
+    } catch (err) {
+      if (err.status === 401) {
+        // Edge case: when the token has expired.
+        // This could happen if the refreshToken calls have failed due to network error or
+        // User has had the tab open from previous day and tries to click on the Fetch button
+        window.location.reload();
+      } else {
+        userContext.setUser(null);
+      }
     }
+  }, [userContext.setUser, userContext.token]);
 
-    setToastContext((oldValues) => {
-      return { ...oldValues, message: null, severity: null };
-    });
-  };
+  useEffect(() => {
+    getAccountDetails();
+  }, [getAccountDetails]);
 
   const verifyAccount = useCallback(async () => {
     try {
       const data = await accountApi.refreshToken();
-      setUserContext((oldValues) => {
-        return { ...oldValues, token: data.token };
-      });
+      userContext.setToken(data.token);
     } catch (err) {
-      setUserContext((oldValues) => {
-        return { ...oldValues, token: null };
-      });
+      userContext.setToken(null);
     }
 
     // call refreshToken every 5 minutes to renew the authentication token.
     setTimeout(verifyAccount, 5 * 60 * 1000);
-  }, [setUserContext]);
+  }, [userContext.setToken]);
 
   useEffect(() => {
     verifyAccount();
@@ -67,21 +79,12 @@ function App() {
           <Route path="*" element={<Login />} />
         </Routes>
       ) : userContext.token ? (
-        <Welcome />
+        <Routes>
+          <Route path="manualverify" element={<ManualVerify />} />
+          <Route path="*" element={<Welcome />} />
+        </Routes>
       ) : (
         <Loader />
-      )}
-
-      {toastContext.message && (
-        <Snackbar
-          open={toastContext.message !== null}
-          onClose={handleToastClose}
-          autoHideDuration={5000}
-        >
-          <Alert severity={toastContext.severity} onClose={handleToastClose}>
-            {toastContext.message}
-          </Alert>
-        </Snackbar>
       )}
     </div>
   );

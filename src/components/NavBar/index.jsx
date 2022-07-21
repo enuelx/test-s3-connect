@@ -1,8 +1,13 @@
+import { useContext } from 'react';
 import { AppBar, Toolbar, Link } from '@mui/material';
-import { WalletData } from '@components';
 import { Box } from '@mui/system';
 
+import { WalletData } from '@components';
+import { UserContext } from '@context';
+
 export default () => {
+  const userContext = useContext(UserContext);
+
   return (
     <AppBar position="static">
       <Toolbar>
@@ -11,15 +16,26 @@ export default () => {
             href="/"
             sx={{ paddingRight: 2, color: 'white', display: 'block' }}
           >
-            Login
+            {userContext.token ? 'Home' : 'Login'}
           </Link>
-          <Link
-            href="/register"
-            sx={{ paddingRight: 2, color: 'white', display: 'block' }}
-          >
-            Register
-          </Link>
+          {!userContext.token && (
+            <Link
+              href="/register"
+              sx={{ paddingRight: 2, color: 'white', display: 'block' }}
+            >
+              Register
+            </Link>
+          )}
+          {userContext.token && (
+            <Link
+              href="/manualverify"
+              sx={{ paddingRight: 2, color: 'white', display: 'block' }}
+            >
+              Add wallet manually
+            </Link>
+          )}
         </Box>
+
         <Box sx={{ flexGrow: 0 }}>
           <WalletData />
         </Box>

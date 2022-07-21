@@ -8,8 +8,8 @@ export default () => {
   const [open, setOpen] = useState(false);
   const [associateCode, setAssociateCode] = useState('');
 
-  const [userContext, setUserContext] = useContext(UserContext);
-  const [toastContext, setToastContext] = useContext(ToastContext);
+  const userContext = useContext(UserContext);
+  const toastContext = useContext(ToastContext);
 
   const handleOpen = async () => {
     try {
@@ -21,9 +21,7 @@ export default () => {
       setOpen(true);
     } catch (err) {
       const message = err.response.data?.error || 'Something went wrong';
-      setToastContext((oldValues) => {
-        return { ...oldValues, message, severity: 'error' };
-      });
+      toastContext.errorMessage(message);
     }
   };
   const handleClose = () => setOpen(false);

@@ -12,8 +12,8 @@ export default {
   async login(signature, message, account) {
     const result = await axiosInstance.post(`${apiUrl}/login`, {
       message,
-        wallet: account,
-        signature
+      wallet: account,
+      signature
     });
 
     return result.data;
@@ -35,5 +35,46 @@ export default {
     );
 
     return result.data.account;
+  },
+
+  async getManualValidationInfo(token) {
+    const result = await axiosInstance.get(`${apiUrl}/manual/info`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+
+    return result.data.manualValidation;
+  },
+
+  async startManualValidation(verifiedWallet, toVerifyWallet, token) {
+    const result = await axiosInstance.post(
+      `${apiUrl}/manual/start`,
+      {
+        verifiedWallet,
+        toVerifyWallet
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    );
+
+    return result.data.manualValidation;
+  },
+
+  async cancelManualValidation(token) {
+    const result = await axiosInstance.post(
+      `${apiUrl}/manual/cancel`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    );
+
+    return result.data.manualValidation;
   }
 };

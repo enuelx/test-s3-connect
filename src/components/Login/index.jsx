@@ -1,16 +1,15 @@
 import { useState, useContext } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { UnsupportedChainIdError, useWeb3React } from '@web3-react/core';
-import { Button, TextField, Divider, Box } from '@mui/material';
+import { Button, Divider } from '@mui/material';
 
 import { UserContext, ToastContext } from '@context';
 import { accountApi, walletApi } from '@services';
-import config from '@config';
 import { AccountForm } from '@components';
 
 export default () => {
-  const [userContext, setUserContext] = useContext(UserContext);
-  const [toastContext, setToastContext] = useContext(ToastContext);
+  const userContext = useContext(UserContext);
+  const toastContext = useContext(ToastContext);
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -25,23 +24,13 @@ export default () => {
       const signature = await library.getSigner().signMessage(message);
       const result = await walletApi.login(signature, message, account);
       setIsSubmitting(false);
-      setUserContext((oldValues) => {
-        return { ...oldValues, token: result.token };
-      });
 
-      setToastContext((oldValues) => {
-        return {
-          ...oldValues,
-          message: 'Login successful',
-          severity: 'success'
-        };
-      });
+      userContext.setToken(result.token);
+      toastContext.successMessage('Login successful');
     } catch (err) {
       const message = err.response.data?.error || 'Something went wrong';
 
-      setToastContext((oldValues) => {
-        return { ...oldValues, message, severity: 'error' };
-      });
+      toastContext.errorMessage(message);
     }
     setIsSubmitting(false);
   };

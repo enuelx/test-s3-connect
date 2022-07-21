@@ -1,15 +1,25 @@
 import { createContext, useState } from 'react';
 
-const UserContext = createContext([{}, () => {}]);
+const UserContext = createContext();
 
 const UserProvider = ({ children }) => {
-  const [state, setState] = useState({});
+  const [token, setToken] = useState(null);
+  const [user, setUser] = useState(undefined);
 
-  return (
-    <UserContext.Provider value={[state, setState]}>
-      {children}
-    </UserContext.Provider>
-  );
+  function clear() {
+    setToken(null);
+    setUser(undefined);
+  }
+
+  const value = {
+    token,
+    user,
+    setUser,
+    setToken,
+    clear
+  };
+
+  return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 };
 
 export { UserContext, UserProvider };

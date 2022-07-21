@@ -34,8 +34,10 @@ function App() {
   }, [userContext.setUser, userContext.token]);
 
   useEffect(() => {
-    getAccountDetails();
-  }, [getAccountDetails]);
+    if (!userContext.user) {
+      getAccountDetails();
+    }
+  }, [userContext.user, getAccountDetails]);
 
   const verifyAccount = useCallback(async () => {
     try {

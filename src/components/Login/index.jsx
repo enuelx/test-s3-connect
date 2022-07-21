@@ -28,7 +28,10 @@ export default () => {
       userContext.setToken(result.token);
       toastContext.successMessage('Login successful');
     } catch (err) {
-      const message = err.response.data?.error || 'Something went wrong';
+      const message =
+        err.response.status === 401
+          ? 'Wallet not associated to an account or invalid signature'
+          : err.response.data?.error || 'Something went wrong';
 
       toastContext.errorMessage(message);
     }

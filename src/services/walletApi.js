@@ -37,6 +37,23 @@ export default {
     return result.data.account;
   },
 
+  async removeWallet(token, wallet) {
+    const result = await axiosInstance.post(
+      `${apiUrl}/remove`,
+      {
+        wallet
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    );
+
+    return result.data;
+  },
+
+  // Manual Validation Process
   async getManualValidationInfo(token) {
     const result = await axiosInstance.get(`${apiUrl}/manual/info`, {
       headers: {

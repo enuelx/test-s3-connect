@@ -7,7 +7,7 @@ import { UserContext, ToastContext } from '@context';
 import { accountApi, walletApi } from '@services';
 import { AccountForm } from '@components';
 
-export default () => {
+const Login = () => {
   const userContext = useContext(UserContext);
   const toastContext = useContext(ToastContext);
 
@@ -52,3 +52,5 @@ export default () => {
     </div>
   );
 };
+
+export default Login;

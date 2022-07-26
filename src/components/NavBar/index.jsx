@@ -1,12 +1,21 @@
 import { useContext } from 'react';
-import { AppBar, Toolbar, Link } from '@mui/material';
+import { AppBar, Toolbar, Link, Button } from '@mui/material';
 import { Box } from '@mui/system';
 
-import { WalletData } from '@components';
-import { UserContext } from '@context';
+import { WalletData, PinkButton } from '@components';
+import { UserContext, ToastContext } from '@context';
+import { accountApi } from '@services';
 
 export default () => {
   const userContext = useContext(UserContext);
+  const toastContext = useContext(ToastContext);
+
+  const logoutHandler = async () => {
+    await accountApi.logout(userContext.token);
+    userContext.clear();
+    toastContext.successMessage('Logout successful');
+    window.localStorage.setItem('logout', Date.now());
+  };
 
   return (
     <AppBar position="static">
@@ -16,7 +25,7 @@ export default () => {
             href="/"
             sx={{ paddingRight: 2, color: 'white', display: 'block' }}
           >
-            {userContext.token ? 'Home' : 'Login'}
+            Home
           </Link>
           {!userContext.token && (
             <Link
@@ -39,6 +48,13 @@ export default () => {
         <Box sx={{ flexGrow: 0 }}>
           <WalletData />
         </Box>
+        {userContext.token && (
+          <PinkButton
+            text="logout"
+            onClick={logoutHandler}
+            sx={{ marginLeft: '2px' }}
+          />
+        )}
       </Toolbar>
     </AppBar>
   );

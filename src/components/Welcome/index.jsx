@@ -5,7 +5,7 @@ import WalletData from './WalletsInfo';
 import { UserContext, ToastContext } from '@context';
 import CodeModal from './CodeModal';
 import { Loader } from '@components';
-import { accountApi } from '@services';
+
 
 const Welcome = () => {
   const userContext = useContext(UserContext);
@@ -15,13 +15,6 @@ const Welcome = () => {
     // set details to undefined so that spinner will be displayed and
     // getUserDetails will be invoked from useEffect
     userContext.setUser(undefined);
-  };
-
-  const logoutHandler = async () => {
-    await accountApi.logout(userContext.token);
-    userContext.clear();
-    toastContext.successMessage('Logout successful');
-    window.localStorage.setItem('logout', Date.now());
   };
 
   return userContext.user === null ? (
@@ -44,9 +37,6 @@ const Welcome = () => {
       <div>
         <Button variant="contained" onClick={reloadUserDetailsHandler}>
           Reload
-        </Button>
-        <Button variant="contained" onClick={logoutHandler}>
-          Logout
         </Button>
       </div>
     </div>

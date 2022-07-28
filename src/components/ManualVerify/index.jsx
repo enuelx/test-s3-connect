@@ -66,6 +66,17 @@ const ManualVerify = () => {
     }
   };
 
+  const sentValidation = async () => {
+    try {
+      const result = await walletApi.sentManualValidation(userContext.token);
+      setManualValidation(result);
+
+      toastContext.successMessage('Waiting for validation');
+    } catch (err) {
+      toastContext.errorMessage('Error sending validation');
+    }
+  };
+
   return userContext.user === null || errorGettingValidation ? (
     'Error loading data'
   ) : !userContext.user ? (
@@ -83,6 +94,7 @@ const ManualVerify = () => {
       <Button
         variant="contained"
         disabled={manualValidation.status === 'sent-to-new-wallet-waiting'}
+        onClick={sentValidation}
       >
         I sent a cypher to the new wallet
       </Button>

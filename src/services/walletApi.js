@@ -93,5 +93,19 @@ export default {
     );
 
     return result.data.manualValidation;
+  },
+
+  async sentManualValidation(token) {
+    const result = await axiosInstance.post(
+      `${apiUrl}/manual/sent`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    );
+
+    return result.data.manualValidation;
   }
 };

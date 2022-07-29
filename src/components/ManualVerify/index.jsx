@@ -31,7 +31,7 @@ const ManualVerify = () => {
         const manualValidationInfo = await walletApi.getManualValidationInfo(
           userContext.token
         );
-        setManualValidation(manualValidationInfo);
+        setManualValidation(manualValidationInfo || null);
       }
     };
 
@@ -80,13 +80,17 @@ const ManualVerify = () => {
 
   return userContext.user === null || errorGettingValidation ? (
     'Error loading data'
-  ) : !userContext.user ? (
+  ) : !userContext.user || manualValidation === undefined ? (
     <Loader />
   ) : [
       manualValidationStatus.STARTED,
       manualValidationStatus.SENT_TO_NEW_WALLET_WAITING
     ].includes(manualValidation?.status) ? (
     <Box>
+      <Typography>
+        Send a cypher to the wallet you want to verify to continue with the
+        process.
+      </Typography>
       <Typography>
         Verified wallet: {manualValidation.verifiedWallet?.wallet}
       </Typography>

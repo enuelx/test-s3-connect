@@ -13,6 +13,7 @@ import {
 import { UserContext, ToastContext } from '@context';
 import { Loader } from '@components';
 import { walletApi } from '@services';
+import manualValidationStatus from './manualValidationStatus';
 
 const ManualVerify = () => {
   const userContext = useContext(UserContext);
@@ -81,22 +82,59 @@ const ManualVerify = () => {
     'Error loading data'
   ) : !userContext.user ? (
     <Loader />
-  ) : ['started', 'sent-to-new-wallet-waiting'].includes(
-      manualValidation?.status
-    ) ? (
+  ) : [
+      manualValidationStatus.STARTED,
+      manualValidationStatus.SENT_TO_NEW_WALLET_WAITING
+    ].includes(manualValidation?.status) ? (
     <Box>
       <Typography>
-        Verified wallet: {manualValidation.verifiedWallet}
+        Verified wallet: {manualValidation.verifiedWallet?.wallet}
       </Typography>
       <Typography>
         To verify wallet: {manualValidation.toVerifyWallet}
       </Typography>
       <Button
         variant="contained"
-        disabled={manualValidation.status === 'sent-to-new-wallet-waiting'}
+        disabled={
+          manualValidation.status ===
+          manualValidationStatus.SENT_TO_NEW_WALLET_WAITING
+        }
         onClick={sentValidation}
       >
-        I sent a cypher to the new wallet
+        {manualValidation?.status === manualValidationStatus.STARTED
+          ? 'I sent a cypher to the new wallet'
+          : 'Waiting for validation'}
+      </Button>
+      <Button variant="contained" onClick={cancelValidation}>
+        Cancel verification
+      </Button>
+    </Box>
+  ) : [
+      manualValidationStatus.SENT_TO_NEW_WALLET_DONE,
+      manualValidationStatus.SENT_BACK_WAITING
+    ].includes(manualValidation?.status) ? (
+    <Box>
+      <Typography>
+        To finish the process send the cypher from the wallet you want to verify
+        to the original wallet.
+      </Typography>
+      <Typography>
+        Verified wallet: {manualValidation.verifiedWallet?.wallet}
+      </Typography>
+      <Typography>
+        To verify wallet: {manualValidation.toVerifyWallet}
+      </Typography>
+      <Button
+        variant="contained"
+        disabled={
+          manualValidation.status === manualValidationStatus.SENT_BACK_WAITING
+        }
+        onClick={sentValidation}
+      >
+        {manualValidation?.status ===
+        manualValidationStatus.SENT_TO_NEW_WALLET_DONE
+          ? 'I sent a cypher to the original wallet'
+          : 'Waiting for validation'}
       </Button>
       <Button variant="contained" onClick={cancelValidation}>
         Cancel verification

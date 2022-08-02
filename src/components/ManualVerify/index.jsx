@@ -59,7 +59,7 @@ const ManualVerify = () => {
   const cancelValidation = async () => {
     try {
       await walletApi.cancelManualValidation(userContext.token);
-      setManualValidation(undefined);
+      setManualValidation(null);
 
       toastContext.successMessage('Validation cancelled');
     } catch (err) {

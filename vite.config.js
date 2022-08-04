@@ -18,7 +18,8 @@ export default defineConfig({
   build: {
     outDir: './build',
     rollupOptions: {
-      plugins: [nodePolyfills()]
+      plugins: [nodePolyfills()],
+      external: ['uuid']
     },
     commonjsOptions: {
       transformMixedEsModules: true

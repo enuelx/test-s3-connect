@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
-import { Button } from '@mui/material';
+import { Button, Divider } from '@mui/material';
 
 import WalletData from './WalletsInfo';
 import { UserContext, ToastContext } from '@context';
 import CodeModal from './CodeModal';
 import { Loader } from '@components';
-
+import { ChangePassword } from './ChangePassword';
 
 const Welcome = () => {
   const userContext = useContext(UserContext);
@@ -34,11 +34,12 @@ const Welcome = () => {
         )}
       </b>{' '}
       <WalletData userContext={userContext} toastContext={toastContext} />
-      <div>
-        <Button variant="contained" onClick={reloadUserDetailsHandler}>
-          Reload
-        </Button>
-      </div>
+      <Divider />
+      <ChangePassword />
+      <Divider />
+      <Button variant="contained" onClick={reloadUserDetailsHandler}>
+        Reload
+      </Button>
     </div>
   );
 };

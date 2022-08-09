@@ -53,6 +53,25 @@ export default {
     return result.data;
   },
 
+  async changePassword(token, signature, message, wallet, newPassword) {
+    const result = await axiosInstance.post(
+      `${apiUrl}/changepassword`,
+      {
+        message,
+        wallet,
+        signature,
+        newPassword
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    );
+
+    return result.data;
+  },
+
   // Manual Validation Process
   async getManualValidationInfo(token) {
     const result = await axiosInstance.get(`${apiUrl}/manual/info`, {

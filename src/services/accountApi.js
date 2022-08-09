@@ -51,5 +51,22 @@ export default {
     });
 
     return result.data;
+  },
+
+  async changePassword(token, oldPassword, newPassword) {
+    const result = await axiosInstance.post(
+      `${apiUrl}/changepassword`,
+      {
+        oldPassword,
+        newPassword
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    );
+
+    return result.data;
   }
 };

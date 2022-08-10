@@ -6,6 +6,7 @@ import { UserContext, ToastContext } from '@context';
 import CodeModal from './CodeModal';
 import { Loader } from '@components';
 import { ChangePassword } from './ChangePassword';
+import { AddressForm } from '../AddressForm';
 
 const Welcome = () => {
   const userContext = useContext(UserContext);
@@ -34,9 +35,8 @@ const Welcome = () => {
         )}
       </b>{' '}
       <WalletData userContext={userContext} toastContext={toastContext} />
-      <Divider />
       <ChangePassword />
-      <Divider />
+      <AddressForm />
       <Button variant="contained" onClick={reloadUserDetailsHandler}>
         Reload
       </Button>

@@ -82,8 +82,8 @@ const WelcomeWalletsInfo = ({ userContext, toastContext }) => {
             Are you sure you want to remove this wallet from your account?
           </Typography>
           <Typography>
-            To later reassociate the wallet you will need to sign a message or
-            go throught the manual verification
+            To later re-associate the wallet you will need to sign a message or
+            go through the manual verification
           </Typography>
           <Button onClick={() => setRemoveWalletDialogIsOpen(false)}>
             Cancel

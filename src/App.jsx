@@ -9,7 +9,8 @@ import {
   Loader,
   Welcome,
   NavBar,
-  ManualVerify
+  ManualVerify,
+  VerifyEmail
 } from '@components';
 
 function App() {
@@ -75,19 +76,22 @@ function App() {
   return (
     <div>
       <NavBar />
-      {userContext.token === null ? (
-        <Routes>
-          <Route path="register" element={<Register />} />
-          <Route path="*" element={<Login />} />
-        </Routes>
-      ) : userContext.token ? (
-        <Routes>
-          <Route path="manualverify" element={<ManualVerify />} />
-          <Route path="*" element={<Welcome />} />
-        </Routes>
-      ) : (
-        <Loader />
-      )}
+      <Routes>
+        <Route path="/verify-email" element={<VerifyEmail />} />
+        {userContext.token === null ? (
+          <>
+            <Route path="register" element={<Register />} />
+            <Route path="*" element={<Login />} />
+          </>
+        ) : userContext.token ? (
+          <>
+            <Route path="manualverify" element={<ManualVerify />} />
+            <Route path="*" element={<Welcome />} />
+          </>
+        ) : (
+          <Loader />
+        )}
+      </Routes>
     </div>
   );
 }

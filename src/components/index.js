@@ -5,5 +5,7 @@ export { default as WalletData } from './WalletData';
 export { default as NavBar } from './NavBar';
 export { default as ManualVerify } from './ManualVerify';
 export { VerifyEmail } from './VerifyEmail';
+export { ForgotPassword } from './ForgotPassword';
+export { ResetPassword } from './ResetPassword';
 
 export * from './common';

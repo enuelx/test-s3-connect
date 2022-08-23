@@ -55,7 +55,7 @@ export default {
 
   async changePassword(token, oldPassword, newPassword) {
     const result = await axiosInstance.post(
-      `${apiUrl}/changepassword`,
+      `${apiUrl}/changePassword`,
       {
         oldPassword,
         newPassword
@@ -66,6 +66,15 @@ export default {
         }
       }
     );
+
+    return result.data;
+  },
+
+  async resetPassword(resetToken, newPassword) {
+    const result = await axiosInstance.post(`${apiUrl}/resetPassword`, {
+      newPassword,
+      resetToken
+    });
 
     return result.data;
   }

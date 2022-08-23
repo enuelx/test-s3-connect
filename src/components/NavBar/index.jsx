@@ -37,7 +37,7 @@ export default () => {
           )}
           {userContext.token && (
             <Link
-              href="/manualverify"
+              href="/manual-verify"
               sx={{ paddingRight: 2, color: 'white', display: 'block' }}
             >
               Add wallet manually

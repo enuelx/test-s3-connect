@@ -1,14 +1,10 @@
 import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Box, Button, TextField, Tooltip } from '@mui/material';
-import {
-  VisibilityOutlined as ShowIcon,
-  VisibilityOffOutlined as HideIcon,
-  InfoOutlined as InfoIcon
-} from '@mui/icons-material';
+import { InfoOutlined as InfoIcon } from '@mui/icons-material';
 
 import { UserContext, ToastContext } from '@context';
-import config from '@config';
+import { PasswordTextField } from '@components/common';
 
 export default ({ formActionName, submitCallback }) => {
   const navigate = useNavigate();
@@ -19,7 +15,6 @@ export default ({ formActionName, submitCallback }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = async () => {
     setIsSubmitting(true);
@@ -62,35 +57,7 @@ export default ({ formActionName, submitCallback }) => {
         <InfoIcon />
       </Tooltip>
       <br />
-      <TextField
-        variant="standard"
-        required
-        label="password"
-        value={password}
-        onChange={(e) => {
-          setPassword(e.target.value);
-        }}
-        type={showPassword ? 'text' : 'password'}
-        error={password !== '' && !config.passwordRegex.test(password)}
-      />
-      <Tooltip
-        sx={{ textTransform: 'none' }}
-        arrow
-        placement="right"
-        describeChild
-        title={
-          <span>
-            Password must: <br />- Be at least 8 characters long <br />- Contain
-            a number <br />- Contain a lowercase letter <br />- Contain an
-            uppercase letter <br />- Contain a special symbol
-          </span>
-        }
-      >
-        <InfoIcon />
-      </Tooltip>
-      <Box component="div" onClick={() => setShowPassword(!showPassword)}>
-        {showPassword ? <HideIcon /> : <ShowIcon />}
-      </Box>
+      <PasswordTextField password={password} setPassword={setPassword} />
       <br />
       <Button
         type="submit"

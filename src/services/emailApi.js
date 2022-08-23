@@ -45,5 +45,13 @@ export default {
     });
 
     return result.data;
+  },
+
+  async forgotPassword(email) {
+    const result = await axiosInstance.post(`${apiUrl}/forgotPassword`, {
+      email
+    });
+
+    return result.data;
   }
 };

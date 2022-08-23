@@ -1,7 +1,7 @@
 import { useState, useContext } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { UnsupportedChainIdError, useWeb3React } from '@web3-react/core';
-import { Button, Divider } from '@mui/material';
+import { Button, Divider, Link } from '@mui/material';
 
 import { UserContext, ToastContext } from '@context';
 import { accountApi, walletApi } from '@services';
@@ -41,6 +41,7 @@ const Login = () => {
   return (
     <div>
       <AccountForm formActionName="Login" submitCallback={accountApi.login} />
+      <Link href="/forgot-password">Forgot your password?</Link>
       <Divider />
       <Button
         variant="contained"

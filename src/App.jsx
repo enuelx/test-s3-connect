@@ -4,12 +4,14 @@ import { Route, Routes } from 'react-router-dom';
 import { accountApi } from '@services';
 import { UserContext } from '@context/UserContext';
 import {
+  ForgotPassword,
   Login,
   Register,
   Loader,
   Welcome,
   NavBar,
   ManualVerify,
+  ResetPassword,
   VerifyEmail
 } from '@components';
 
@@ -44,12 +46,12 @@ function App() {
     try {
       const data = await accountApi.refreshToken();
       userContext.setToken(data.token);
+
+      // call refreshToken every 5 minutes to renew the authentication token.
+      setTimeout(verifyAccount, 5 * 60 * 1000);
     } catch (err) {
       userContext.setToken(null);
     }
-
-    // call refreshToken every 5 minutes to renew the authentication token.
-    setTimeout(verifyAccount, 5 * 60 * 1000);
   }, [userContext.setToken]);
 
   useEffect(() => {
@@ -78,14 +80,16 @@ function App() {
       <NavBar />
       <Routes>
         <Route path="/verify-email" element={<VerifyEmail />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
         {userContext.token === null ? (
           <>
             <Route path="register" element={<Register />} />
+            <Route path="forgot-password" element={<ForgotPassword />} />
             <Route path="*" element={<Login />} />
           </>
         ) : userContext.token ? (
           <>
-            <Route path="manualverify" element={<ManualVerify />} />
+            <Route path="manual-verify" element={<ManualVerify />} />
             <Route path="*" element={<Welcome />} />
           </>
         ) : (

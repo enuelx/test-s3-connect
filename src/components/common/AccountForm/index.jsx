@@ -1,12 +1,20 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Box, Button, TextField, Tooltip } from '@mui/material';
-import { InfoOutlined as InfoIcon } from '@mui/icons-material';
+import { Button, FormControl } from '@mui/material';
+import ReCAPTCHA from 'react-google-recaptcha';
 
 import { UserContext, ToastContext } from '@context';
-import { PasswordTextField } from '@components/common';
+import { PasswordTextField, UsernameTextField } from '@components/common';
+import config from '@config';
 
-export default ({ formActionName, submitCallback }) => {
+export default ({
+  formActionName,
+  submitCallback,
+  children,
+  useCaptcha = false,
+  validateRepeatPassword = false
+}) => {
+  const captchaRef = useRef(null);
   const navigate = useNavigate();
 
   const userContext = useContext(UserContext);
@@ -15,12 +23,27 @@ export default ({ formActionName, submitCallback }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [repeatPassword, setRepeatPassword] = useState('');
 
   const handleSubmit = async () => {
     setIsSubmitting(true);
 
     try {
-      const result = await submitCallback(username, password);
+      if (validateRepeatPassword && password !== repeatPassword) {
+        toastContext.errorMessage('Passwords do not match');
+        return;
+      }
+
+      if (useCaptcha && !captchaRef.current?.getValue()) {
+        toastContext.errorMessage('Please verify that you are not a robot');
+        return;
+      }
+
+      const result = await submitCallback({
+        username,
+        password,
+        captchaValue: captchaRef.current?.getValue()
+      });
 
       userContext.setToken(result.token);
       toastContext.successMessage(`${formActionName} successful`);
@@ -37,36 +60,29 @@ export default ({ formActionName, submitCallback }) => {
   };
 
   return (
-    <Box component="form">
-      <TextField
-        required
-        label="username"
-        value={username}
-        onChange={(e) => {
-          setUsername(e.target.value);
-        }}
-        variant="standard"
-        error={username !== '' && username.length < 4}
-      />
-      <Tooltip
-        arrow
-        placement="right"
-        describeChild
-        title="Username must be at least 4 characters long"
-      >
-        <InfoIcon />
-      </Tooltip>
-      <br />
-      <PasswordTextField password={password} setPassword={setPassword} />
-      <br />
-      <Button
-        type="submit"
-        disabled={isSubmitting}
-        variant="contained"
-        onClick={handleSubmit}
-      >
-        {formActionName}
-      </Button>
-    </Box>
+    <>
+      <FormControl fullWidth>
+        <UsernameTextField username={username} setUsername={setUsername} />
+        <PasswordTextField password={password} setPassword={setPassword} />
+        {validateRepeatPassword && (
+          <PasswordTextField
+            password={repeatPassword}
+            setPassword={setRepeatPassword}
+          />
+        )}
+        {useCaptcha && (
+          <ReCAPTCHA ref={captchaRef} sitekey={config.captchaKey} />
+        )}
+
+        <Button
+          disabled={isSubmitting}
+          variant="contained"
+          onClick={handleSubmit}
+        >
+          {formActionName}
+        </Button>
+        {children}
+      </FormControl>
+    </>
   );
 };

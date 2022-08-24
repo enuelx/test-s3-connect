@@ -1,7 +1,7 @@
 import { useState, useContext } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { UnsupportedChainIdError, useWeb3React } from '@web3-react/core';
-import { Button, Divider, Link } from '@mui/material';
+import { Button, Box, Divider, Link } from '@mui/material';
 
 import { UserContext, ToastContext } from '@context';
 import { accountApi, walletApi } from '@services';
@@ -39,18 +39,18 @@ const Login = () => {
   };
 
   return (
-    <div>
-      <AccountForm formActionName="Login" submitCallback={accountApi.login} />
-      <Link href="/forgot-password">Forgot your password?</Link>
-      <Divider />
-      <Button
-        variant="contained"
-        disabled={!active || isUnsupportedChain || isSubmitting}
-        onClick={handleWeb3Login}
-      >
-        Web3 Login
-      </Button>
-    </div>
+    <Box sx={{ width: '25vw' }}>
+      <AccountForm formActionName="Login" submitCallback={accountApi.login}>
+        <Button
+          variant="contained"
+          disabled={!active || isUnsupportedChain || isSubmitting}
+          onClick={handleWeb3Login}
+        >
+          Web3 Login
+        </Button>
+        <Link href="/forgot-password">Forgot your password?</Link>
+      </AccountForm>
+    </Box>
   );
 };
 

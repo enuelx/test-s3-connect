@@ -9,7 +9,7 @@ const axiosInstance = axios.create({
 const apiUrl = `${config.apiUrl}/api/account`;
 
 export default {
-  async login(username, password) {
+  async login({ username, password }) {
     const result = await axiosInstance.post(`${apiUrl}/login`, {
       username,
       password
@@ -18,10 +18,11 @@ export default {
     return result.data;
   },
 
-  async signUp(username, password) {
+  async signUp({ username, password, captchaValue }) {
     const result = await axiosInstance.post(`${apiUrl}/signup`, {
       username,
-      password
+      password,
+      captcha: captchaValue
     });
 
     return result.data;

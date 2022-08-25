@@ -8,7 +8,11 @@ import {
 
 import config from '@config';
 
-export const PasswordTextField = ({ password, setPassword }) => {
+export const PasswordTextField = ({
+  password,
+  setPassword,
+  label = 'password'
+}) => {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
@@ -16,7 +20,7 @@ export const PasswordTextField = ({ password, setPassword }) => {
       <TextField
         variant="standard"
         required
-        label="password"
+        label={label}
         value={password}
         onChange={(e) => {
           setPassword(e.target.value);
@@ -29,25 +33,25 @@ export const PasswordTextField = ({ password, setPassword }) => {
               <IconButton onClick={() => setShowPassword(!showPassword)}>
                 {showPassword ? <HideIcon /> : <ShowIcon />}
               </IconButton>
+              <Tooltip
+                sx={{ textTransform: 'none' }}
+                arrow
+                placement="right"
+                describeChild
+                title={
+                  <span>
+                    Password must: <br />- Be at least 8 characters long <br />-
+                    Contain a number <br />- Contain a lowercase letter <br />-
+                    Contain an uppercase letter <br />- Contain a special symbol
+                  </span>
+                }
+              >
+                <InfoIcon />
+              </Tooltip>
             </InputAdornment>
           )
         }}
       />
-      <Tooltip
-        sx={{ textTransform: 'none' }}
-        arrow
-        placement="right"
-        describeChild
-        title={
-          <span>
-            Password must: <br />- Be at least 8 characters long <br />- Contain
-            a number <br />- Contain a lowercase letter <br />- Contain an
-            uppercase letter <br />- Contain a special symbol
-          </span>
-        }
-      >
-        <InfoIcon />
-      </Tooltip>
     </>
   );
 };

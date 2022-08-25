@@ -2,7 +2,8 @@ import { useState } from 'react';
 import { HighlightOffOutlined } from '@mui/icons-material';
 import { v4 as uuidv4 } from 'uuid';
 import { UnsupportedChainIdError, useWeb3React } from '@web3-react/core';
-import { Button, Dialog, Typography, Box } from '@mui/material';
+import { Button, Dialog, Typography, Box, Tooltip } from '@mui/material';
+import { InfoOutlined as InfoIcon } from '@mui/icons-material';
 
 import { walletApi } from '@services';
 
@@ -72,6 +73,14 @@ const WelcomeWalletsInfo = ({ userContext, toastContext }) => {
             return prev + cypherHoldings.length;
           }, 0)}
         </b>
+        <Tooltip
+          arrow
+          placement="right"
+          describeChild
+          title={<span>Holdings info are updated every 2 hours.</span>}
+        >
+          <InfoIcon />
+        </Tooltip>
       </div>
       <Dialog
         open={removeWalletDialogIsOpen}

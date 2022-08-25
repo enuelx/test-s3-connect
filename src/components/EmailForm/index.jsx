@@ -5,6 +5,7 @@ import {
   AccordionSummary,
   Button,
   FormControl,
+  InputAdornment,
   TextField,
   Typography
 } from '@mui/material';
@@ -29,7 +30,7 @@ export const EmailForm = () => {
         email: data.email
       });
 
-      toastContext.successMessage('Email updated');
+      toastContext.successMessage('Email updated, verify email sent');
     } catch (err) {
       const message = err.response.data?.error || 'Something went wrong';
       toastContext.errorMessage(message);
@@ -63,9 +64,18 @@ export const EmailForm = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             sx={{ marginBottom: '0.5rem' }}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  {userContext.user?.email?.email &&
+                    userContext.user.email.verified === true && (
+                      <Verified sx={{ color: 'green' }} />
+                    )}
+                </InputAdornment>
+              )
+            }}
           />
-          {userContext.user?.email?.email &&
-            userContext.user.email.verified === true && <Verified />}
+
           {userContext.user?.email?.email &&
             userContext.user.email.verified === false && (
               <Button

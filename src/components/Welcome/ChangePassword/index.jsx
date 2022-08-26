@@ -52,38 +52,35 @@ export const ChangePassword = () => {
 
   const handleWeb3ChangePassword = async () => {
     setIsSubmitting(true);
+
     if (
       !userContext.user.wallets.map((wallet) => wallet.wallet).includes(account)
     ) {
       toastContext.errorMessage('Wallet not associated to this account.');
-      return;
-    }
-
-    if (newPassword !== repeatNewPassword) {
+    } else if (newPassword !== repeatNewPassword) {
       toastContext.errorMessage('Passwords do not match');
-      return;
-    }
+    } else {
+      try {
+        const message = `Click sign message to sign in and prove the ownership of the wallet.\n\nThis request will not trigger a blockchain transaction or cost any gas fees.\n\nWallet address:\n${account}\n\nNonce:\n${uuidv4()}`;
+        const signature = await library.getSigner().signMessage(message);
+        const data = await walletApi.changePassword(
+          userContext.token,
+          signature,
+          message,
+          account,
+          newPassword
+        );
 
-    try {
-      const message = `Click sign message to sign in and prove the ownership of the wallet.\n\nThis request will not trigger a blockchain transaction or cost any gas fees.\n\nWallet address:\n${account}\n\nNonce:\n${uuidv4()}`;
-      const signature = await library.getSigner().signMessage(message);
-      const data = await walletApi.changePassword(
-        userContext.token,
-        signature,
-        message,
-        account,
-        newPassword
-      );
+        userContext.setToken(data.token);
+        toastContext.successMessage('Password changed');
+      } catch (err) {
+        const message =
+          err.response.status === 401
+            ? 'Wallet not associated to this account or invalid signature'
+            : err.response.data?.error || 'Something went wrong';
 
-      userContext.setToken(data.token);
-      toastContext.successMessage('Password changed');
-    } catch (err) {
-      const message =
-        err.response.status === 401
-          ? 'Wallet not associated to this account or invalid signature'
-          : err.response.data?.error || 'Something went wrong';
-
-      toastContext.errorMessage(message);
+        toastContext.errorMessage(message);
+      }
     }
 
     setIsSubmitting(false);

@@ -1,12 +1,12 @@
 import { useState, useContext } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { UnsupportedChainIdError, useWeb3React } from '@web3-react/core';
-import { Button, Box, Divider, Container } from '@mui/material';
+import { Button, Box, Container } from '@mui/material';
 
 import { UserContext, ToastContext } from '@context';
 import { accountApi, walletApi } from '@services';
 import { AccountForm } from '@components';
-import backImg from '../../style/img/imgChart1.png';
+import background from './style/img/loginBackground.png';
 import textLogin from '../../style/img/textLogin.png';
 import { Link } from 'react-router-dom';
 import { ThemeProvider } from '@emotion/react';
@@ -47,26 +47,16 @@ const Login = () => {
       sx={{
         marginLeft: '0px',
         marginRight: '0px',
-        height: '980px',
+        height: '100vh',
 
         minWidth: '-webkit-fill-available',
         position: 'relative',
         left: 0,
         top: 0,
-        background:
-          'radial-gradient(circle at center, #460036 0, #200017, #18000ee8 80%)'
+
+        background: `url(${background}), radial-gradient(circle at center, #460036 0, #200017, #18000ee8 80%)`
       }}
     >
-      <img
-        style={{
-          width: '1720px',
-          position: 'absolute',
-          left: '250px'
-        }}
-        src={backImg}
-        alt=""
-      />
-
       <img
         style={{
           width: '400px',

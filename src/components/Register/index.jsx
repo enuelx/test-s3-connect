@@ -9,7 +9,6 @@ import {
 } from './style/img';
 import textLogin from '../../style/img/textLogin.png';
 
-import { Link } from 'react-router-dom';
 export default () => {
   return (
     <Container

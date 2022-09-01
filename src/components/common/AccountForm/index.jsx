@@ -32,6 +32,7 @@ export default ({
     try {
       if (validateRepeatPassword && password !== repeatPassword) {
         toastContext.errorMessage('Passwords do not match');
+        setIsSubmitting(false);
         return;
       }
 

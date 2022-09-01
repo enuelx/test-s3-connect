@@ -142,5 +142,19 @@ export default {
     );
 
     return result.data.manualValidation;
+  },
+
+  async ackManualValidation(token) {
+    await axiosInstance.post(
+      `${apiUrl}/manual/ack`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    );
+
+    return;
   }
 };

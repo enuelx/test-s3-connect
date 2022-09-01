@@ -26,11 +26,6 @@ const ManualVerify = ({ stepState, setStepState }) => {
   const userContext = useContext(UserContext);
   const toastContext = useContext(ToastContext);
 
-  const reloadUserDetailsHandler = () => {
-    // set details to undefined so that spinner will be displayed and
-    // getUserDetails will be invoked from useEffect
-    userContext.setUser(undefined);
-  };
   const [manualValidation, setManualValidation] = useState(undefined);
   const [errorGettingValidation, setErrorGettingValidation] = useState(false);
 
@@ -68,7 +63,7 @@ const ManualVerify = ({ stepState, setStepState }) => {
         setStepState(0);
         break;
     }
-  }, [userContext.token, manualValidation]);
+  }, [userContext.token, manualValidation?.status]);
 
   const startValidation = async () => {
     try {
@@ -104,6 +99,16 @@ const ManualVerify = ({ stepState, setStepState }) => {
       toastContext.successMessage('Waiting for validation');
     } catch (err) {
       toastContext.errorMessage('Error sending validation');
+    }
+  };
+
+  const ackValidation = async () => {
+    try {
+      await walletApi.ackManualValidation(userContext.token);
+      setManualValidation(null);
+      toastContext.successMessage('Validation finished');
+    } catch (err) {
+      toastContext.errorMessage('Error finishing validation');
     }
   };
 
@@ -297,7 +302,7 @@ const ManualVerify = ({ stepState, setStepState }) => {
   ) : stepState === 3 ? (
     <Box style={{ marginTop: '3vh' }}>
       <Typography style={{ color: 'rgb(120, 120, 120)' }}>
-        Congrats, wallet verified
+        Congrats, wallet verified, check it in your wallets section
       </Typography>
       <Box
         style={{
@@ -313,7 +318,7 @@ const ManualVerify = ({ stepState, setStepState }) => {
         <Typography
           style={{ color: '#787878', lineHeight: '35px', fontSize: '18px' }}
         >
-          {'aca va a ir la wallet verificada'}
+          {manualValidation?.toVerifyWallet}
         </Typography>
       </Box>
       <Box style={{ marginTop: '3vh' }}>
@@ -321,7 +326,7 @@ const ManualVerify = ({ stepState, setStepState }) => {
           <Button
             variant="contained"
             style={{ color: '#fff' }}
-            onClick={reloadUserDetailsHandler}
+            onClick={ackValidation}
           >
             <FontAwesomeIcon
               style={{ marginRight: '1vh' }}

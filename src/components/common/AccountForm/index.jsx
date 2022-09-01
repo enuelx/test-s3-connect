@@ -32,24 +32,19 @@ export default ({
     try {
       if (validateRepeatPassword && password !== repeatPassword) {
         toastContext.errorMessage('Passwords do not match');
-        setIsSubmitting(false);
-        return;
-      }
-
-      if (useCaptcha && !captchaRef.current?.getValue()) {
+      } else if (useCaptcha && !captchaRef.current?.getValue()) {
         toastContext.errorMessage('Please verify that you are not a robot');
-        return;
+      } else {
+        const result = await submitCallback({
+          username,
+          password,
+          captchaValue: captchaRef.current?.getValue()
+        });
+
+        userContext.setToken(result.token);
+        toastContext.successMessage(`${formActionName} successful`);
+        navigate('/');
       }
-
-      const result = await submitCallback({
-        username,
-        password,
-        captchaValue: captchaRef.current?.getValue()
-      });
-
-      userContext.setToken(result.token);
-      toastContext.successMessage(`${formActionName} successful`);
-      navigate('/');
     } catch (err) {
       const message =
         err.response.status === 401

@@ -1,6 +1,6 @@
 import { useState, useContext, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Button, FormControl } from '@mui/material';
+import { Link, useNavigate } from 'react-router-dom';
+import { Box, Button, FormControl } from '@mui/material';
 import ReCAPTCHA from 'react-google-recaptcha';
 
 import { UserContext, ToastContext } from '@context';
@@ -11,6 +11,7 @@ export default ({
   formActionName,
   submitCallback,
   children,
+  margin,
   useCaptcha = false,
   validateRepeatPassword = false
 }) => {
@@ -61,26 +62,55 @@ export default ({
 
   return (
     <>
-      <FormControl fullWidth>
+      <FormControl fullWidth sx={{ marginTop: '425px' }}>
         <UsernameTextField username={username} setUsername={setUsername} />
         <PasswordTextField password={password} setPassword={setPassword} />
         {validateRepeatPassword && (
           <PasswordTextField
+            margin="20px"
             password={repeatPassword}
             setPassword={setRepeatPassword}
           />
-        )}
-        {useCaptcha && (
-          <ReCAPTCHA ref={captchaRef} sitekey={config.captchaKey} />
         )}
 
         <Button
           disabled={isSubmitting}
           variant="contained"
           onClick={handleSubmit}
+          sx={{
+            marginTop: margin,
+            width: '182px',
+            background: 'none',
+
+            border: 'solid 1px',
+            position: 'absolute',
+            ':hover': {
+              bgcolor: '#787878', // theme.palette.primary.main
+              color: 'white'
+            }
+          }}
         >
           {formActionName}
         </Button>
+
+        {formActionName == 'Register' ? (
+          <Link
+            to={{
+              pathname: '/login'
+            }}
+            style={{ color: 'white', marginTop: '100px' }}
+          >
+            Already a member? Log in
+          </Link>
+        ) : (
+          ''
+        )}
+
+        {useCaptcha && (
+          <Box sx={{ marginTop: '50px' }}>
+            <ReCAPTCHA ref={captchaRef} sitekey={config.captchaKey} />
+          </Box>
+        )}
         {children}
       </FormControl>
     </>

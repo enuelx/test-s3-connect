@@ -2,7 +2,8 @@ import { useEffect, useCallback } from 'react';
 import { useWeb3React } from '@web3-react/core';
 import { Chip } from '@mui/material';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faWallet } from '@fortawesome/free-solid-svg-icons';
 import WalletModal from './WalletModal';
 import { connectors } from '@config/web3';
 
@@ -27,11 +28,11 @@ export default () => {
     <div>
       <div>
         <Chip
-          color="primary"
+          variant="outlined"
+          sx={{ color: '#787878' }}
           label={account}
           onDelete={disconnect}
-          icon={<AccountBalanceWalletIcon />}
-          sx={{ bgcolor: '#fbd33e', color: '#d9144e' }}
+          icon={<FontAwesomeIcon icon={faWallet} />}
         />
       </div>
     </div>

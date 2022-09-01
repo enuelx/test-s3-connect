@@ -1,48 +1,43 @@
-import React, { useContext } from 'react';
-import { Button } from '@mui/material';
+import React, { useContext } from "react";
+import { Button, Container, Grid } from "@mui/material";
 
-import WalletData from './WalletsInfo';
-import { UserContext, ToastContext } from '@context';
-import CodeModal from './CodeModal';
-import { Loader } from '@components';
-import { ChangePassword } from './ChangePassword';
-import { AddressForm } from '../AddressForm';
-import { EmailForm } from '../EmailForm';
+import WalletData from "./WalletsInfo";
+import { UserContext, ToastContext } from "@context";
+import { Loader } from "@components";
+import DiscordCard from "./DiscordCard";
 
 const Welcome = () => {
   const userContext = useContext(UserContext);
   const toastContext = useContext(ToastContext);
 
-  const reloadUserDetailsHandler = () => {
-    // set details to undefined so that spinner will be displayed and
-    // getUserDetails will be invoked from useEffect
-    userContext.setUser(undefined);
-  };
-
   return userContext.user === null ? (
-    'Error loading user'
+    "Error loading user"
   ) : !userContext.user ? (
     <Loader />
   ) : (
-    <div>
-      <h2>Welcome</h2> <br />
-      Username: <b>{userContext.user.username}</b> <br />
-      DiscordUser:{' '}
-      <b>
-        {userContext.user.discordUser?.discordTag ?? (
-          <span>
-            --- <CodeModal />
-          </span>
-        )}
-      </b>{' '}
-      <WalletData userContext={userContext} toastContext={toastContext} />
-      <ChangePassword />
-      <EmailForm />
-      <AddressForm />
-      <Button variant="contained" onClick={reloadUserDetailsHandler}>
-        Reload
-      </Button>
-    </div>
+    <Container
+      style={{
+        backgroundColor: "#252525",
+        width: "100%",
+        height: "100%",
+        minHeight: "100vh",
+        minWidth: "100vw",
+        marginLeft: "2vw",
+      }}
+    >
+      <Grid
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          flexWrap: "wrap",
+          paddingTop: "20vh",
+          marginLeft: "18vw",
+        }}
+      >
+        <WalletData userContext={userContext} toastContext={toastContext} />
+        <DiscordCard userContext={userContext} toastContext={toastContext} />
+      </Grid>
+    </Container>
   );
 };
 

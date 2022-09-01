@@ -72,6 +72,22 @@ export default {
     return result.data;
   },
 
+  async setMain(token, wallet) {
+    const result = await axiosInstance.post(
+      `${apiUrl}/setMain`,
+      {
+        wallet
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    );
+
+    return result.data;
+  },
+
   // Manual Validation Process
   async getManualValidationInfo(token) {
     const result = await axiosInstance.get(`${apiUrl}/manual/info`, {

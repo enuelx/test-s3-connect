@@ -9,11 +9,16 @@ import {
   Register,
   Loader,
   Welcome,
-  NavBar,
-  ManualVerify,
+  NavBarTop,
   ResetPassword,
-  VerifyEmail
+  VerifyEmail,
+  NavBarLeft
 } from '@components';
+import { Box } from '@mui/system';
+import AccountSettings from './components/AccountSettings';
+import ManualVerifyPage from './components/ManualVerifyPage';
+import { Tooltip } from '@mui/material';
+import { InfoOutlined as InfoIcon } from '@mui/icons-material';
 
 function App() {
   const userContext = useContext(UserContext);
@@ -74,10 +79,44 @@ function App() {
       window.removeEventListener('storage', syncLogout);
     };
   }, [syncLogout]);
-
+  const wallets = userContext.user?.wallets || [];
   return (
     <div>
-      <NavBar />
+      {/*<Box sx={{ flexGrow: 0 }}>
+          <WalletData />
+      </Box>*/}
+      {userContext.token && <NavBarLeft />}
+      {<NavBarTop />}
+      {userContext.token && (
+        <div style={{ position: 'absolute', bottom: 50, right: 50 }}>
+          <div
+            style={{
+              marginTop: '2vh',
+              backgroundColor: '#3E3E3E',
+              borderRadius: '5px',
+              width: '210px',
+              color: '#787878',
+              textAlign: 'center',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}
+          >
+            Cyphers Hodling:{' '}
+            {wallets.reduce((prev, { cypherHoldings }) => {
+              return prev + cypherHoldings.length;
+            }, 0)}
+            <Tooltip
+              arrow
+              placement="top"
+              describeChild
+              title={<span>Holdings info are updated every 2 hours.</span>}
+            >
+              <InfoIcon style={{ marginLeft: '1vh' }} />
+            </Tooltip>
+          </div>
+        </div>
+      )}
       <Routes>
         <Route path="/verify-email" element={<VerifyEmail />} />
         <Route path="/reset-password" element={<ResetPassword />} />
@@ -89,7 +128,8 @@ function App() {
           </>
         ) : userContext.token ? (
           <>
-            <Route path="manual-verify" element={<ManualVerify />} />
+            <Route path="manual-verify" element={<ManualVerifyPage />} />
+            <Route path="account-settings" element={<AccountSettings />} />
             <Route path="*" element={<Welcome />} />
           </>
         ) : (

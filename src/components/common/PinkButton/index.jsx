@@ -1,8 +1,9 @@
 import { ThemeProvider } from '@emotion/react';
 import { Button, Tooltip } from '@mui/material';
 
-import { pinkButton } from '@themes';
-
+import { whiteButton } from '@themes';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faRotate, faWallet } from '@fortawesome/free-solid-svg-icons';
 export default ({
   text,
   color = 'primary',
@@ -16,15 +17,28 @@ export default ({
 }) => {
   if (tooltip) {
     return (
-      <ThemeProvider theme={pinkButton}>
+      <ThemeProvider theme={whiteButton}>
         <Tooltip title={tooltip} placement={tooltipPlacement}>
           <Button
-            color={color}
             disabled={disabled}
             variant={variant}
             onClick={onClick}
             size={size}
-            sx={sx}
+            sx={{
+              width: '200px',
+
+              marginTop: '10px',
+              background: 'transparent',
+              bgcolor: 'transparent', // theme.palette.primary.main
+              color: 'white',
+              border: 'solid 1px',
+              alignSelf: 'baseline',
+              ':hover': {
+                bgcolor: 'transparent' // theme.palette.primary.main
+              },
+              marginRight: '20px',
+              marginBottom: '0px'
+            }}
           >
             {text}
           </Button>
@@ -34,16 +48,37 @@ export default ({
   }
 
   return (
-    <ThemeProvider theme={pinkButton}>
+    <ThemeProvider theme={whiteButton}>
       <Button
-        color={color}
         disabled={disabled}
         variant={variant}
         onClick={onClick}
         size={size}
-        sx={sx}
+        sx={{
+          width: text == 'reload' ? '50px' : '250px',
+          marginTop: '10px',
+          background: 'transparent',
+          border: 'solid 1px',
+          alignSelf: 'baseline',
+          color: '#787878',
+          marginRight: '20px',
+          marginBottom: '0px'
+        }}
       >
-        {text}
+        {text == 'reload' ? (
+          <>
+            <FontAwesomeIcon style={{ fontSize: '26px' }} icon={faRotate} />
+          </>
+        ) : (
+          <>
+            <FontAwesomeIcon
+              size="lg"
+              style={{ marginRight: '10px' }}
+              icon={faWallet}
+            />
+            {text}
+          </>
+        )}
       </Button>
     </ThemeProvider>
   );

@@ -1,19 +1,19 @@
 import { useState, useContext } from 'react';
 import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
+  Box,
   Button,
   FormControl,
   InputAdornment,
   TextField,
   Typography
 } from '@mui/material';
-import { ExpandMore, Verified } from '@mui/icons-material';
-
+import { Verified } from '@mui/icons-material';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEnvelopeCircleCheck } from '@fortawesome/free-solid-svg-icons';
 import { UserContext, ToastContext } from '@context';
 import { emailApi } from '@services';
-
+import { ThemeProvider } from '@emotion/react';
+import { grayButton } from '@themes';
 export const EmailForm = () => {
   const userContext = useContext(UserContext);
   const toastContext = useContext(ToastContext);
@@ -53,23 +53,47 @@ export const EmailForm = () => {
   };
 
   return (
-    <Accordion sx={{ width: '50vw' }}>
-      <AccordionSummary expandIcon={<ExpandMore />}>
-        <Typography>Email</Typography>
-      </AccordionSummary>
-      <AccordionDetails>
-        <FormControl fullWidth>
+    <div style={{ width: '45%' }}>
+      <Box
+        style={{
+          width: '166px',
+          height: '71px',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          marginLeft: 'auto',
+          marginRight: 'auto',
+          backgroundColor: '#3E3E3E',
+          borderRadius: '5px'
+        }}
+      >
+        <FontAwesomeIcon
+          color="#787878"
+          icon={faEnvelopeCircleCheck}
+          size="3x"
+        />
+      </Box>
+      <Box style={{ textAlign: 'center', marginTop: '3vh' }}>
+        <Typography style={{ fontSize: '18px', color: '#787878' }}>
+          Verify your email
+        </Typography>
+      </Box>
+      <Box style={{ textAlign: 'center', marginTop: '3vh' }}>
+        <FormControl width="80%">
           <TextField
             label="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            sx={{ marginBottom: '0.5rem' }}
+            InputLabelProps={{
+              style: { color: 'rgb(120, 120, 120)', fontSize: '18px' }
+            }}
             InputProps={{
+              style: { color: 'rgb(120, 120, 120)', fontSize: '18px' },
               endAdornment: (
                 <InputAdornment position="end">
                   {userContext.user?.email?.email &&
                     userContext.user.email.verified === true && (
-                      <Verified sx={{ color: 'green' }} />
+                      <Verified sx={{ color: '#787878' }} />
                     )}
                 </InputAdornment>
               )
@@ -78,24 +102,57 @@ export const EmailForm = () => {
 
           {userContext.user?.email?.email &&
             userContext.user.email.verified === false && (
+              <Box
+                style={{
+                  textAlign: 'center',
+                  display: 'flex',
+                  alignItems: 'center',
+                  flexWrap: 'wrap',
+                  justifyContent: 'center',
+                  marginTop: '4vh'
+                }}
+              >
+                <ThemeProvider theme={grayButton}>
+                  <Button
+                    variant="contained"
+                    style={{
+                      borderRadius: '0px 10px 0px 10px',
+                      width: '100%'
+                    }}
+                    onClick={handleResendVerificationEmail}
+                    disabled={isSubmitting}
+                  >
+                    Resend verification mail
+                  </Button>
+                </ThemeProvider>
+              </Box>
+            )}
+          <Box
+            style={{
+              textAlign: 'center',
+              display: 'flex',
+              alignItems: 'center',
+              flexWrap: 'wrap',
+              justifyContent: 'center',
+              marginTop: '3vh'
+            }}
+          >
+            <ThemeProvider theme={grayButton}>
               <Button
                 variant="contained"
-                sx={{ marginBottom: '2px' }}
-                onClick={handleResendVerificationEmail}
                 disabled={isSubmitting}
+                onClick={handleUpdateEmail}
+                style={{
+                  borderRadius: '0px 10px 0px 10px',
+                  width: '100%'
+                }}
               >
-                Resend verification mail
+                Update
               </Button>
-            )}
-          <Button
-            variant="contained"
-            disabled={isSubmitting}
-            onClick={handleUpdateEmail}
-          >
-            Update
-          </Button>
+            </ThemeProvider>
+          </Box>
         </FormControl>
-      </AccordionDetails>
-    </Accordion>
+      </Box>
+    </div>
   );
 };

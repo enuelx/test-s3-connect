@@ -1,11 +1,13 @@
 import { useState, useContext, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Box, Button, FormControl } from '@mui/material';
-import ReCAPTCHA from 'react-google-recaptcha';
 
 import { UserContext, ToastContext } from '@context';
-import { PasswordTextField, UsernameTextField } from '@components/common';
-import config from '@config';
+import {
+  PasswordTextField,
+  ReCaptcha,
+  UsernameTextField
+} from '@components/common';
 
 export default ({
   formActionName,
@@ -91,7 +93,7 @@ export default ({
 
         {useCaptcha && (
           <Box sx={{ position: 'absolute', bottom: '20px', left: '270px' }}>
-            <ReCAPTCHA ref={captchaRef} sitekey={config.captchaKey} />
+            <ReCaptcha captchaRef={captchaRef} />
           </Box>
         )}
         {children}

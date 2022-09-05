@@ -1,14 +1,15 @@
-import { useState, useContext } from 'react';
+import { useContext, useRef, useState } from 'react';
 import { Box, Button, Container, FormControl, Grid } from '@mui/material';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 
-import { PasswordTextField } from '@components/common';
+import { ReCaptcha, PasswordTextField } from '@components/common';
 import { accountApi } from '@services';
-import { UserContext, ToastContext } from '@context';
+import { ToastContext } from '@context';
 import { ThemeProvider } from '@emotion/react';
-
 import { whiteButton } from '@themes';
+
 export const ResetPassword = () => {
+  const captchaRef = useRef(null);
   const navigate = useNavigate();
   const toastContext = useContext(ToastContext);
   const [searchParams, setSearchParams] = useSearchParams();
@@ -20,12 +21,16 @@ export const ResetPassword = () => {
   const handleResetPassword = async () => {
     setIsSubmitting(true);
 
+    const captchaValue = captchaRef.current?.getValue();
+
     if (password !== repeatPassword) {
       toastContext.errorMessage('Passwords do not match');
+    } else if (!captchaValue) {
+      toastContext.errorMessage('Please verify that you are not a robot');
     } else {
       try {
         const resetToken = searchParams.get('token');
-        await accountApi.resetPassword(resetToken, password);
+        await accountApi.resetPassword(resetToken, password, captchaValue);
         toastContext.successMessage('Password updated');
         navigate('/');
       } catch (err) {
@@ -70,7 +75,7 @@ export const ResetPassword = () => {
               display: 'flex',
               alignItems: 'center',
               flexWrap: 'wrap',
-              justifyContent: 'center',
+              justifyContent: 'space-between',
               marginTop: '4vh'
             }}
           >
@@ -83,6 +88,7 @@ export const ResetPassword = () => {
                 Reset Password
               </Button>
             </ThemeProvider>
+            <ReCaptcha captchaRef={captchaRef} />
           </Box>
         </FormControl>
       </Grid>

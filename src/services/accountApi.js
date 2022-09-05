@@ -71,10 +71,11 @@ export default {
     return result.data;
   },
 
-  async resetPassword(resetToken, newPassword) {
+  async resetPassword(resetToken, newPassword, captchaValue) {
     const result = await axiosInstance.post(`${apiUrl}/resetPassword`, {
       newPassword,
-      resetToken
+      resetToken,
+      captcha: captchaValue
     });
 
     return result.data;

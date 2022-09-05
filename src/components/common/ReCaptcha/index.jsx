@@ -1,6 +1,6 @@
-const captchaRef = useRef(null);
+import config from '@config';
+import ReCAPTCHA from 'react-google-recaptcha';
 
-export default () => {
-  const captchaValue = captchaRef.current.getValue();
+export const ReCaptcha = ({ captchaRef }) => {
   return <ReCAPTCHA ref={captchaRef} sitekey={config.captchaKey} />;
 };

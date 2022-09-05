@@ -1,10 +1,12 @@
 import { useState, useContext } from 'react';
-import { Dialog, Box, Typography, Divider } from '@mui/material';
+import { Dialog, Box, Typography, Divider, Button } from '@mui/material';
 
 import { UserContext, ToastContext } from '@context';
 import { discordUserApi } from '@services';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye } from '@fortawesome/free-solid-svg-icons';
+import { ThemeProvider } from '@emotion/react';
+import { grayButton } from '@themes';
 export default () => {
   const [open, setOpen] = useState(false);
   const [associateCode, setAssociateCode] = useState('');
@@ -32,25 +34,39 @@ export default () => {
       <Box
         style={{
           textAlign: 'center',
+          marginTop: '2vh',
           display: 'flex',
           alignItems: 'center',
-          flexWrap: 'wrap',
-          justifyContent: 'center',
-          cursor: 'pointer'
+          justifyContent: 'center'
         }}
-        onClick={handleOpen}
       >
-        <FontAwesomeIcon color="#787878" icon={faEye} size="lg" />
-        <Typography
-          style={{
-            fontSize: '18px',
-            marginLeft: '1vw',
-            color: '#787878'
-          }}
-        >
-          Connect discord account
-        </Typography>
+        <ThemeProvider theme={grayButton}>
+          <Button
+            sx={{
+              background: 'transparent',
+              border: 'solid 1px',
+              alignSelf: 'baseline',
+              textTransform: 'none',
+              color: '#787878',
+              ':hover': {
+                bgcolor: '#3E3E3E'
+              }
+            }}
+            onClick={handleOpen}
+          >
+            <FontAwesomeIcon icon={faEye} size="lg" />
+            <Typography
+              style={{
+                fontSize: '18px',
+                marginLeft: '1vw'
+              }}
+            >
+              Connect discord account
+            </Typography>
+          </Button>
+        </ThemeProvider>
       </Box>
+
       <Dialog
         open={open}
         onClose={handleClose}

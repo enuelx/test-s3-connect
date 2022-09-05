@@ -37,7 +37,6 @@ export const PasswordTextField = ({
           InputLabelProps={{
             style: { color: 'antiquewhite' }
           }}
-          id="input-with-sx"
           variant="standard"
           sx={{ width: '507px', borderColor: 'white', borderBottom: 'ridge' }}
           label={label}

@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { Box, Button, FormControl, Typography } from '@mui/material';
 import { UnsupportedChainIdError, useWeb3React } from '@web3-react/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUnlockKeyhole, faEye } from '@fortawesome/free-solid-svg-icons';
+import { faUnlockKeyhole, faKey } from '@fortawesome/free-solid-svg-icons';
 import { UserContext, ToastContext } from '@context';
 import { accountApi, walletApi } from '@services';
 import { PasswordTextField2 } from '../../common/PasswordTextField2';
@@ -122,7 +122,7 @@ export const ChangePassword = () => {
           <FontAwesomeIcon
             style={{ marginRight: '1vw', marginTop: '2vh' }}
             color="#787878"
-            icon={faEye}
+            icon={faKey}
             size="lg"
           />
           <PasswordTextField2
@@ -144,7 +144,7 @@ export const ChangePassword = () => {
           <FontAwesomeIcon
             style={{ marginRight: '1vw', marginTop: '2vh' }}
             color="#787878"
-            icon={faEye}
+            icon={faKey}
             size="lg"
           />
           <PasswordTextField2
@@ -166,7 +166,7 @@ export const ChangePassword = () => {
           <FontAwesomeIcon
             style={{ marginRight: '1vw', marginTop: '2vh' }}
             color="#787878"
-            icon={faEye}
+            icon={faKey}
             size="lg"
           />
           <PasswordTextField2

@@ -63,7 +63,7 @@ const ManualVerify = ({ stepState, setStepState }) => {
         setStepState(0);
         break;
     }
-  }, [userContext.token, manualValidation?.status]);
+  }, [userContext.token, manualValidation?.status, userContext.user]);
 
   const startValidation = async () => {
     try {

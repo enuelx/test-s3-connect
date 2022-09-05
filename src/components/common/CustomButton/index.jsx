@@ -3,7 +3,11 @@ import { Button, Tooltip } from '@mui/material';
 
 import { whiteButton } from '@themes';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faRotate, faWallet } from '@fortawesome/free-solid-svg-icons';
+import {
+  faRotate,
+  faWallet,
+  faArrowRightFromBracket
+} from '@fortawesome/free-solid-svg-icons';
 export default ({
   text,
   color = 'primary',
@@ -13,7 +17,8 @@ export default ({
   size = 'large',
   sx,
   tooltip,
-  tooltipPlacement = 'bottom'
+  tooltipPlacement = 'bottom',
+  login
 }) => {
   if (tooltip) {
     return (
@@ -55,12 +60,12 @@ export default ({
         onClick={onClick}
         size={size}
         sx={{
-          width: text == 'reload' ? '50px' : '250px',
+          width: text == 'reload' || text == 'logout' ? '50px' : '250px',
           marginTop: '10px',
           background: 'transparent',
           border: 'solid 1px',
           alignSelf: 'baseline',
-          color: '#787878',
+          color: login ? '#787878' : '#fff',
           marginRight: '20px',
           marginBottom: '0px'
         }}
@@ -68,6 +73,13 @@ export default ({
         {text == 'reload' ? (
           <>
             <FontAwesomeIcon style={{ fontSize: '26px' }} icon={faRotate} />
+          </>
+        ) : text == 'logout' ? (
+          <>
+            <FontAwesomeIcon
+              style={{ fontSize: '26px' }}
+              icon={faArrowRightFromBracket}
+            />
           </>
         ) : (
           <>

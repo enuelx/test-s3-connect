@@ -42,7 +42,11 @@ const ToastProvider = ({ children }) => {
           onClose={handleToastClose}
           autoHideDuration={5000}
         >
-          <Alert severity={state.severity} onClose={handleToastClose}>
+          <Alert
+            style={{ backgroundColor: '#787878' }}
+            severity={state.severity}
+            onClose={handleToastClose}
+          >
             {state.message}
           </Alert>
         </Snackbar>

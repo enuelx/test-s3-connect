@@ -13,11 +13,11 @@ import { UnsupportedChainIdError, useWeb3React } from '@web3-react/core';
 import { connectors } from '@config/web3';
 
 import './style.css';
-import { PinkButton } from '@components/common';
+import { CustomButton } from '@components/common';
 import MetamaskLogo from './img/MetaMask.png';
 import WalletConnectLogo from './img/WalletConnect.png';
 
-export default () => {
+export default ({ login }) => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -40,7 +40,7 @@ export default () => {
 
   return (
     <div>
-      <PinkButton text="Connect Wallet" onClick={handleOpen} />
+      <CustomButton login={login} text="Connect Wallet" onClick={handleOpen} />
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Choose your wallet</DialogTitle>
         <List>
@@ -48,7 +48,7 @@ export default () => {
             <ListItemButton
               onClick={async () => {
                 activate(connectors.Metamask);
-                localStorage.setItem('previouslyConnectedMetamask', 'true')
+                localStorage.setItem('previouslyConnectedMetamask', 'true');
                 handleClose();
               }}
               disabled={

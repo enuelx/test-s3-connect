@@ -12,14 +12,15 @@ import {
 import { faStar as emptyStar } from '@fortawesome/free-regular-svg-icons';
 import { ThemeProvider } from '@emotion/react';
 
-import { whiteButton } from '@themes';
+import './style.css';
+import { whiteButton, grayButton } from '@themes';
 import { walletApi } from '@services';
 
 const WelcomeWalletsInfo = ({ userContext, toastContext }) => {
   const [removeWalletDialogIsOpen, setRemoveWalletDialogIsOpen] =
     useState(false);
   const [walletToDelete, setWalletToDelete] = useState(false);
-
+  const [overStar, setOverStar] = useState(false);
   const wallets = userContext.user?.wallets || [];
   const { active, library, account, error } = useWeb3React();
   const isUnsupportedChain = error instanceof UnsupportedChainIdError;
@@ -59,7 +60,7 @@ const WelcomeWalletsInfo = ({ userContext, toastContext }) => {
   };
 
   return (
-    <div style={{ width: '480px' }}>
+    <div style={{ width: '400px' }}>
       <Box
         style={{
           width: '166px',
@@ -88,7 +89,7 @@ const WelcomeWalletsInfo = ({ userContext, toastContext }) => {
 
       <div style={{ marginTop: '2vh' }}>
         {wallets.length > 0 ? (
-          wallets.map((wallet) => {
+          wallets.map((wallet, index) => {
             return (
               <Box
                 style={{
@@ -108,31 +109,51 @@ const WelcomeWalletsInfo = ({ userContext, toastContext }) => {
                     6
                   )}...${wallet.wallet.substring(wallet.wallet.length - 6)}`}
                 </Typography>
-                <Box>
+                <Box
+                  style={{
+                    justifyContent: 'center',
+                    alignItems: 'center'
+                  }}
+                >
                   {wallet.wallet === userContext.user.mainWallet?.wallet ? (
-                    <FontAwesomeIcon color="#787878" icon={faStar} size="lg" />
+                    <FontAwesomeIcon
+                      style={{ margin: 'auto' }}
+                      color="#787878"
+                      icon={faStar}
+                      size="lg"
+                    />
                   ) : (
                     <FontAwesomeIcon
+                      className="clickable"
                       onClick={() => {
                         setMainWallet(wallet.wallet);
                       }}
-                      color="#787878"
-                      icon={emptyStar}
+                      icon={
+                        overStar?.over && overStar?.overIndexStart === index
+                          ? faStar
+                          : emptyStar
+                      }
                       size="lg"
-                      style={{ cursor: 'pointer' }}
+                      onMouseOver={() =>
+                        setOverStar({ over: true, overIndexStart: index })
+                      }
+                      onMouseLeave={() =>
+                        setOverStar({ over: false, overIndexStart: -1 })
+                      }
                     />
                   )}
+
+                  <FontAwesomeIcon
+                    className="clickable"
+                    onClick={() => {
+                      setWalletToDelete(wallet.wallet);
+                      setRemoveWalletDialogIsOpen(true);
+                    }}
+                    icon={faTrash}
+                    size="lg"
+                    style={{ marginLeft: '1vw' }}
+                  />
                 </Box>
-                <FontAwesomeIcon
-                  onClick={() => {
-                    setWalletToDelete(wallet.wallet);
-                    setRemoveWalletDialogIsOpen(true);
-                  }}
-                  color="#787878"
-                  icon={faTrash}
-                  size="lg"
-                  style={{ cursor: 'pointer' }}
-                />
               </Box>
             );
           })
@@ -144,34 +165,45 @@ const WelcomeWalletsInfo = ({ userContext, toastContext }) => {
           </Box>
         )}
       </div>
-
       <Box
         style={{
           textAlign: 'center',
           marginTop: '2vh',
           display: 'flex',
           alignItems: 'center',
-          justifyContent: wallets.length > 0 ? '' : 'center',
-          flexWrap: 'wrap',
-          cursor: !active || isUnsupportedChain ? 'default' : 'pointer'
+          justifyContent: wallets.length > 0 ? '' : 'center'
         }}
-        onClick={!active || isUnsupportedChain ? () => {} : associateWallet}
-        disabled={!active || isUnsupportedChain}
       >
-        <FontAwesomeIcon
-          color={!active || isUnsupportedChain ? '#787878' : '#fff'}
-          icon={faCirclePlus}
-          size="lg"
-        />
-        <Typography
-          style={{
-            fontSize: '18px',
-            marginLeft: '1vw',
-            color: !active || isUnsupportedChain ? '#787878' : '#fff'
-          }}
-        >
-          Add new wallet
-        </Typography>
+        <ThemeProvider theme={grayButton}>
+          <Button
+            onClick={!active || isUnsupportedChain ? () => {} : associateWallet}
+            disabled={!active || isUnsupportedChain}
+            sx={{
+              background: 'transparent',
+              border: 'solid 1px',
+              alignSelf: 'baseline',
+              textTransform: 'none',
+              color: '#787878',
+              ':hover': {
+                bgcolor: '#3E3E3E'
+              }
+            }}
+          >
+            <FontAwesomeIcon
+              //color={!active || isUnsupportedChain ? '#787878' : '#fff'}
+              icon={faCirclePlus}
+              size="lg"
+            />
+            <Typography
+              style={{
+                fontSize: '18px',
+                marginLeft: '1vw'
+              }}
+            >
+              Add new wallet
+            </Typography>
+          </Button>
+        </ThemeProvider>
       </Box>
 
       <Dialog

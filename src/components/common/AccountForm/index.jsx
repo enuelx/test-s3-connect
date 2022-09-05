@@ -1,5 +1,5 @@
 import { useState, useContext, useRef } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Box, Button, FormControl } from '@mui/material';
 import ReCAPTCHA from 'react-google-recaptcha';
 
@@ -89,21 +89,8 @@ export default ({
           {formActionName}
         </Button>
 
-        {formActionName == 'Register' ? (
-          <Link
-            to={{
-              pathname: '/login'
-            }}
-            style={{ color: 'white', marginTop: '100px' }}
-          >
-            Already a member? Log in
-          </Link>
-        ) : (
-          ''
-        )}
-
         {useCaptcha && (
-          <Box sx={{ marginTop: '50px' }}>
+          <Box sx={{ position: 'absolute', bottom: '20px', left: '270px' }}>
             <ReCAPTCHA ref={captchaRef} sitekey={config.captchaKey} />
           </Box>
         )}

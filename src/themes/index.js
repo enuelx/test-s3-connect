@@ -1,6 +1,6 @@
 import { createTheme } from '@mui/material';
 
-export const pinkButton = createTheme({
+export const CustomButton = createTheme({
   palette: {
     primary: {
       main: '#fffffff'

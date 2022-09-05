@@ -30,7 +30,7 @@ const Welcome = () => {
           justifyContent: 'center',
           flexWrap: 'wrap',
           paddingTop: '20vh',
-          marginLeft: '18vw'
+          marginLeft: '21vw'
         }}
       >
         <WalletData userContext={userContext} toastContext={toastContext} />

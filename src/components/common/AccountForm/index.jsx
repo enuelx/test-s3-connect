@@ -48,10 +48,7 @@ export default ({
         navigate('/');
       }
     } catch (err) {
-      const message =
-        err.response.status === 401
-          ? 'Invalid username or password'
-          : err.response.data?.error || 'Something went wrong';
+      const message = err.response.data?.error || 'Something went wrong';
 
       toastContext.errorMessage(message);
     }

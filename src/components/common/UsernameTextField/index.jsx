@@ -19,7 +19,12 @@ export const UsernameTextField = ({ username, setUsername }) => {
           InputLabelProps={{
             style: { color: 'antiquewhite' }
           }}
-          sx={{ width: '483px', borderColor: 'white', borderBottom: 'ridge' }}
+          sx={{
+            width: '483px',
+            borderColor: 'white',
+            borderBottom: 'ridge',
+            input: { color: 'white' }
+          }}
           required
           label="username"
           value={username}

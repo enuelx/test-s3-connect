@@ -37,7 +37,12 @@ export const PasswordTextField = ({
             style: { color: 'antiquewhite' }
           }}
           variant="standard"
-          sx={{ width: '507px', borderColor: 'white', borderBottom: 'ridge' }}
+          sx={{
+            width: '507px',
+            borderColor: 'white',
+            borderBottom: 'ridge',
+            input: { color: 'white' }
+          }}
           label={label}
           value={password}
           onChange={(e) => {

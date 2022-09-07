@@ -4,13 +4,21 @@ import { Route, Routes } from 'react-router-dom';
 import { accountApi } from '@services';
 import { UserContext } from '@context/UserContext';
 import {
+  ForgotPassword,
   Login,
   Register,
   Loader,
   Welcome,
-  NavBar,
-  ManualVerify
+  NavBarTop,
+  ResetPassword,
+  VerifyEmail,
+  NavBarLeft
 } from '@components';
+import { Box } from '@mui/system';
+import AccountSettings from './components/AccountSettings';
+import ManualVerifyPage from './components/ManualVerifyPage';
+import { Tooltip } from '@mui/material';
+import { InfoOutlined as InfoIcon } from '@mui/icons-material';
 
 function App() {
   const userContext = useContext(UserContext);
@@ -43,12 +51,12 @@ function App() {
     try {
       const data = await accountApi.refreshToken();
       userContext.setToken(data.token);
+
+      // call refreshToken every 5 minutes to renew the authentication token.
+      setTimeout(verifyAccount, 5 * 60 * 1000);
     } catch (err) {
       userContext.setToken(null);
     }
-
-    // call refreshToken every 5 minutes to renew the authentication token.
-    setTimeout(verifyAccount, 5 * 60 * 1000);
   }, [userContext.setToken]);
 
   useEffect(() => {
@@ -71,23 +79,63 @@ function App() {
       window.removeEventListener('storage', syncLogout);
     };
   }, [syncLogout]);
-
+  const wallets = userContext.user?.wallets || [];
   return (
     <div>
-      <NavBar />
-      {userContext.token === null ? (
-        <Routes>
-          <Route path="register" element={<Register />} />
-          <Route path="*" element={<Login />} />
-        </Routes>
-      ) : userContext.token ? (
-        <Routes>
-          <Route path="manualverify" element={<ManualVerify />} />
-          <Route path="*" element={<Welcome />} />
-        </Routes>
-      ) : (
-        <Loader />
+      {/*<Box sx={{ flexGrow: 0 }}>
+          <WalletData />
+      </Box>*/}
+      {userContext.token && <NavBarLeft />}
+      {<NavBarTop />}
+      {userContext.token && (
+        <div style={{ position: 'absolute', bottom: 50, right: 50 }}>
+          <div
+            style={{
+              marginTop: '2vh',
+              backgroundColor: '#3E3E3E',
+              borderRadius: '5px',
+              width: '210px',
+              color: '#787878',
+              textAlign: 'center',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}
+          >
+            Cyphers Hodling:{' '}
+            {wallets.reduce((prev, { cypherHoldings }) => {
+              return prev + cypherHoldings.length;
+            }, 0)}
+            <Tooltip
+              arrow
+              placement="top"
+              describeChild
+              title={<span>Holdings info are updated every 2 hours.</span>}
+            >
+              <InfoIcon style={{ marginLeft: '1vh' }} />
+            </Tooltip>
+          </div>
+        </div>
       )}
+      <Routes>
+        <Route path="/verify-email" element={<VerifyEmail />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
+        {userContext.token === null ? (
+          <>
+            <Route path="register" element={<Register />} />
+            <Route path="forgot-password" element={<ForgotPassword />} />
+            <Route path="*" element={<Login />} />
+          </>
+        ) : userContext.token ? (
+          <>
+            <Route path="manual-verify" element={<ManualVerifyPage />} />
+            <Route path="account-settings" element={<AccountSettings />} />
+            <Route path="*" element={<Welcome />} />
+          </>
+        ) : (
+          <Loader />
+        )}
+      </Routes>
     </div>
   );
 }

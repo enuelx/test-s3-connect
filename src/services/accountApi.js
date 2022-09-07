@@ -9,7 +9,7 @@ const axiosInstance = axios.create({
 const apiUrl = `${config.apiUrl}/api/account`;
 
 export default {
-  async login(username, password) {
+  async login({ username, password }) {
     const result = await axiosInstance.post(`${apiUrl}/login`, {
       username,
       password
@@ -18,10 +18,11 @@ export default {
     return result.data;
   },
 
-  async signUp(username, password) {
+  async signUp({ username, password, captchaValue }) {
     const result = await axiosInstance.post(`${apiUrl}/signup`, {
       username,
-      password
+      password,
+      captcha: captchaValue
     });
 
     return result.data;
@@ -48,6 +49,33 @@ export default {
       headers: {
         Authorization: `Bearer ${token}`
       }
+    });
+
+    return result.data;
+  },
+
+  async changePassword(token, oldPassword, newPassword) {
+    const result = await axiosInstance.post(
+      `${apiUrl}/changePassword`,
+      {
+        oldPassword,
+        newPassword
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    );
+
+    return result.data;
+  },
+
+  async resetPassword(resetToken, newPassword, captchaValue) {
+    const result = await axiosInstance.post(`${apiUrl}/resetPassword`, {
+      newPassword,
+      resetToken,
+      captcha: captchaValue
     });
 
     return result.data;

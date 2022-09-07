@@ -1,0 +1,10 @@
+stages:
+  - build
+  - deploy
+
+include:
+  - project: 'nxar/collider-infrastructure/templates-gitlab-ci'
+    ref: main
+    file:
+      - 'static_website_build.yml'
+      - 'static_website_deploy_s3.yml'

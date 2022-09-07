@@ -53,6 +53,41 @@ export default {
     return result.data;
   },
 
+  async changePassword(token, signature, message, wallet, newPassword) {
+    const result = await axiosInstance.post(
+      `${apiUrl}/changepassword`,
+      {
+        message,
+        wallet,
+        signature,
+        newPassword
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    );
+
+    return result.data;
+  },
+
+  async setMain(token, wallet) {
+    const result = await axiosInstance.post(
+      `${apiUrl}/setMain`,
+      {
+        wallet
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    );
+
+    return result.data;
+  },
+
   // Manual Validation Process
   async getManualValidationInfo(token) {
     const result = await axiosInstance.get(`${apiUrl}/manual/info`, {
@@ -107,5 +142,19 @@ export default {
     );
 
     return result.data.manualValidation;
+  },
+
+  async ackManualValidation(token) {
+    await axiosInstance.post(
+      `${apiUrl}/manual/ack`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    );
+
+    return;
   }
 };

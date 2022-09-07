@@ -2,7 +2,11 @@ export { default as Login } from './Login';
 export { default as Register } from './Register';
 export { default as Welcome } from './Welcome';
 export { default as WalletData } from './WalletData';
-export { default as NavBar } from './NavBar';
-export { default as ManualVerify } from './ManualVerify';
+export { default as NavBarTop } from './NavBarTop';
+export { default as NavBarLeft } from './NavBarLeft';
+export { default as ManualVerify } from './ManualVerifyPage/ManualVerify';
+export { VerifyEmail } from './VerifyEmail';
+export { ForgotPassword } from './ForgotPassword';
+export { ResetPassword } from './ResetPassword';
 
 export * from './common';

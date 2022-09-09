@@ -1,12 +1,13 @@
 import { useState, useContext } from 'react';
 import { Dialog, Box, Typography, Divider, Button } from '@mui/material';
-
-import { UserContext, ToastContext } from '@context';
-import { discordUserApi } from '@services';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye } from '@fortawesome/free-solid-svg-icons';
 import { ThemeProvider } from '@emotion/react';
+
+import { UserContext, ToastContext } from '@context';
+import { discordUserApi } from '@services';
 import { grayButton } from '@themes';
+
 export default () => {
   const [open, setOpen] = useState(false);
   const [associateCode, setAssociateCode] = useState('');
@@ -86,17 +87,18 @@ export default () => {
               border: '1px solid rgba(0,0,0,.1)'
             }}
           />
-          {/* TODO fix text */}
           <Typography style={{ marginTop: '5vh', color: '#787878' }}>
-            Here is your association code, go to the channel xxx in our discord
-            server and interact with the bot, where you will be prompted to
-            insert this code.
+            Here is your association code, go to the channel{' '}
+            <a
+              href="https://discord.com/channels/920306036517253171/961604478056939591"
+              target="_blank"
+              style={{ color: '#fff' }}
+            >
+              #holders-verification
+            </a>{' '}
+            in our discord server and interact with the bot, where you will be
+            prompted to insert this code.
           </Typography>
-          {/*<TextField
-            sx={{ margin: "auto", color: "#787878" }}
-            InputProps={{ readOnly: true }}
-            defaultValue={associateCode}
-          />*/}
           <Box
             style={{
               border: '1px solid #fff',

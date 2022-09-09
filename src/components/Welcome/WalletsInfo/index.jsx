@@ -33,7 +33,7 @@ const WelcomeWalletsInfo = ({ userContext, toastContext }) => {
       userContext.setUser(undefined); // To force reload
       toastContext.successMessage('Wallet associated successfully');
     } catch (err) {
-      const message = err.response.data?.error || 'Something went wrong';
+      const message = err.response.data?.error || 'Error associating wallet';
       toastContext.errorMessage(message);
     }
   };
@@ -44,7 +44,8 @@ const WelcomeWalletsInfo = ({ userContext, toastContext }) => {
       userContext.setUser(undefined);
       toastContext.successMessage('Wallet removed');
     } catch (err) {
-      toastContext.errorMessage('Error removing wallet');
+      const message = err.response.data?.error || 'Error removing wallet';
+      toastContext.errorMessage(message);
     }
   };
 

@@ -45,7 +45,7 @@ const DiscordCard = ({ userContext, toastContext }) => {
         <Typography
           style={{ marginLeft: '1vw', fontSize: '18px', color: '#787878' }}
         >
-          DiscordUser:
+          DiscordUser: {' '}
           {userContext.user.discordUser?.discordTag ?? ' ---------- '}
         </Typography>
       </Box>

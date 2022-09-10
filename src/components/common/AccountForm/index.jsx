@@ -1,11 +1,13 @@
 import { useState, useContext, useRef } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Box, Button, FormControl } from '@mui/material';
-import ReCAPTCHA from 'react-google-recaptcha';
 
 import { UserContext, ToastContext } from '@context';
-import { PasswordTextField, UsernameTextField } from '@components/common';
-import config from '@config';
+import {
+  PasswordTextField,
+  ReCaptcha,
+  UsernameTextField
+} from '@components/common';
 
 export default ({
   formActionName,
@@ -46,10 +48,7 @@ export default ({
         navigate('/');
       }
     } catch (err) {
-      const message =
-        err.response.status === 401
-          ? 'Invalid username or password'
-          : err.response.data?.error || 'Something went wrong';
+      const message = err.response.data?.error || 'Something went wrong';
 
       toastContext.errorMessage(message);
     }
@@ -89,22 +88,9 @@ export default ({
           {formActionName}
         </Button>
 
-        {formActionName == 'Register' ? (
-          <Link
-            to={{
-              pathname: '/login'
-            }}
-            style={{ color: 'white', marginTop: '100px' }}
-          >
-            Already a member? Log in
-          </Link>
-        ) : (
-          ''
-        )}
-
         {useCaptcha && (
-          <Box sx={{ marginTop: '50px' }}>
-            <ReCAPTCHA ref={captchaRef} sitekey={config.captchaKey} />
+          <Box sx={{ position: 'absolute', bottom: '20px', left: '270px' }}>
+            <ReCaptcha captchaRef={captchaRef} />
           </Box>
         )}
         {children}

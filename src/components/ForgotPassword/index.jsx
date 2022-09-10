@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   Box,
@@ -10,13 +10,15 @@ import {
   Tooltip
 } from '@mui/material';
 import { InfoOutlined as InfoIcon } from '@mui/icons-material';
+import { ThemeProvider } from '@emotion/react';
 
 import { ToastContext } from '@context';
 import { emailApi } from '@services';
-import { ThemeProvider } from '@emotion/react';
-
 import { whiteButton } from '@themes';
+import { ReCaptcha } from '@components/common';
+
 export const ForgotPassword = () => {
+  const captchaRef = useRef(null);
   const navigate = useNavigate();
 
   const toastContext = useContext(ToastContext);
@@ -25,9 +27,14 @@ export const ForgotPassword = () => {
 
   const handleForgotPassword = async () => {
     try {
-      await emailApi.forgotPassword(email);
-      toastContext.successMessage('Email sent');
-      navigate('/');
+      const captchaValue = captchaRef.current?.getValue();
+      if (!captchaValue) {
+        toastContext.errorMessage('Please verify that you are not a robot');
+      } else {
+        await emailApi.forgotPassword(email, captchaValue);
+        toastContext.successMessage('Email sent');
+        navigate('/');
+      }
     } catch (err) {
       const message = err.response?.data?.error || 'Something went wrong';
 
@@ -86,6 +93,7 @@ export const ForgotPassword = () => {
                 <InfoIcon />
               </Tooltip>
             </Box>
+            <ReCaptcha captchaRef={captchaRef} />
             <Box
               style={{
                 display: 'flex',
@@ -93,7 +101,8 @@ export const ForgotPassword = () => {
                 flexWrap: 'wrap',
                 alignItems: 'center',
                 width: '100%',
-                marginTop: '2vh'
+                marginTop: '2vh',
+                marginBottom: '2vh'
               }}
             >
               <ThemeProvider theme={whiteButton}>

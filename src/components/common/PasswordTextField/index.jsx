@@ -26,7 +26,6 @@ export const PasswordTextField = ({
   return (
     <>
       <Box sx={{ display: 'flex', alignItems: 'flex-end', marginTop: margin }}>
-        {/*<KeyIcon sx={{ color: "white", mr: 1, my: 0.5 }} />*/}
         <FontAwesomeIcon
           style={{ marginRight: '1vw', marginBottom: '1vh' }}
           color="#fff"
@@ -37,9 +36,13 @@ export const PasswordTextField = ({
           InputLabelProps={{
             style: { color: 'antiquewhite' }
           }}
-          id="input-with-sx"
           variant="standard"
-          sx={{ width: '507px', borderColor: 'white', borderBottom: 'ridge' }}
+          sx={{
+            width: '507px',
+            borderColor: 'white',
+            borderBottom: 'ridge',
+            input: { color: 'white' }
+          }}
           label={label}
           value={password}
           onChange={(e) => {

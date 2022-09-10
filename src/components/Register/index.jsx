@@ -1,8 +1,8 @@
-import { Box } from '@mui/material';
+import { Box, Container } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 import { accountApi } from '@services';
 import { AccountForm } from '@components';
-import { Container } from '@mui/system';
 import {
   registerBackground as background,
   createAccountText
@@ -53,7 +53,16 @@ export default () => {
           validateRepeatPassword
           useCaptcha
           margin="250px"
-        />
+        >
+          <Link
+            to={{
+              pathname: '/login'
+            }}
+            style={{ color: 'white', marginTop: '100px' }}
+          >
+            Already a member? Log in
+          </Link>
+        </AccountForm>
       </Box>
     </Container>
   );

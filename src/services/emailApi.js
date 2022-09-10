@@ -47,9 +47,10 @@ export default {
     return result.data;
   },
 
-  async forgotPassword(email) {
+  async forgotPassword(email, captchaValue) {
     const result = await axiosInstance.post(`${apiUrl}/forgotPassword`, {
-      email
+      email,
+      captcha: captchaValue
     });
 
     return result.data;

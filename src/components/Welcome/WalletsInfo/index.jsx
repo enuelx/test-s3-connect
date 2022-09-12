@@ -64,8 +64,8 @@ const WelcomeWalletsInfo = ({ userContext, toastContext }) => {
     <div style={{ width: '400px' }}>
       <Box
         style={{
-          width: '166px',
-          height: '71px',
+          width: '100%',
+          height: '40%',
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
@@ -75,20 +75,20 @@ const WelcomeWalletsInfo = ({ userContext, toastContext }) => {
           borderRadius: '5px'
         }}
       >
-        <FontAwesomeIcon color="#787878" icon={faWallet} size="3x" />
+        <FontAwesomeIcon color="#787878" icon={faWallet} size="4x" />
       </Box>
-      <Box style={{ textAlign: 'center', marginTop: '3vh' }}>
+      <Box style={{ textAlign: 'left', marginTop: '4vh' }}>
         <Typography style={{ fontSize: '18px', color: '#787878' }}>
           Connect your wallet
         </Typography>
       </Box>
-      <Box style={{ textAlign: 'center', marginTop: '4vh' }}>
+      <Box style={{ textAlign: 'left', marginTop: '4vh' }}>
         <Typography style={{ fontSize: '18px', color: '#787878' }}>
           We will never do anything without your approval.
         </Typography>
       </Box>
 
-      <div style={{ marginTop: '2vh' }}>
+      <div style={{ marginTop: '4vh' }}>
         {wallets.length > 0 ? (
           wallets.map((wallet, index) => {
             return (
@@ -159,7 +159,7 @@ const WelcomeWalletsInfo = ({ userContext, toastContext }) => {
             );
           })
         ) : (
-          <Box style={{ textAlign: 'center', marginTop: '4vh' }}>
+          <Box style={{ textAlign: 'left', marginTop: '2vh' }}>
             <Typography style={{ fontSize: '18px', color: '#787878' }}>
               You don't have linked wallets yet
             </Typography>
@@ -169,10 +169,10 @@ const WelcomeWalletsInfo = ({ userContext, toastContext }) => {
       <Box
         style={{
           textAlign: 'center',
-          marginTop: '2vh',
+          marginTop: '4vh',
           display: 'flex',
           alignItems: 'center',
-          justifyContent: wallets.length > 0 ? '' : 'center'
+          justifyContent: wallets.length > 0 ? '' : 'left'
         }}
       >
         <ThemeProvider theme={grayButton}>

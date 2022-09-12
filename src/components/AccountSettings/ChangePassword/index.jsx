@@ -84,8 +84,8 @@ export const ChangePassword = () => {
     <div style={{ width: '45%' }}>
       <Box
         style={{
-          width: '166px',
-          height: '71px',
+          width: '80%',
+          height: '18%',
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
@@ -97,12 +97,12 @@ export const ChangePassword = () => {
       >
         <FontAwesomeIcon color="#787878" icon={faUnlockKeyhole} size="3x" />
       </Box>
-      <Box style={{ textAlign: 'center', marginTop: '3vh' }}>
+      <Box style={{ marginLeft: '3vw', marginTop: '3vh' }}>
         <Typography style={{ fontSize: '18px', color: '#787878' }}>
           Change Password
         </Typography>
       </Box>
-      <Box style={{ textAlign: 'center', marginTop: '4vh' }}>
+      <Box style={{ textAlign: 'left', marginTop: '4vh' }}>
         <Typography style={{ fontSize: '18px', color: '#787878' }}>
           To change the password, you can choose to enter your previous
           password, or sign a message with a wallet associated to your account.

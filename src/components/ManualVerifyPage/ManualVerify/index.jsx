@@ -15,7 +15,7 @@ import { Loader } from '@components';
 import { walletApi } from '@services';
 import manualValidationStatus from './manualValidationStatus';
 import { ThemeProvider } from '@emotion/react';
-import { grayButton, whiteButton } from '@themes';
+import { grayButton, whiteButton, grayButtonVerify } from '@themes';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faCircleCheck,
@@ -160,7 +160,7 @@ const ManualVerify = ({ stepState, setStepState }) => {
         </Typography>
       </Box>
       <Box style={{ marginTop: '3vh' }}>
-        <ThemeProvider theme={grayButton}>
+        <ThemeProvider theme={grayButtonVerify}>
           <Button
             variant="contained"
             disabled={
@@ -251,7 +251,7 @@ const ManualVerify = ({ stepState, setStepState }) => {
         </Typography>
       </Box>
       <Box style={{ marginTop: '3vh' }}>
-        <ThemeProvider theme={grayButton}>
+        <ThemeProvider theme={grayButtonVerify}>
           <Button
             variant="contained"
             style={{
@@ -352,16 +352,35 @@ const ManualVerify = ({ stepState, setStepState }) => {
         <Typography style={{ color: 'rgb(120, 120, 120)' }}>
           Select the wallet from where you will move your cypher
         </Typography>
-        <FormControl fullWidth style={{ marginTop: '2vh' }}>
+        <FormControl
+          fullWidth
+          style={{ marginTop: '2vh', color: 'rgb(120, 120, 120)' }}
+        >
           <InputLabel style={{ color: 'rgb(120, 120, 120)' }}>
             Wallet
           </InputLabel>
           <Select
+            sx={{
+              color: 'white',
+              '.MuiOutlinedInput-notchedOutline': {
+                borderColor: 'white '
+              },
+              '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                borderColor: 'white '
+              },
+              '&:hover .MuiOutlinedInput-notchedOutline': {
+                borderColor: 'white '
+              },
+              '.MuiSvgIcon-root ': {
+                fill: 'white !important'
+              }
+            }}
             label="Wallet"
             value={useHolderWallet}
             onChange={(e) => {
               setUseHolderWallet(e.target.value);
             }}
+            style={{ color: 'rgb(120, 120, 120)' }}
             inputProps={{ style: { color: 'rgb(120, 120, 120)' } }}
           >
             {userContext.user.wallets
@@ -385,6 +404,21 @@ const ManualVerify = ({ stepState, setStepState }) => {
             Wallet
           </InputLabel>
           <OutlinedInput
+            sx={{
+              color: 'white',
+              '.MuiOutlinedInput-notchedOutline': {
+                borderColor: 'white '
+              },
+              '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                borderColor: 'white '
+              },
+              '&:hover .MuiOutlinedInput-notchedOutline': {
+                borderColor: 'white '
+              },
+              '.MuiSvgIcon-root ': {
+                fill: 'white !important'
+              }
+            }}
             value={toValidateWallet}
             onChange={(e) => {
               setToValidateWallet(e.target.value);
@@ -395,7 +429,7 @@ const ManualVerify = ({ stepState, setStepState }) => {
         </FormControl>
         <ThemeProvider theme={whiteButton}>
           <Button
-            style={{ marginTop: '2vh', backgroundColor: '#3E3E3E' }}
+            style={{ marginTop: '4vh', backgroundColor: '#3E3E3E' }}
             variant="outlined"
             onClick={startValidation}
           >

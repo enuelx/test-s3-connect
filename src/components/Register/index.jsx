@@ -13,16 +13,35 @@ export default () => {
   return (
     <Container
       sx={{
+        marginLeft: '0px',
         marginRight: '0px',
-        height: '100vh',
-
-        minWidth: '-webkit-fill-available',
-        position: 'relative',
+        height: '100%',
+        minHeight: '100vh',
+        minWidth: '100vw',
+        position: 'abdolute',
         left: 0,
         top: 0,
-        background: `url(${background}), linear-gradient(90deg, #2a2d23, #6d705e)`
+        backgroundRepeat: 'no-repeat!important',
+
+        objectFit: 'cover!important',
+        background: `linear-gradient(90deg, #2a2d23, #6d705e)`
       }}
     >
+      <Box>
+        <img
+          style={{
+            position: 'absolute',
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            right: 0,
+            maxWidth: '85%',
+            bottom: 0
+          }}
+          src={background}
+          alt=""
+        />
+      </Box>
       <img
         style={{
           width: '500px',

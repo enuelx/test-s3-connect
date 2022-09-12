@@ -56,8 +56,8 @@ export const EmailForm = () => {
     <div style={{ width: '45%' }}>
       <Box
         style={{
-          width: '166px',
-          height: '71px',
+          width: '80%',
+          height: '18%',
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
@@ -73,19 +73,38 @@ export const EmailForm = () => {
           size="3x"
         />
       </Box>
-      <Box style={{ textAlign: 'center', marginTop: '3vh' }}>
+      <Box style={{ marginLeft: '3vw', marginTop: '3vh' }}>
         <Typography style={{ fontSize: '18px', color: '#787878' }}>
           Verify your email
         </Typography>
       </Box>
-      <Box style={{ textAlign: 'center', marginTop: '3vh' }}>
-        <FormControl width="80%">
+      <Box style={{ marginTop: '3vh', width: '100%' }}>
+        <FormControl style={{ width: '100%' }}>
           <TextField
             label="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             InputLabelProps={{
               style: { color: 'rgb(120, 120, 120)', fontSize: '18px' }
+            }}
+            sx={{
+              '& label.Mui-focused': {
+                color: 'white'
+              },
+              '& .MuiInput-underline:after': {
+                borderBottomColor: 'white'
+              },
+              '& .MuiOutlinedInput-root': {
+                '& fieldset': {
+                  borderColor: 'white'
+                },
+                '&:hover fieldset': {
+                  borderColor: 'white'
+                },
+                '&.Mui-focused fieldset': {
+                  borderColor: 'white'
+                }
+              }
             }}
             InputProps={{
               style: { color: 'rgb(120, 120, 120)', fontSize: '18px' },
@@ -134,7 +153,7 @@ export const EmailForm = () => {
               alignItems: 'center',
               flexWrap: 'wrap',
               justifyContent: 'center',
-              marginTop: '3vh'
+              marginTop: '4vh'
             }}
           >
             <ThemeProvider theme={grayButton}>
@@ -144,7 +163,7 @@ export const EmailForm = () => {
                 onClick={handleUpdateEmail}
                 style={{
                   borderRadius: '0px 10px 0px 10px',
-                  width: '100%'
+                  width: '70%'
                 }}
               >
                 Update

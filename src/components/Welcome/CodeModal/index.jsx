@@ -35,10 +35,10 @@ export default () => {
       <Box
         style={{
           textAlign: 'center',
-          marginTop: '2vh',
+          marginTop: '4vh',
           display: 'flex',
           alignItems: 'center',
-          justifyContent: 'center'
+          justifyContent: 'left'
         }}
       >
         <ThemeProvider theme={grayButton}>

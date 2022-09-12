@@ -10,7 +10,7 @@ export const UsernameTextField = ({ username, setUsername }) => {
       >
         <FontAwesomeIcon
           style={{ marginRight: '1vw', marginBottom: '1vh' }}
-          color="#fff"
+          color="antiquewhite"
           icon={faUserAstronaut}
           size="lg"
         />
@@ -21,9 +21,9 @@ export const UsernameTextField = ({ username, setUsername }) => {
           }}
           sx={{
             width: '483px',
-            borderColor: 'white',
+            borderColor: 'antiquewhite',
             borderBottom: 'ridge',
-            input: { color: 'white' }
+            input: { color: 'antiquewhite' }
           }}
           required
           label="username"
@@ -35,7 +35,7 @@ export const UsernameTextField = ({ username, setUsername }) => {
           error={username !== '' && username.length < 4}
         />
         <Tooltip
-          sx={{ color: 'white' }}
+          sx={{ color: 'antiquewhite' }}
           arrow
           placement="right"
           describeChild

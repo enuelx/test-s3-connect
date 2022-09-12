@@ -35,7 +35,7 @@ const ManualVerifyPage = () => {
     height: 30px;
     font-size: 20px;
     border-radius: 50%;
-    margin-top: -13px;
+    margin-top: -5px;
     font-weight: 500;
     z-index: 1;
   `;
@@ -70,10 +70,10 @@ const ManualVerifyPage = () => {
           justifyContent: 'center',
           flexWrap: 'wrap',
           paddingTop: '20vh',
-          marginLeft: '15vw'
+          marginLeft: '23vw'
         }}
       >
-        <div style={{ width: '700px' }}>
+        <div style={{ width: '800px' }}>
           <Box
             style={{
               display: 'flex',
@@ -81,7 +81,7 @@ const ManualVerifyPage = () => {
               alignItems: 'center',
               marginLeft: 'auto',
               marginRight: 'auto',
-              width: '500px'
+              width: '100%'
             }}
           >
             <Box sx={{ width: '100%' }}>

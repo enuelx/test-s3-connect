@@ -8,7 +8,10 @@ const ToastProvider = ({ children }) => {
     message: null,
     severity: null
   });
-
+  const [openNavBarLeft, setOpenNavBarLeft] = useState({
+    login: false,
+    open: false
+  });
   const value = {
     ...state,
     errorMessage: (message) => {
@@ -22,6 +25,9 @@ const ToastProvider = ({ children }) => {
         message,
         severity: 'success'
       });
+    },
+    changeOpenNavbarLeft: (open) => {
+      setOpenNavBarLeft(open);
     }
   };
 
@@ -41,6 +47,13 @@ const ToastProvider = ({ children }) => {
           open={state.message !== null}
           onClose={handleToastClose}
           autoHideDuration={5000}
+          style={{
+            marginLeft: openNavBarLeft.login
+              ? openNavBarLeft.open
+                ? '23vw'
+                : '5vw'
+              : ''
+          }}
         >
           <Alert
             style={{ backgroundColor: '#787878' }}

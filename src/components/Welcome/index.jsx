@@ -27,10 +27,10 @@ const Welcome = () => {
       <Grid
         style={{
           display: 'flex',
-          justifyContent: 'center',
+          justifyContent: 'space-between',
           flexWrap: 'wrap',
           paddingTop: '20vh',
-          marginLeft: '21vw'
+          marginLeft: '23vw'
         }}
       >
         <WalletData userContext={userContext} toastContext={toastContext} />

@@ -94,7 +94,7 @@ function App() {
               marginTop: '2vh',
               backgroundColor: '#3E3E3E',
               borderRadius: '5px',
-              width: '210px',
+              width: '250px',
               color: '#787878',
               textAlign: 'center',
               display: 'flex',

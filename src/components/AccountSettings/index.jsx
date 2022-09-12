@@ -18,8 +18,8 @@ const AccountSettings = () => {
           display: 'flex',
           justifyContent: 'space-between',
           flexWrap: 'wrap',
-          paddingTop: '20vh',
-          marginLeft: '22vw'
+          paddingTop: '18vh',
+          marginLeft: '23vw'
         }}
       >
         {<ChangePassword />}

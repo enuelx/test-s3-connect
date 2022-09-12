@@ -28,7 +28,7 @@ export const PasswordTextField = ({
       <Box sx={{ display: 'flex', alignItems: 'flex-end', marginTop: margin }}>
         <FontAwesomeIcon
           style={{ marginRight: '1vw', marginBottom: '1vh' }}
-          color="#fff"
+          color="antiquewhite"
           icon={faKey}
           size="lg"
         />
@@ -41,7 +41,7 @@ export const PasswordTextField = ({
             width: '507px',
             borderColor: 'white',
             borderBottom: 'ridge',
-            input: { color: 'white' }
+            input: { color: 'antiquewhite' }
           }}
           label={label}
           value={password}
@@ -55,13 +55,13 @@ export const PasswordTextField = ({
               <InputAdornment position="end">
                 <IconButton onClick={() => setShowPassword(!showPassword)}>
                   {showPassword ? (
-                    <HideIcon sx={{ color: 'white' }} />
+                    <HideIcon sx={{ color: 'antiquewhite' }} />
                   ) : (
-                    <ShowIcon sx={{ color: 'white' }} />
+                    <ShowIcon sx={{ color: 'antiquewhite' }} />
                   )}
                 </IconButton>
                 <Tooltip
-                  sx={{ textTransform: 'none', color: 'white' }}
+                  sx={{ textTransform: 'none', color: 'antiquewhite' }}
                   arrow
                   placement="right"
                   describeChild

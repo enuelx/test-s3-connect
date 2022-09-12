@@ -1,5 +1,5 @@
 import { Box, Drawer, IconButton, Typography } from '@mui/material';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import './style/style.css';
 import MenuIcon from '@mui/icons-material/Menu';
 import ColliderMenu from './style/img/colliderMenu.png';
@@ -17,15 +17,20 @@ export default () => {
   const [open, setOpen] = useState(false);
   const handleDrawerClose = () => {
     setOpen(!open);
+    toastContext.changeOpenNavbarLeft({ login: true, open: !open });
   };
   const userContext = useContext(UserContext);
   const toastContext = useContext(ToastContext);
   const logoutHandler = async () => {
     await accountApi.logout(userContext.token);
     userContext.clear();
+    toastContext.changeOpenNavbarLeft({ login: false, open: false });
     toastContext.successMessage('Logout successful');
     window.localStorage.setItem('logout', Date.now());
   };
+  useEffect(() => {
+    toastContext.changeOpenNavbarLeft({ login: true, open: open });
+  }, []);
   return (
     <Drawer
       variant="permanent"
@@ -62,7 +67,7 @@ export default () => {
                   maxHeight: '24px'
                 }}
               >
-                <MenuIcon style={{ marginRight: '2vh' }} />
+                <MenuIcon style={{ marginRight: '2vh', color: '#787878' }} />
                 <img style={{ objectFit: 'contain' }} src={ColliderMenu} />
               </div>
             ) : (
@@ -80,66 +85,82 @@ export default () => {
         {open ? (
           <Box
             style={{
-              textAlign: 'center',
-              marginTop: '50vh',
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              flexWrap: 'wrap'
+              position: 'absolute',
+              bottom: 50,
+              width: '100%'
             }}
           >
             <Box
               style={{
                 textAlign: 'center',
                 display: 'flex',
-                justifyContent: 'center',
+                justifyContent: 'space-between',
                 alignItems: 'center',
-                flexWrap: 'wrap',
-                marginLeft: '4vh'
+                flexWrap: 'wrap'
               }}
             >
-              <Typography style={{ color: '#FFF', fontWeight: '800' }}>
-                UserName:
-              </Typography>
-              <Typography style={{ color: '#FFF', marginLeft: '1vw' }}>
-                {userContext.user.username}
-              </Typography>
-            </Box>
+              <Box
+                style={{
+                  textAlign: 'center',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  flexWrap: 'wrap',
+                  marginLeft: '31px'
+                }}
+              >
+                <Typography style={{ color: '#FFF', fontWeight: '800' }}>
+                  {userContext.user.username.toUpperCase()}
+                </Typography>
+              </Box>
 
-            <Box
-              style={{
-                textAlign: 'center',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                flexWrap: 'wrap',
-                marginRight: '2vw',
-                cursor: 'pointer'
-              }}
-              onClick={logoutHandler}
-            >
-              <Typography style={{ color: '#787878', marginRight: '1vh' }}>
-                Logout
-              </Typography>
-              <FontAwesomeIcon
-                color="#787878"
-                icon={faArrowRightFromBracket}
-                size="lg"
-              />
+              <Box
+                style={{
+                  textAlign: 'center',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  flexWrap: 'wrap',
+                  marginRight: '6vw',
+                  cursor: 'pointer'
+                }}
+                onClick={logoutHandler}
+              >
+                <Typography style={{ color: '#787878', marginRight: '1vh' }}>
+                  Logout
+                </Typography>
+                <FontAwesomeIcon
+                  color="#787878"
+                  icon={faArrowRightFromBracket}
+                  size="lg"
+                />
+              </Box>
             </Box>
           </Box>
         ) : (
           <Box
             style={{
               textAlign: 'center',
-              marginTop: '50vh',
+              position: 'absolute',
+              bottom: 50,
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'center',
               flexWrap: 'wrap'
             }}
           >
-            <FontAwesomeIcon color="#FFF" icon={faCircleUser} size="lg" />
+            <Box
+              style={{
+                textAlign: 'center',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                flexWrap: 'wrap',
+                marginLeft: '31px'
+              }}
+            >
+              <FontAwesomeIcon color="#FFF" icon={faCircleUser} size="lg" />
+            </Box>
           </Box>
         )}
       </div>

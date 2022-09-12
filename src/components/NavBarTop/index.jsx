@@ -15,6 +15,7 @@ export default () => {
   const logoutHandler = async () => {
     await accountApi.logout(userContext.token);
     userContext.clear();
+    toastContext.changeOpenNavbarLeft({ login: false, open: false });
     toastContext.successMessage('Logout successful');
     window.localStorage.setItem('logout', Date.now());
   };

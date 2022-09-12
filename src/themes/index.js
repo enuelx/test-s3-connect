@@ -36,6 +36,18 @@ export const grayButton = createTheme({
   }
 });
 
+export const grayButtonVerify = createTheme({
+  palette: {
+    primary: {
+      main: 'rgb(62, 62, 62)'
+    },
+    action: {
+      disabled: '#3E3E3E',
+      disabledBackground: '#3E3E3E'
+    }
+  }
+});
+
 export const grayDisabledButton = createTheme({
   palette: {
     primary: {

@@ -47,28 +47,46 @@ const Login = () => {
       sx={{
         marginLeft: '0px',
         marginRight: '0px',
-        height: '100vh',
-
-        minWidth: '-webkit-fill-available',
-        position: 'relative',
+        height: '100%',
+        minHeight: '100vh',
+        minWidth: '100vw',
+        position: 'abdolute',
         left: 0,
         top: 0,
+        backgroundRepeat: 'no-repeat!important',
 
-        background: `url(${background}), radial-gradient(circle at center, #460036 0, #200017, #18000ee8 80%)`
+        objectFit: 'cover!important',
+
+        background: ` radial-gradient(circle at center, #460036 0, #200017, #18000ee8 80%)`
       }}
     >
+      <Box>
+        <img
+          style={{
+            position: 'absolute',
+            width: '100%',
+            height: '100%',
+            maxWidth: '85%',
+            right: 0,
+            top: 0,
+            objectFit: 'cover'
+          }}
+          src={background}
+          alt=""
+        />
+      </Box>
       <img
         style={{
-          width: '400px',
+          width: '500px',
           position: 'absolute',
-          top: '100px',
+          top: '80px',
           left: '0px',
           marginLeft: '150px'
         }}
         src={textLogin}
         alt=""
       />
-      <Box sx={{ marginLeft: '150px' }}>
+      <Box sx={{ marginLeft: '10vw' }}>
         <Box>
           <AccountForm
             margin="160px"
@@ -85,8 +103,8 @@ const Login = () => {
 
                   border: 'solid 1px',
                   alignSelf: 'baseline',
-                  marginLeft: '250px',
-                  marginTop: '25px',
+                  marginLeft: '195px',
+                  marginTop: '26px',
                   marginBottom: '0px',
 
                   background: 'none',

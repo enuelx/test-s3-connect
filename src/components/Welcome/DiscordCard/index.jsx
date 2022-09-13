@@ -5,11 +5,11 @@ import { faDiscord } from '@fortawesome/free-brands-svg-icons';
 import CodeModal from '../CodeModal';
 const DiscordCard = ({ userContext, toastContext }) => {
   return (
-    <div style={{ width: '400px' }}>
+    <div style={{ width: '380px' }}>
       <Box
         style={{
           width: '100%',
-          height: '40%',
+          height: '120px',
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
@@ -19,9 +19,9 @@ const DiscordCard = ({ userContext, toastContext }) => {
           borderRadius: '5px'
         }}
       >
-        <FontAwesomeIcon color="#787878" icon={faDiscord} size="4x" />
+        <FontAwesomeIcon color="#fff" icon={faDiscord} size="3x" />
       </Box>
-      <Box style={{ textAlign: 'left', marginTop: '4vh' }}>
+      <Box style={{ marginTop: '4vh' }}>
         <Typography style={{ fontSize: '18px', color: '#787878' }}>
           Connect Discord
         </Typography>

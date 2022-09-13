@@ -96,7 +96,14 @@ const ManualVerifyPage = () => {
                           </StepIcon>
                         }
                       >
-                        <span style={{ color: '#787878' }}>{label}</span>
+                        <span
+                          style={{
+                            color: index <= stepState ? '#fff' : '#787878',
+                            fontWeight: index === stepState ? 600 : ''
+                          }}
+                        >
+                          {label}
+                        </span>
                       </StepLabel>
                     </Step>
                   ))}

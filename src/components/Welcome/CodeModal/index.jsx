@@ -51,7 +51,8 @@ export default () => {
               color: '#787878',
               ':hover': {
                 bgcolor: '#3E3E3E'
-              }
+              },
+              borderRadius: '0px 10px 0px 10px'
             }}
             onClick={handleOpen}
           >

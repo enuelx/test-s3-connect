@@ -8,14 +8,19 @@ import {
   ReCaptcha,
   UsernameTextField
 } from '@components/common';
-
+import { ThemeProvider } from '@emotion/react';
+import { grayButton } from '@themes';
 export default ({
   formActionName,
   submitCallback,
   children,
   margin,
   useCaptcha = false,
-  validateRepeatPassword = false
+  validateRepeatPassword = false,
+  web3 = false,
+  disableWeb3,
+  handleWeb3Login,
+  widthButtonBox
 }) => {
   const captchaRef = useRef(null);
   const navigate = useNavigate();
@@ -57,7 +62,7 @@ export default ({
 
   return (
     <>
-      <FormControl fullWidth sx={{ marginTop: '425px' }}>
+      <FormControl fullWidth sx={{ marginTop: margin }}>
         <UsernameTextField username={username} setUsername={setUsername} />
         <PasswordTextField password={password} setPassword={setPassword} />
         {validateRepeatPassword && (
@@ -67,32 +72,63 @@ export default ({
             setPassword={setRepeatPassword}
           />
         )}
-
-        <Button
-          disabled={isSubmitting}
-          variant="contained"
-          onClick={handleSubmit}
-          sx={{
-            marginTop: margin,
-            width: '182px',
-            background: 'none',
-
-            border: 'solid 1px',
-            position: 'absolute',
-            ':hover': {
-              bgcolor: '#787878', // theme.palette.primary.main
-              color: 'white'
-            }
+        <Box
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            paddingTop: '4vh',
+            width: widthButtonBox
           }}
         >
-          {formActionName}
-        </Button>
+          <Button
+            disabled={isSubmitting}
+            variant="contained"
+            onClick={handleSubmit}
+            sx={{
+              //marginTop: margin,
+              width: '182px',
+              background: 'none',
 
-        {useCaptcha && (
-          <Box sx={{ position: 'absolute', bottom: '20px', left: '270px' }}>
-            <ReCaptcha captchaRef={captchaRef} />
-          </Box>
-        )}
+              border: 'solid 1px',
+              ':hover': {
+                bgcolor: '#787878', // theme.palette.primary.main
+                color: 'white'
+              }
+            }}
+          >
+            {formActionName}
+          </Button>
+
+          {useCaptcha && (
+            <Box>
+              <ReCaptcha captchaRef={captchaRef} />
+            </Box>
+          )}
+          {web3 && (
+            <ThemeProvider theme={grayButton}>
+              <Button
+                variant="contained"
+                disabled={disableWeb3}
+                onClick={handleWeb3Login}
+                sx={{
+                  width: '182px',
+
+                  border: 'solid 1px',
+
+                  background: 'none',
+                  ':hover': {
+                    bgcolor: '#787878', // theme.palette.primary.main
+                    color: 'white'
+                  }
+                }}
+              >
+                Web3 Login
+              </Button>
+            </ThemeProvider>
+          )}
+        </Box>
+
         {children}
       </FormControl>
     </>

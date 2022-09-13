@@ -95,6 +95,7 @@ function App() {
               backgroundColor: '#3E3E3E',
               borderRadius: '5px',
               width: '250px',
+              height: '32px',
               color: '#787878',
               textAlign: 'center',
               display: 'flex',
@@ -112,7 +113,7 @@ function App() {
               describeChild
               title={<span>Holdings info are updated every 2 hours.</span>}
             >
-              <InfoIcon style={{ marginLeft: '1vh' }} />
+              <InfoIcon style={{ marginLeft: '1vh', fontSize: '25px' }} />
             </Tooltip>
           </div>
         </div>

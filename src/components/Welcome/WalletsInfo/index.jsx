@@ -61,11 +61,11 @@ const WelcomeWalletsInfo = ({ userContext, toastContext }) => {
   };
 
   return (
-    <div style={{ width: '400px' }}>
+    <div style={{ width: '380px' }}>
       <Box
         style={{
           width: '100%',
-          height: '40%',
+          height: '120px',
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
@@ -75,9 +75,9 @@ const WelcomeWalletsInfo = ({ userContext, toastContext }) => {
           borderRadius: '5px'
         }}
       >
-        <FontAwesomeIcon color="#787878" icon={faWallet} size="4x" />
+        <FontAwesomeIcon color="#fff" icon={faWallet} size="3x" />
       </Box>
-      <Box style={{ textAlign: 'left', marginTop: '4vh' }}>
+      <Box style={{ marginTop: '4vh' }}>
         <Typography style={{ fontSize: '18px', color: '#787878' }}>
           Connect your wallet
         </Typography>
@@ -187,7 +187,8 @@ const WelcomeWalletsInfo = ({ userContext, toastContext }) => {
               color: '#787878',
               ':hover': {
                 bgcolor: '#3E3E3E'
-              }
+              },
+              borderRadius: '0px 10px 0px 10px'
             }}
           >
             <FontAwesomeIcon

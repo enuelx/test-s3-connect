@@ -9,8 +9,7 @@ import { AccountForm } from '@components';
 import background from './style/img/loginBackground.png';
 import textLogin from '../../style/img/textLogin.png';
 import { Link } from 'react-router-dom';
-import { ThemeProvider } from '@emotion/react';
-import { grayButton } from '@themes';
+
 const Login = () => {
   const userContext = useContext(UserContext);
   const toastContext = useContext(ToastContext);
@@ -79,9 +78,9 @@ const Login = () => {
         style={{
           width: '500px',
           position: 'absolute',
-          top: '80px',
+          top: '50px',
           left: '0px',
-          marginLeft: '150px'
+          marginLeft: '7.7vw'
         }}
         src={textLogin}
         alt=""
@@ -89,35 +88,14 @@ const Login = () => {
       <Box sx={{ marginLeft: '10vw' }}>
         <Box>
           <AccountForm
-            margin="160px"
+            web3={true}
             formActionName="Login"
             submitCallback={accountApi.login}
+            disableWeb3={!active || isUnsupportedChain || isSubmitting}
+            handleWeb3Login={handleWeb3Login}
+            widthButtonBox="380px"
+            margin="370px"
           >
-            <ThemeProvider theme={grayButton}>
-              <Button
-                variant="contained"
-                disabled={!active || isUnsupportedChain || isSubmitting}
-                onClick={handleWeb3Login}
-                sx={{
-                  width: '150px',
-
-                  border: 'solid 1px',
-                  alignSelf: 'baseline',
-                  marginLeft: '195px',
-                  marginTop: '26px',
-                  marginBottom: '0px',
-
-                  background: 'none',
-                  ':hover': {
-                    bgcolor: '#787878', // theme.palette.primary.main
-                    color: 'white'
-                  }
-                }}
-              >
-                Web3 Login
-              </Button>
-            </ThemeProvider>
-
             <Link
               style={{
                 color: 'white',

@@ -46,9 +46,9 @@ export default () => {
         style={{
           width: '500px',
           position: 'absolute',
-          top: '80px',
+          top: '50px',
           left: '0px',
-          marginLeft: '150px'
+          marginLeft: '7.7vw'
         }}
         src={textLogin}
         alt=""
@@ -57,27 +57,28 @@ export default () => {
         style={{
           width: '300px',
           position: 'absolute',
-          top: '400px',
+          top: '370px',
           left: '59px',
-          marginLeft: '150px'
+          marginLeft: '7.7vw'
         }}
         src={createAccountText}
         alt=""
       />
 
-      <Box sx={{ marginLeft: '170px' }}>
+      <Box sx={{ marginLeft: '10vw' }}>
         <AccountForm
           formActionName="Register"
           submitCallback={accountApi.signUp}
           validateRepeatPassword
           useCaptcha
-          margin="250px"
+          widthButtonBox="500px"
+          margin="400px"
         >
           <Link
             to={{
               pathname: '/login'
             }}
-            style={{ color: 'white', marginTop: '100px' }}
+            style={{ color: 'white', marginTop: '4vh' }}
           >
             Already a member? Log in
           </Link>

@@ -42,7 +42,8 @@ export default ({
                 bgcolor: 'transparent' // theme.palette.primary.main
               },
               marginRight: '20px',
-              marginBottom: '0px'
+              marginBottom: '0px',
+              borderRadius: '0px 10px 0px 10px'
             }}
           >
             {text}
@@ -67,7 +68,8 @@ export default ({
           alignSelf: 'baseline',
           color: login ? '#787878' : '#fff',
           marginRight: '20px',
-          marginBottom: '0px'
+          marginBottom: '0px',
+          borderRadius: '0px 10px 0px 10px'
         }}
       >
         {text == 'reload' ? (

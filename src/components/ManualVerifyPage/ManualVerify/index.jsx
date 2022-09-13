@@ -173,7 +173,8 @@ const ManualVerify = ({ stepState, setStepState }) => {
                 manualValidationStatus.SENT_TO_NEW_WALLET_WAITING
                   ? '#787878'
                   : '#fff',
-              marginRight: '1vw'
+              marginRight: '1vw',
+              borderRadius: '0px 10px 0px 10px'
             }}
             onClick={sentValidation}
           >
@@ -198,7 +199,7 @@ const ManualVerify = ({ stepState, setStepState }) => {
             onClick={cancelValidation}
           >
             <FontAwesomeIcon
-              style={{ marginRight: '1vh' }}
+              style={{ marginRight: '1vh', borderRadius: '0px 10px 0px 10px' }}
               icon={faCircleXmark}
               size="xs"
             />
@@ -260,7 +261,8 @@ const ManualVerify = ({ stepState, setStepState }) => {
                 manualValidationStatus.SENT_BACK_WAITING
                   ? '#787878'
                   : '#fff',
-              marginRight: '1vw'
+              marginRight: '1vw',
+              borderRadius: '0px 10px 0px 10px'
             }}
             disabled={
               manualValidation.status ===
@@ -286,7 +288,7 @@ const ManualVerify = ({ stepState, setStepState }) => {
         <ThemeProvider theme={grayButton}>
           <Button
             variant="contained"
-            style={{ color: '#fff' }}
+            style={{ color: '#fff', borderRadius: '0px 10px 0px 10px' }}
             onClick={cancelValidation}
           >
             <FontAwesomeIcon
@@ -325,7 +327,7 @@ const ManualVerify = ({ stepState, setStepState }) => {
         <ThemeProvider theme={grayButton}>
           <Button
             variant="contained"
-            style={{ color: '#fff' }}
+            style={{ color: '#fff', borderRadius: '0px 10px 0px 10px' }}
             onClick={ackValidation}
           >
             <FontAwesomeIcon
@@ -429,7 +431,11 @@ const ManualVerify = ({ stepState, setStepState }) => {
         </FormControl>
         <ThemeProvider theme={whiteButton}>
           <Button
-            style={{ marginTop: '4vh', backgroundColor: '#3E3E3E' }}
+            style={{
+              marginTop: '4vh',
+              backgroundColor: '#3E3E3E',
+              borderRadius: '0px 10px 0px 10px'
+            }}
             variant="outlined"
             onClick={startValidation}
           >

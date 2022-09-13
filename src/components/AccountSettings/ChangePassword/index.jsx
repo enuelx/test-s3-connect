@@ -81,11 +81,11 @@ export const ChangePassword = () => {
   };
 
   return (
-    <div style={{ width: '45%' }}>
+    <div style={{ width: '380px' }}>
       <Box
         style={{
-          width: '80%',
-          height: '18%',
+          width: '100%',
+          height: '120px',
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
@@ -95,9 +95,9 @@ export const ChangePassword = () => {
           borderRadius: '5px'
         }}
       >
-        <FontAwesomeIcon color="#787878" icon={faUnlockKeyhole} size="3x" />
+        <FontAwesomeIcon color="#fff" icon={faUnlockKeyhole} size="3x" />
       </Box>
-      <Box style={{ marginLeft: '3vw', marginTop: '3vh' }}>
+      <Box style={{ marginTop: '3vh' }}>
         <Typography style={{ fontSize: '18px', color: '#787878' }}>
           Change Password
         </Typography>

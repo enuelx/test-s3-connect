@@ -6,6 +6,7 @@ import {
   Container,
   FormControl,
   Grid,
+  InputAdornment,
   TextField,
   Tooltip
 } from '@mui/material';
@@ -72,28 +73,52 @@ export const ForgotPassword = () => {
                 label="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                sx={{ width: '100%', color: 'white' }}
+                sx={{
+                  width: '100%',
+                  '& label.Mui-focused': {
+                    color: 'white'
+                  },
+                  '& .MuiInput-underline:after': {
+                    borderBottomColor: 'white'
+                  },
+                  '& .MuiOutlinedInput-root': {
+                    '& fieldset': {
+                      borderColor: 'white'
+                    },
+                    '&:hover fieldset': {
+                      borderColor: 'white'
+                    },
+                    '&.Mui-focused fieldset': {
+                      borderColor: 'white'
+                    }
+                  }
+                }}
                 InputLabelProps={{
                   style: { color: 'rgb(120, 120, 120)', fontSize: '18px' }
                 }}
                 InputProps={{
-                  style: { color: 'rgb(120, 120, 120)', fontSize: '18px' }
+                  style: { color: 'rgb(120, 120, 120)', fontSize: '18px' },
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <Tooltip
+                        arrow
+                        placement="right"
+                        describeChild
+                        title="Enter a valid email associated with your account"
+                        sx={{
+                          paddingLeft: '5px',
+                          alignSelf: 'center',
+                          color: 'white'
+                        }}
+                      >
+                        <InfoIcon />
+                      </Tooltip>
+                    </InputAdornment>
+                  )
                 }}
               />
-              <Tooltip
-                arrow
-                placement="right"
-                describeChild
-                title="Enter a valid email associated with your account"
-                sx={{
-                  paddingLeft: '5px',
-                  alignSelf: 'center'
-                }}
-              >
-                <InfoIcon />
-              </Tooltip>
             </Box>
-            <ReCaptcha captchaRef={captchaRef} />
+
             <Box
               style={{
                 display: 'flex',
@@ -101,20 +126,20 @@ export const ForgotPassword = () => {
                 flexWrap: 'wrap',
                 alignItems: 'center',
                 width: '100%',
-                marginTop: '2vh',
-                marginBottom: '2vh'
+                marginTop: '4vh',
+                marginBottom: '4vh'
               }}
             >
               <ThemeProvider theme={whiteButton}>
                 <Button
-                  style={{ width: '45%' }}
+                  style={{ width: '48%' }}
                   variant="outlined"
                   onClick={handleForgotPassword}
                 >
                   Submit
                 </Button>
                 <Button
-                  style={{ width: '45%' }}
+                  style={{ width: '48%' }}
                   variant="outlined"
                   onClick={() => navigate('/')}
                 >
@@ -122,6 +147,7 @@ export const ForgotPassword = () => {
                 </Button>
               </ThemeProvider>
             </Box>
+            <ReCaptcha captchaRef={captchaRef} />
           </FormControl>
         </Box>
       </Grid>

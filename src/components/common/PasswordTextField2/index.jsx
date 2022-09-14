@@ -18,6 +18,7 @@ export const PasswordTextField2 = ({
   return (
     <>
       <TextField
+        sx={{ width: '88%' }}
         variant="standard"
         required
         label={label}

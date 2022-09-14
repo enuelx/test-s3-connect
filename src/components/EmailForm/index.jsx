@@ -123,7 +123,7 @@ export const EmailForm = () => {
                   display: 'flex',
                   alignItems: 'center',
                   flexWrap: 'wrap',
-                  justifyContent: 'center',
+                  justifyContent: 'start',
                   marginTop: '4vh'
                 }}
               >
@@ -148,7 +148,7 @@ export const EmailForm = () => {
               display: 'flex',
               alignItems: 'center',
               flexWrap: 'wrap',
-              justifyContent: 'center',
+              justifyContent: 'start',
               marginTop: '4vh'
             }}
           >

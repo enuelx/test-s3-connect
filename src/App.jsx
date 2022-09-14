@@ -93,14 +93,14 @@ function App() {
             style={{
               marginTop: '2vh',
               backgroundColor: '#3E3E3E',
-              borderRadius: '5px',
               width: '250px',
               height: '32px',
               color: '#787878',
               textAlign: 'center',
               display: 'flex',
               alignItems: 'center',
-              justifyContent: 'center'
+              justifyContent: 'center',
+              borderRadius: '0px 10px 0px 10px'
             }}
           >
             Cyphers Hodling:{' '}

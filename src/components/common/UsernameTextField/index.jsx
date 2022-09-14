@@ -1,4 +1,4 @@
-import { Box, TextField, Tooltip } from '@mui/material';
+import { Box, InputAdornment, TextField, Tooltip } from '@mui/material';
 import { InfoOutlined as InfoIcon } from '@mui/icons-material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserAstronaut } from '@fortawesome/free-solid-svg-icons';
@@ -20,7 +20,7 @@ export const UsernameTextField = ({ username, setUsername }) => {
             style: { color: 'antiquewhite' }
           }}
           sx={{
-            width: '483px',
+            width: '507px',
             borderColor: 'antiquewhite',
             borderBottom: 'ridge',
             input: { color: 'antiquewhite' }
@@ -33,16 +33,22 @@ export const UsernameTextField = ({ username, setUsername }) => {
           }}
           variant="standard"
           error={username !== '' && username.length < 4}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <Tooltip
+                  sx={{ color: 'antiquewhite' }}
+                  arrow
+                  placement="right"
+                  describeChild
+                  title="Username must be at least 4 characters long"
+                >
+                  <InfoIcon />
+                </Tooltip>
+              </InputAdornment>
+            )
+          }}
         />
-        <Tooltip
-          sx={{ color: 'antiquewhite' }}
-          arrow
-          placement="right"
-          describeChild
-          title="Username must be at least 4 characters long"
-        >
-          <InfoIcon />
-        </Tooltip>
       </Box>
     </>
   );

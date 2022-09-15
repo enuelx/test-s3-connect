@@ -26,11 +26,13 @@ const DiscordCard = ({ userContext, toastContext }) => {
           Connect Discord
         </Typography>
       </Box>
-      <Box style={{ textAlign: 'left', marginTop: '4vh' }}>
-        <Typography style={{ fontSize: '18px', color: '#787878' }}>
-          Generate sync code
-        </Typography>
-      </Box>
+      {!userContext.user.discordUser && (
+        <Box style={{ textAlign: 'left', marginTop: '4vh' }}>
+          <Typography style={{ fontSize: '18px', color: '#787878' }}>
+            Generate sync code
+          </Typography>
+        </Box>
+      )}
       <Box
         style={{
           textAlign: 'center',

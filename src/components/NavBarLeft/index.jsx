@@ -52,7 +52,8 @@ export default () => {
         >
           <IconButton
             onClick={handleDrawerClose}
-            style={{
+            disableRipple={true}
+            sx={{
               marginTop: '1vh',
               marginLeft: 'auto',
               marginRight: 'auto'
@@ -67,7 +68,7 @@ export default () => {
                   maxHeight: '24px'
                 }}
               >
-                <MenuIcon style={{ marginRight: '2vh', color: '#787878' }} />
+                <MenuIcon style={{ marginRight: '1vh', color: '#787878' }} />
                 <img style={{ objectFit: 'contain' }} src={ColliderMenu} />
               </div>
             ) : (
@@ -110,7 +111,7 @@ export default () => {
                 }}
               >
                 <Typography style={{ color: '#FFF', fontWeight: '800' }}>
-                  {userContext.user.username.toUpperCase()}
+                  {userContext.user.username}
                 </Typography>
               </Box>
 

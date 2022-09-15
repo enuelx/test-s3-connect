@@ -81,11 +81,11 @@ export const ChangePassword = () => {
   };
 
   return (
-    <div style={{ width: '45%' }}>
+    <div style={{ width: '380px' }}>
       <Box
         style={{
-          width: '80%',
-          height: '18%',
+          width: '100%',
+          height: '120px',
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
@@ -95,9 +95,9 @@ export const ChangePassword = () => {
           borderRadius: '5px'
         }}
       >
-        <FontAwesomeIcon color="#787878" icon={faUnlockKeyhole} size="3x" />
+        <FontAwesomeIcon color="#fff" icon={faUnlockKeyhole} size="3x" />
       </Box>
-      <Box style={{ marginLeft: '3vw', marginTop: '3vh' }}>
+      <Box style={{ marginTop: '3vh' }}>
         <Typography style={{ fontSize: '18px', color: '#787878' }}>
           Change Password
         </Typography>
@@ -108,19 +108,19 @@ export const ChangePassword = () => {
           password, or sign a message with a wallet associated to your account.
         </Typography>
       </Box>
-      <FormControl fullWidth>
+      <FormControl style={{ width: '100%' }}>
         <Box
           style={{
             textAlign: 'center',
             display: 'flex',
             alignItems: 'center',
             flexWrap: 'wrap',
-            justifyContent: 'center',
+            justifyContent: 'space-between',
             marginTop: '2vh'
           }}
         >
           <FontAwesomeIcon
-            style={{ marginRight: '1vw', marginTop: '2vh' }}
+            style={{ marginTop: '2vh' }}
             color="#787878"
             icon={faKey}
             size="lg"
@@ -137,12 +137,12 @@ export const ChangePassword = () => {
             display: 'flex',
             alignItems: 'center',
             flexWrap: 'wrap',
-            justifyContent: 'center',
+            justifyContent: 'space-between',
             marginTop: '2vh'
           }}
         >
           <FontAwesomeIcon
-            style={{ marginRight: '1vw', marginTop: '2vh' }}
+            style={{ marginTop: '2vh' }}
             color="#787878"
             icon={faKey}
             size="lg"
@@ -159,12 +159,12 @@ export const ChangePassword = () => {
             display: 'flex',
             alignItems: 'center',
             flexWrap: 'wrap',
-            justifyContent: 'center',
+            justifyContent: 'space-between',
             marginTop: '2vh'
           }}
         >
           <FontAwesomeIcon
-            style={{ marginRight: '1vw', marginTop: '2vh' }}
+            style={{ marginTop: '2vh' }}
             color="#787878"
             icon={faKey}
             size="lg"
@@ -181,7 +181,7 @@ export const ChangePassword = () => {
             display: 'flex',
             alignItems: 'center',
             flexWrap: 'wrap',
-            justifyContent: 'center',
+            justifyContent: 'start',
             marginTop: '4vh'
           }}
         >
@@ -192,7 +192,8 @@ export const ChangePassword = () => {
               variant="contained"
               onClick={handleChangePassword}
               style={{
-                borderRadius: '0px 10px 0px 10px'
+                borderRadius: '0px 10px 0px 10px',
+                width: '70%'
               }}
             >
               Submit new password
@@ -205,7 +206,7 @@ export const ChangePassword = () => {
             display: 'flex',
             alignItems: 'center',
             flexWrap: 'wrap',
-            justifyContent: 'center',
+            justifyContent: 'start',
             marginTop: '3vh'
           }}
         >
@@ -215,7 +216,8 @@ export const ChangePassword = () => {
               disabled={!active || isUnsupportedChain || isSubmitting}
               onClick={handleWeb3ChangePassword}
               style={{
-                borderRadius: '0px 10px 0px 10px'
+                borderRadius: '0px 10px 0px 10px',
+                width: '70%'
               }}
             >
               W3 Change Password

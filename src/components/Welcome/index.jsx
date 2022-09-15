@@ -29,8 +29,9 @@ const Welcome = () => {
           display: 'flex',
           justifyContent: 'space-between',
           flexWrap: 'wrap',
-          paddingTop: '20vh',
-          marginLeft: '23vw'
+          paddingTop: '13vh',
+          marginLeft: '23vw',
+          width: '52vw'
         }}
       >
         <WalletData userContext={userContext} toastContext={toastContext} />

@@ -64,7 +64,7 @@ export const AddressForm = () => {
       const message =
         err.response.status === 401
           ? 'Invalid password'
-          : err.response.data?.error || 'Something went wrong';
+          : err.response.data?.error;
       toastContext.errorMessage(message);
     }
 

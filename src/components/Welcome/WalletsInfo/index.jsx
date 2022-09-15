@@ -31,9 +31,13 @@ const WelcomeWalletsInfo = ({ userContext, toastContext }) => {
     try {
       await walletApi.associate(userContext.token, signature, message, account);
       userContext.setUser(undefined); // To force reload
-      toastContext.successMessage('Wallet associated successfully');
+      toastContext.successMessage(
+        "Wallet associated! How 'bout a crisp high-five!"
+      );
     } catch (err) {
-      const message = err.response.data?.error || 'Error associating wallet';
+      const message =
+        err.response.data?.error ||
+        "Caramba! Looks like there's been an error associating your wallet. Try again?";
       toastContext.errorMessage(message);
     }
   };
@@ -42,9 +46,11 @@ const WelcomeWalletsInfo = ({ userContext, toastContext }) => {
     try {
       await walletApi.removeWallet(userContext.token, wallet);
       userContext.setUser(undefined);
-      toastContext.successMessage('Wallet removed');
+      toastContext.successMessage('Wallet removed successfully! Cheers.');
     } catch (err) {
-      const message = err.response.data?.error || 'Error removing wallet';
+      const message =
+        err.response.data?.error ||
+        "Damn. There's been an error removing your wallet. Try again?";
       toastContext.errorMessage(message);
     }
   };
@@ -53,9 +59,13 @@ const WelcomeWalletsInfo = ({ userContext, toastContext }) => {
     try {
       await walletApi.setMain(userContext.token, wallet);
       userContext.setUser(undefined);
-      toastContext.successMessage('Wallet set as main');
+      toastContext.successMessage(
+        'Your wallet has been set as “main wallet”. Cheers!'
+      );
     } catch (err) {
-      const message = err.response.data?.error || 'Error setting main wallet';
+      const message =
+        err.response.data?.error ||
+        "There's been an error setting your main wallet. Hakuna your tatas and try again. Will ya?";
       toastContext.errorMessage(message);
     }
   };

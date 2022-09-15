@@ -29,12 +29,12 @@ const Login = () => {
       setIsSubmitting(false);
 
       userContext.setToken(result.token);
-      toastContext.successMessage('Login successful');
+      toastContext.successMessage("Welcome, Cypher. We've been expecting you");
     } catch (err) {
       const message =
         err.response.status === 401
-          ? 'Wallet not associated to an account or invalid signature'
-          : err.response.data?.error || 'Something went wrong';
+          ? 'Oops! Looks like this wallet is not associated to this account or the signature is invalid'
+          : err.response.data?.error;
 
       toastContext.errorMessage(message);
     }

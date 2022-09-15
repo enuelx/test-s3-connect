@@ -24,7 +24,7 @@ export default () => {
       setAssociateCode(result.associationCode);
       setOpen(true);
     } catch (err) {
-      const message = err.response.data?.error || 'Something went wrong';
+      const message = err.response.data?.error;
       toastContext.errorMessage(message);
     }
   };

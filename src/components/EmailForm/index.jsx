@@ -30,9 +30,11 @@ export const EmailForm = () => {
         email: data.email
       });
 
-      toastContext.successMessage('Email updated, verify email sent');
+      toastContext.successMessage(
+        'Email updated. Please, check your email to verify your account.'
+      );
     } catch (err) {
-      const message = err.response.data?.error || 'Something went wrong';
+      const message = err.response.data?.error;
       toastContext.errorMessage(message);
     }
 
@@ -43,9 +45,11 @@ export const EmailForm = () => {
     setIsSubmitting(true);
     try {
       await emailApi.resendVerification(userContext.token);
-      toastContext.successMessage('Verification email sent');
+      toastContext.successMessage(
+        "Verification email sent! Don't let it go cold…"
+      );
     } catch (err) {
-      const message = err.response.data?.error || 'Something went wrong';
+      const message = err.response.data?.error;
       toastContext.errorMessage(message);
     }
 

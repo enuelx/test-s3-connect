@@ -1,5 +1,5 @@
 import { useEffect, useContext } from 'react';
-import { useSearchParams , useNavigate } from 'react-router-dom';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 
 import { Loader } from '@components';
 import { ToastContext } from '@context';
@@ -18,7 +18,7 @@ export const VerifyEmail = () => {
         await emailApi.verify(verifyToken);
         toastContext.successMessage('Email verified');
       } catch (err) {
-        const message = err.response.data?.error || 'Something went wrong';
+        const message = err.response.data?.error;
         toastContext.errorMessage(message);
       }
       navigate('/');

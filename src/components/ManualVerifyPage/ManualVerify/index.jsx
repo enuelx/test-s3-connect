@@ -76,7 +76,8 @@ const ManualVerify = ({ stepState, setStepState }) => {
 
       toastContext.successMessage('Validation started');
     } catch (err) {
-      toastContext.errorMessage('Error starting validation');
+      const message = err.response.data?.error || 'Error starting validation';
+      toastContext.errorMessage(message);
     }
   };
 
@@ -164,12 +165,12 @@ const ManualVerify = ({ stepState, setStepState }) => {
           <Button
             variant="contained"
             disabled={
-              manualValidation.status ===
+              manualValidation?.status ===
               manualValidationStatus.SENT_TO_NEW_WALLET_WAITING
             }
             style={{
               color:
-                manualValidation.status ===
+                manualValidation?.status ===
                 manualValidationStatus.SENT_TO_NEW_WALLET_WAITING
                   ? '#787878'
                   : '#fff',

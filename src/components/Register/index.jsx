@@ -18,7 +18,7 @@ export default () => {
         height: '100%',
         minHeight: '100vh',
         minWidth: '100vw',
-        position: 'abdolute',
+        position: 'absolute',
         left: 0,
         top: 0,
         backgroundRepeat: 'no-repeat!important',

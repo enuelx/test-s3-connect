@@ -25,7 +25,7 @@ export default () => {
     await accountApi.logout(userContext.token);
     userContext.clear();
     toastContext.changeOpenNavbarLeft({ login: false, open: false });
-    toastContext.successMessage('Logout successful');
+    toastContext.successMessage('Cypher Out!');
     window.localStorage.setItem('logout', Date.now());
   };
   useEffect(() => {

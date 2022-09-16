@@ -24,9 +24,9 @@ export const ResetPassword = () => {
     const captchaValue = captchaRef.current?.getValue();
 
     if (password !== repeatPassword) {
-      toastContext.errorMessage('Passwords do not match');
+      toastContext.errorMessage('Passwords do not match. No more drinking, ser');
     } else if (!captchaValue) {
-      toastContext.errorMessage('Please verify that you are not a robot');
+      toastContext.errorMessage('Are you a robot? If not, please confirm your humanity');
     } else {
       try {
         const resetToken = searchParams.get('token');
@@ -34,7 +34,7 @@ export const ResetPassword = () => {
         toastContext.successMessage('Password updated');
         navigate('/');
       } catch (err) {
-        const message = err.response?.data?.error || 'Something went wrong';
+        const message = err.response?.data?.error;
         toastContext.errorMessage(message);
       }
     }

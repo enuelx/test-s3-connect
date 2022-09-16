@@ -29,12 +29,12 @@ const Login = () => {
       setIsSubmitting(false);
 
       userContext.setToken(result.token);
-      toastContext.successMessage('Login successful');
+      toastContext.successMessage("Welcome, Cypher. We've been expecting you");
     } catch (err) {
       const message =
         err.response.status === 401
-          ? 'Wallet not associated to an account or invalid signature'
-          : err.response.data?.error || 'Something went wrong';
+          ? 'Oops! Looks like this wallet is not associated to this account or the signature is invalid'
+          : err.response.data?.error;
 
       toastContext.errorMessage(message);
     }
@@ -49,7 +49,7 @@ const Login = () => {
         height: '100%',
         minHeight: '100vh',
         minWidth: '100vw',
-        position: 'abdolute',
+        position: 'absolute',
         left: 0,
         top: 0,
         backgroundRepeat: 'no-repeat!important',

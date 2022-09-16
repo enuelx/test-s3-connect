@@ -30,14 +30,18 @@ export const ForgotPassword = () => {
     try {
       const captchaValue = captchaRef.current?.getValue();
       if (!captchaValue) {
-        toastContext.errorMessage('Please verify that you are not a robot');
+        toastContext.errorMessage(
+          'Are you a robot? If not, please confirm your humanity'
+        );
       } else {
         await emailApi.forgotPassword(email, captchaValue);
-        toastContext.successMessage('Email sent');
+        toastContext.successMessage(
+          'Email sent! Check your inbox (or spam folder)'
+        );
         navigate('/');
       }
     } catch (err) {
-      const message = err.response?.data?.error || 'Something went wrong';
+      const message = err.response?.data?.error;
 
       toastContext.errorMessage(message);
     }

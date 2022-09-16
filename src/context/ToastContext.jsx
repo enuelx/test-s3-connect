@@ -14,7 +14,9 @@ const ToastProvider = ({ children }) => {
   });
   const value = {
     ...state,
-    errorMessage: (message) => {
+    errorMessage: (
+      message = "There's been an error in the Matrix. Please try again"
+    ) => {
       setState({
         message,
         severity: 'error'

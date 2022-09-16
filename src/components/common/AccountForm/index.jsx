@@ -38,9 +38,13 @@ export default ({
 
     try {
       if (validateRepeatPassword && password !== repeatPassword) {
-        toastContext.errorMessage('Passwords do not match');
+        toastContext.errorMessage(
+          'Passwords do not match. No more drinking, ser'
+        );
       } else if (useCaptcha && !captchaRef.current?.getValue()) {
-        toastContext.errorMessage('Please verify that you are not a robot');
+        toastContext.errorMessage(
+          'Are you a robot? If not, please confirm your humanity'
+        );
       } else {
         const result = await submitCallback({
           username,
@@ -53,7 +57,7 @@ export default ({
         navigate('/');
       }
     } catch (err) {
-      const message = err.response.data?.error || 'Something went wrong';
+      const message = err.response.data?.error;
 
       toastContext.errorMessage(message);
     }
@@ -70,6 +74,7 @@ export default ({
             margin="20px"
             password={repeatPassword}
             setPassword={setRepeatPassword}
+            label="confirm your password"
           />
         )}
         <Box
@@ -81,6 +86,11 @@ export default ({
             width: widthButtonBox
           }}
         >
+          {useCaptcha && (
+            <Box>
+              <ReCaptcha captchaRef={captchaRef} />
+            </Box>
+          )}
           <Button
             disabled={isSubmitting}
             variant="contained"
@@ -100,11 +110,6 @@ export default ({
             {formActionName}
           </Button>
 
-          {useCaptcha && (
-            <Box>
-              <ReCaptcha captchaRef={captchaRef} />
-            </Box>
-          )}
           {web3 && (
             <ThemeProvider theme={grayButton}>
               <Button

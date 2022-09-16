@@ -120,7 +120,14 @@ const ManualVerify = ({ stepState, setStepState }) => {
   ) : stepState === 1 ? (
     <Box style={{ marginTop: '3vh' }}>
       <Typography style={{ color: 'rgb(120, 120, 120)' }}>
-        Please transfer a Cypher NFT from the verified wallet:
+        Please transfer a Cypher NFT from the verified wallet (A) to the wallet
+        you want to verify (B).
+        <br /> You’ll need to use your favorite platform or marketplace to make
+        this transfer. The Accounts System DOES NOT make these transfers, just
+        tracks them in the blockchain to verify your wallet.
+      </Typography>
+      <Typography style={{ color: 'rgb(120, 120, 120)', marginTop: '2vh' }}>
+        From:
       </Typography>
       <Box
         style={{
@@ -141,7 +148,7 @@ const ManualVerify = ({ stepState, setStepState }) => {
       </Box>
 
       <Typography style={{ color: 'rgb(120, 120, 120)', marginTop: '2vh' }}>
-        To wallet:
+        To:
       </Typography>
       <Box
         style={{
@@ -212,9 +219,15 @@ const ManualVerify = ({ stepState, setStepState }) => {
   ) : stepState === 2 ? (
     <Box style={{ marginTop: '3vh' }}>
       <Typography style={{ color: 'rgb(120, 120, 120)' }}>
-        Now, please transfer the Cypher NFT from the wallet to verify:
+        Now, please transfer the Cypher NFT from the wallet to verify (B) back
+        to the original wallet (A).
+        <br /> You’ll need to use your favorite platform or marketplace to make
+        this transfer. The Accounts System DOES NOT make these transfers, just
+        tracks them in the blockchain to verify your wallet.
       </Typography>
-
+      <Typography style={{ color: 'rgb(120, 120, 120)', marginTop: '2vh' }}>
+        From:
+      </Typography>
       <Box
         style={{
           border: '1px solid rgb(120, 120, 120)',
@@ -233,7 +246,7 @@ const ManualVerify = ({ stepState, setStepState }) => {
         </Typography>
       </Box>
       <Typography style={{ color: 'rgb(120, 120, 120)', marginTop: '2vh' }}>
-        Back to wallet:
+        Back to:
       </Typography>
       <Box
         style={{

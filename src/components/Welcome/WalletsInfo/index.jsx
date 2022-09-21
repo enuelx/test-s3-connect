@@ -23,7 +23,8 @@ import { ThemeProvider } from '@emotion/react';
 import './style.css';
 import { whiteButton, grayButton } from '@themes';
 import { walletApi } from '@services';
-import { ReCaptcha } from '../../common/ReCaptcha';
+import { ReCaptcha } from '@components/common';
+import { toastMessages } from '@utils';
 
 const WelcomeWalletsInfo = ({ userContext, toastContext }) => {
   const [captchaValue, setCaptchaValue] = useState(null);
@@ -40,9 +41,7 @@ const WelcomeWalletsInfo = ({ userContext, toastContext }) => {
     const signature = await library.getSigner().signMessage(message);
     try {
       if (!captchaValue) {
-        toastContext.errorMessage(
-          'Are you a robot? If not, please confirm your humanity'
-        );
+        toastContext.errorMessage(toastMessages.error.CAPTCHA);
       } else {
         await walletApi.associate({
           token: userContext.token,
@@ -52,14 +51,12 @@ const WelcomeWalletsInfo = ({ userContext, toastContext }) => {
           captchaValue
         });
         userContext.setUser(undefined); // To force reload
-        toastContext.successMessage(
-          "Wallet associated! How 'bout a crisp high-five!"
-        );
+        toastContext.successMessage(toastMessages.success.WALLET_ASSOCIATED);
       }
     } catch (err) {
       const message =
-        err.response.data?.error ||
-        "Caramba! Looks like there's been an error associating your wallet. Try again?";
+        err.response.data?.error || toastMessages.error.WALLET_ASSOCIATION;
+
       toastContext.errorMessage(message);
     }
   };
@@ -68,11 +65,10 @@ const WelcomeWalletsInfo = ({ userContext, toastContext }) => {
     try {
       await walletApi.removeWallet(userContext.token, wallet);
       userContext.setUser(undefined);
-      toastContext.successMessage('Wallet removed successfully! Cheers.');
+      toastContext.successMessage(toastMessages.success.WALLET_REMOVED);
     } catch (err) {
       const message =
-        err.response.data?.error ||
-        "Damn. There's been an error removing your wallet. Try again?";
+        err.response.data?.error || toastMessages.error.WALLET_REMOVING;
       toastContext.errorMessage(message);
     }
   };
@@ -81,13 +77,10 @@ const WelcomeWalletsInfo = ({ userContext, toastContext }) => {
     try {
       await walletApi.setMain(userContext.token, wallet);
       userContext.setUser(undefined);
-      toastContext.successMessage(
-        'Your wallet has been set as “main wallet”. Cheers!'
-      );
+      toastContext.successMessage(toastMessages.success.WALLET_MAIN_SET);
     } catch (err) {
       const message =
-        err.response.data?.error ||
-        "There's been an error setting your main wallet. Hakuna your tatas and try again. Will ya?";
+        err.response.data?.error || toastMessages.error.WALLET_MAIN_SET;
       toastContext.errorMessage(message);
     }
   };

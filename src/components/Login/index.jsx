@@ -1,14 +1,15 @@
 import { useState, useContext } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { UnsupportedChainIdError, useWeb3React } from '@web3-react/core';
-import { Button, Box, Container } from '@mui/material';
+import { Box, Container } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 import { UserContext, ToastContext } from '@context';
 import { accountApi, walletApi } from '@services';
 import { AccountForm } from '@components';
 import background from './style/img/loginBackground.png';
 import textLogin from '../../style/img/textLogin.png';
-import { Link } from 'react-router-dom';
+import { toastMessages } from '@utils';
 
 const Login = () => {
   const userContext = useContext(UserContext);
@@ -34,11 +35,11 @@ const Login = () => {
       setIsSubmitting(false);
 
       userContext.setToken(result.token);
-      toastContext.successMessage("Welcome, Cypher. We've been expecting you");
+      toastContext.successMessage(toastMessages.success.LOGGED);
     } catch (err) {
       const message =
         err.response.status === 401
-          ? 'Oops! Looks like this wallet is not associated to this account or the signature is invalid'
+          ? toastMessages.error.WALLET_NOT_ASSOCIATED
           : err.response.data?.error;
 
       toastContext.errorMessage(message);

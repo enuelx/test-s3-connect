@@ -9,6 +9,11 @@ import {
   OutlinedInput,
   Button
 } from '@mui/material';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faCircleCheck,
+  faCircleXmark
+} from '@fortawesome/free-solid-svg-icons';
 
 import { UserContext, ToastContext } from '@context';
 import { Loader } from '@components';
@@ -16,11 +21,7 @@ import { walletApi } from '@services';
 import manualValidationStatus from './manualValidationStatus';
 import { ThemeProvider } from '@emotion/react';
 import { grayButton, whiteButton, grayButtonVerify } from '@themes';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faCircleCheck,
-  faCircleXmark
-} from '@fortawesome/free-solid-svg-icons';
+import { toastMessages } from '@utils';
 
 const ManualVerify = ({ stepState, setStepState }) => {
   const userContext = useContext(UserContext);
@@ -44,7 +45,7 @@ const ManualVerify = ({ stepState, setStepState }) => {
 
     getValidation().catch((err) => {
       setErrorGettingValidation(true);
-      toastContext.errorMessage('Error getting validation status');
+      toastContext.errorMessage(toastMessages.error.VALIDATION_STATUS);
     });
 
     switch (manualValidation?.status) {
@@ -74,9 +75,9 @@ const ManualVerify = ({ stepState, setStepState }) => {
       );
       setManualValidation(info);
 
-      toastContext.successMessage('Validation started');
+      toastContext.successMessage(toastMessages.success.VALIDATION_STARTED);
     } catch (err) {
-      const message = err.response.data?.error || 'Error starting validation';
+      const message = err.response.data?.error;
       toastContext.errorMessage(message);
     }
   };
@@ -86,9 +87,9 @@ const ManualVerify = ({ stepState, setStepState }) => {
       await walletApi.cancelManualValidation(userContext.token);
       setManualValidation(null);
 
-      toastContext.successMessage('Validation cancelled');
+      toastContext.successMessage(toastMessages.success.VALIDATION_CANCELED);
     } catch (err) {
-      toastContext.errorMessage('Error cancelling validation');
+      toastContext.errorMessage();
     }
   };
 
@@ -97,9 +98,9 @@ const ManualVerify = ({ stepState, setStepState }) => {
       const result = await walletApi.sentManualValidation(userContext.token);
       setManualValidation(result);
 
-      toastContext.successMessage('Waiting for validation');
+      toastContext.successMessage(toastMessages.success.VALIDATION_WAIT);
     } catch (err) {
-      toastContext.errorMessage('Error sending validation');
+      toastContext.errorMessage();
     }
   };
 
@@ -107,9 +108,9 @@ const ManualVerify = ({ stepState, setStepState }) => {
     try {
       await walletApi.ackManualValidation(userContext.token);
       setManualValidation(null);
-      toastContext.successMessage('Validation finished');
+      toastContext.successMessage(toastMessages.success.VALIDATION_FINISHED);
     } catch (err) {
-      toastContext.errorMessage('Error finishing validation');
+      toastContext.errorMessage();
     }
   };
 

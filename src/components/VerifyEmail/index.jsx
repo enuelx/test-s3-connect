@@ -4,6 +4,7 @@ import { useSearchParams, useNavigate } from 'react-router-dom';
 import { Loader } from '@components';
 import { ToastContext } from '@context';
 import { emailApi } from '@services';
+import { toastMessages } from '@utils';
 
 export const VerifyEmail = () => {
   const navigate = useNavigate();
@@ -16,7 +17,7 @@ export const VerifyEmail = () => {
       try {
         const verifyToken = searchParams.get('token');
         await emailApi.verify(verifyToken);
-        toastContext.successMessage('Email verified');
+        toastContext.successMessage(toastMessages.success.EMAIL_VERIFIED);
       } catch (err) {
         const message = err.response.data?.error;
         toastContext.errorMessage(message);

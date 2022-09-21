@@ -17,6 +17,7 @@ import { ToastContext } from '@context';
 import { emailApi } from '@services';
 import { whiteButton } from '@themes';
 import { ReCaptcha } from '@components/common';
+import { toastMessages } from '@utils';
 
 export const ForgotPassword = () => {
   const navigate = useNavigate();
@@ -28,19 +29,16 @@ export const ForgotPassword = () => {
   const handleForgotPassword = async () => {
     try {
       if (!captchaValue) {
-        toastContext.errorMessage(
-          'Are you a robot? If not, please confirm your humanity'
-        );
+        toastContext.errorMessage(toastMessages.error.CAPTCHA);
       } else {
         await emailApi.forgotPassword(email, captchaValue);
         toastContext.successMessage(
-          'Email sent! Check your inbox (or spam folder)'
+          toastMessages.success.EMAIL_FORGOT_PASSWORD_SENT
         );
         navigate('/');
       }
     } catch (err) {
       const message = err.response?.data?.error;
-
       toastContext.errorMessage(message);
     }
   };

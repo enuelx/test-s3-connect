@@ -7,6 +7,7 @@ import { accountApi } from '@services';
 import { ToastContext } from '@context';
 import { ThemeProvider } from '@emotion/react';
 import { whiteButton } from '@themes';
+import { toastMessages } from '../../utils';
 
 export const ResetPassword = () => {
   const navigate = useNavigate();
@@ -22,18 +23,14 @@ export const ResetPassword = () => {
     setIsSubmitting(true);
 
     if (password !== repeatPassword) {
-      toastContext.errorMessage(
-        'Passwords do not match. No more drinking, ser'
-      );
+      toastContext.errorMessage(toastMessages.error.PASSWORD_MATCH);
     } else if (!captchaValue) {
-      toastContext.errorMessage(
-        'Are you a robot? If not, please confirm your humanity'
-      );
+      toastContext.errorMessage(toastMessages.error.CAPTCHA);
     } else {
       try {
         const resetToken = searchParams.get('token');
         await accountApi.resetPassword(resetToken, password, captchaValue);
-        toastContext.successMessage('Password updated');
+        toastContext.successMessage(toastMessages.success.PASSWORD_CHANGED);
         navigate('/');
       } catch (err) {
         const message = err.response?.data?.error;

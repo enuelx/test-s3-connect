@@ -10,6 +10,8 @@ import {
 } from '@components/common';
 import { ThemeProvider } from '@emotion/react';
 import { grayButton } from '@themes';
+import { toastMessages } from '@utils';
+
 export default ({
   formActionName,
   submitCallback,
@@ -38,13 +40,9 @@ export default ({
 
     try {
       if (validateRepeatPassword && password !== repeatPassword) {
-        toastContext.errorMessage(
-          'Passwords do not match. No more drinking, ser'
-        );
+        toastContext.errorMessage(toastMessages.error.WRONG_PASSWORD);
       } else if (useCaptcha && !captchaValue) {
-        toastContext.errorMessage(
-          'Are you a robot? If not, please confirm your humanity'
-        );
+        toastContext.errorMessage(toastMessages.error.CAPTCHA);
       } else {
         const result = await submitCallback({
           username,
@@ -53,11 +51,13 @@ export default ({
         });
 
         userContext.setToken(result.token);
-        toastContext.successMessage(`${formActionName} successful`);
+        toastContext.successMessage(
+          toastMessages.success.GENERIC_ACTION(formActionName)
+        );
         navigate('/');
       }
     } catch (err) {
-      const message = err.response?.data?.error || 'Something went wrong';
+      const message = err.response?.data?.error;
 
       toastContext.errorMessage(message);
     }
@@ -66,9 +66,7 @@ export default ({
 
   const handleWeb3Submit = async () => {
     if (useCaptcha && !captchaValue) {
-      toastContext.errorMessage(
-        'Are you a robot? If not, please confirm your humanity'
-      );
+      toastContext.errorMessage(toastMessages.error.CAPTCHA);
     } else {
       handleWeb3Login(captchaValue);
     }

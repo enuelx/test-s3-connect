@@ -9,23 +9,25 @@ const axiosInstance = axios.create({
 const apiUrl = `${config.apiUrl}/api/wallet`;
 
 export default {
-  async login(signature, message, account) {
+  async login({ signature, message, account, captchaValue }) {
     const result = await axiosInstance.post(`${apiUrl}/login`, {
       message,
       wallet: account,
-      signature
+      signature,
+      captcha: captchaValue
     });
 
     return result.data;
   },
 
-  async associate(token, signature, message, account) {
+  async associate({ token, signature, message, account, captchaValue }) {
     const result = await axiosInstance.post(
       `${apiUrl}/associate`,
       {
         message,
         wallet: account,
-        signature
+        signature,
+        captcha: captchaValue
       },
       {
         headers: {

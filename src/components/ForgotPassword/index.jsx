@@ -1,4 +1,4 @@
-import { useContext, useRef, useState } from 'react';
+import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   Box,
@@ -19,16 +19,14 @@ import { whiteButton } from '@themes';
 import { ReCaptcha } from '@components/common';
 
 export const ForgotPassword = () => {
-  const captchaRef = useRef(null);
   const navigate = useNavigate();
-
   const toastContext = useContext(ToastContext);
 
+  const [captchaValue, setCaptchaValue] = useState(null);
   const [email, setEmail] = useState('');
 
   const handleForgotPassword = async () => {
     try {
-      const captchaValue = captchaRef.current?.getValue();
       if (!captchaValue) {
         toastContext.errorMessage(
           'Are you a robot? If not, please confirm your humanity'
@@ -151,7 +149,7 @@ export const ForgotPassword = () => {
                 </Button>
               </ThemeProvider>
             </Box>
-            <ReCaptcha captchaRef={captchaRef} />
+            <ReCaptcha setCaptchaValue={setCaptchaValue} />
           </FormControl>
         </Box>
       </Grid>

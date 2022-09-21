@@ -1,4 +1,4 @@
-import { useContext, useRef, useState } from 'react';
+import { useContext, useState } from 'react';
 import { Box, Button, Container, FormControl, Grid } from '@mui/material';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 
@@ -9,11 +9,11 @@ import { ThemeProvider } from '@emotion/react';
 import { whiteButton } from '@themes';
 
 export const ResetPassword = () => {
-  const captchaRef = useRef(null);
   const navigate = useNavigate();
   const toastContext = useContext(ToastContext);
   const [searchParams, setSearchParams] = useSearchParams();
 
+  const [captchaValue, setCaptchaValue] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
@@ -21,12 +21,14 @@ export const ResetPassword = () => {
   const handleResetPassword = async () => {
     setIsSubmitting(true);
 
-    const captchaValue = captchaRef.current?.getValue();
-
     if (password !== repeatPassword) {
-      toastContext.errorMessage('Passwords do not match. No more drinking, ser');
+      toastContext.errorMessage(
+        'Passwords do not match. No more drinking, ser'
+      );
     } else if (!captchaValue) {
-      toastContext.errorMessage('Are you a robot? If not, please confirm your humanity');
+      toastContext.errorMessage(
+        'Are you a robot? If not, please confirm your humanity'
+      );
     } else {
       try {
         const resetToken = searchParams.get('token');
@@ -88,7 +90,7 @@ export const ResetPassword = () => {
                 Reset Password
               </Button>
             </ThemeProvider>
-            <ReCaptcha captchaRef={captchaRef} />
+            <ReCaptcha setCaptchaValue={setCaptchaValue} />
           </Box>
         </FormControl>
       </Grid>

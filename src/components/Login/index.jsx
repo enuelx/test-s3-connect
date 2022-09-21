@@ -19,13 +19,18 @@ const Login = () => {
   const { active, account, library, error } = useWeb3React();
   const isUnsupportedChain = error instanceof UnsupportedChainIdError;
 
-  const handleWeb3Login = async () => {
+  const handleWeb3Login = async (captchaValue) => {
     setIsSubmitting(true);
 
     try {
       const message = `Welcome to Cyphanatics Dashboard!\n\nClick sign message to sign in and prove the ownership of the wallet.\n\nThis request will not trigger a blockchain transaction or cost any gas fees.\n\nWallet address:\n${account}\n\nNonce:\n${uuidv4()}`;
       const signature = await library.getSigner().signMessage(message);
-      const result = await walletApi.login(signature, message, account);
+      const result = await walletApi.login({
+        signature,
+        message,
+        account,
+        captchaValue
+      });
       setIsSubmitting(false);
 
       userContext.setToken(result.token);
@@ -90,6 +95,7 @@ const Login = () => {
           <AccountForm
             web3={true}
             formActionName="Login"
+            useCaptcha
             submitCallback={accountApi.login}
             disableWeb3={!active || isUnsupportedChain || isSubmitting}
             handleWeb3Login={handleWeb3Login}

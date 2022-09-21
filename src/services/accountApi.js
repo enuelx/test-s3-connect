@@ -9,10 +9,11 @@ const axiosInstance = axios.create({
 const apiUrl = `${config.apiUrl}/api/account`;
 
 export default {
-  async login({ username, password }) {
+  async login({ username, password, captchaValue }) {
     const result = await axiosInstance.post(`${apiUrl}/login`, {
       username,
-      password
+      password,
+      captcha: captchaValue
     });
 
     return result.data;

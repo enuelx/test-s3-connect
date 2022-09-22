@@ -1,7 +1,15 @@
 import { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { UnsupportedChainIdError, useWeb3React } from '@web3-react/core';
-import { Button, Dialog, Typography, Box, Divider, Stack } from '@mui/material';
+import {
+  Button,
+  Dialog,
+  Typography,
+  Box,
+  Divider,
+  Stack,
+  FormControl
+} from '@mui/material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faWallet,
@@ -15,8 +23,11 @@ import { ThemeProvider } from '@emotion/react';
 import './style.css';
 import { whiteButton, grayButton } from '@themes';
 import { walletApi } from '@services';
+import { ReCaptcha } from '@components/common';
+import { toastMessages } from '@utils';
 
 const WelcomeWalletsInfo = ({ userContext, toastContext }) => {
+  const [captchaValue, setCaptchaValue] = useState(null);
   const [removeWalletDialogIsOpen, setRemoveWalletDialogIsOpen] =
     useState(false);
   const [walletToDelete, setWalletToDelete] = useState(false);
@@ -29,15 +40,23 @@ const WelcomeWalletsInfo = ({ userContext, toastContext }) => {
     const message = `Welcome to Cyphanatics Dashboard!\n\nClick to sign in to sign a message and prove the ownership of the wallet.\n\nThis request will not trigger a blockchain transaction or cost any gas fees.\n\nWallet address:\n${account}\n\nNonce:\n${uuidv4()}`;
     const signature = await library.getSigner().signMessage(message);
     try {
-      await walletApi.associate(userContext.token, signature, message, account);
-      userContext.setUser(undefined); // To force reload
-      toastContext.successMessage(
-        "Wallet associated! How 'bout a crisp high-five!"
-      );
+      if (!captchaValue) {
+        toastContext.errorMessage(toastMessages.error.CAPTCHA);
+      } else {
+        await walletApi.associate({
+          token: userContext.token,
+          signature,
+          message,
+          account,
+          captchaValue
+        });
+        userContext.setUser(undefined); // To force reload
+        toastContext.successMessage(toastMessages.success.WALLET_ASSOCIATED);
+      }
     } catch (err) {
       const message =
-        err.response.data?.error ||
-        "Caramba! Looks like there's been an error associating your wallet. Try again?";
+        err.response.data?.error || toastMessages.error.WALLET_ASSOCIATION;
+
       toastContext.errorMessage(message);
     }
   };
@@ -46,11 +65,10 @@ const WelcomeWalletsInfo = ({ userContext, toastContext }) => {
     try {
       await walletApi.removeWallet(userContext.token, wallet);
       userContext.setUser(undefined);
-      toastContext.successMessage('Wallet removed successfully! Cheers.');
+      toastContext.successMessage(toastMessages.success.WALLET_REMOVED);
     } catch (err) {
       const message =
-        err.response.data?.error ||
-        "Damn. There's been an error removing your wallet. Try again?";
+        err.response.data?.error || toastMessages.error.WALLET_REMOVING;
       toastContext.errorMessage(message);
     }
   };
@@ -59,13 +77,10 @@ const WelcomeWalletsInfo = ({ userContext, toastContext }) => {
     try {
       await walletApi.setMain(userContext.token, wallet);
       userContext.setUser(undefined);
-      toastContext.successMessage(
-        'Your wallet has been set as “main wallet”. Cheers!'
-      );
+      toastContext.successMessage(toastMessages.success.WALLET_MAIN_SET);
     } catch (err) {
       const message =
-        err.response.data?.error ||
-        "There's been an error setting your main wallet. Hakuna your tatas and try again. Will ya?";
+        err.response.data?.error || toastMessages.error.WALLET_MAIN_SET;
       toastContext.errorMessage(message);
     }
   };
@@ -185,37 +200,41 @@ const WelcomeWalletsInfo = ({ userContext, toastContext }) => {
           justifyContent: wallets.length > 0 ? '' : 'left'
         }}
       >
-        <ThemeProvider theme={grayButton}>
-          <Button
-            onClick={!active || isUnsupportedChain ? () => {} : associateWallet}
-            disabled={!active || isUnsupportedChain}
-            sx={{
-              background: 'transparent',
-              border: 'solid 1px',
-              alignSelf: 'baseline',
-              textTransform: 'none',
-              color: '#787878',
-              ':hover': {
-                bgcolor: '#3E3E3E'
-              },
-              borderRadius: '0px 10px 0px 10px'
-            }}
-          >
-            <FontAwesomeIcon
-              //color={!active || isUnsupportedChain ? '#787878' : '#fff'}
-              icon={faCirclePlus}
-              size="lg"
-            />
-            <Typography
-              style={{
-                fontSize: '18px',
-                marginLeft: '1vw'
+        <FormControl>
+          {active && !isUnsupportedChain && (
+            <ReCaptcha setCaptchaValue={setCaptchaValue} />
+          )}
+          <ThemeProvider theme={grayButton}>
+            <Button
+              onClick={
+                !active || isUnsupportedChain ? () => {} : associateWallet
+              }
+              disabled={!active || isUnsupportedChain}
+              sx={{
+                background: 'transparent',
+                paddingTop: '1vh',
+                border: 'solid 1px',
+                alignSelf: 'baseline',
+                textTransform: 'none',
+                color: '#787878',
+                ':hover': {
+                  bgcolor: '#3E3E3E'
+                },
+                borderRadius: '0px 10px 0px 10px'
               }}
             >
-              Add new wallet
-            </Typography>
-          </Button>
-        </ThemeProvider>
+              <FontAwesomeIcon icon={faCirclePlus} size="lg" />
+              <Typography
+                style={{
+                  fontSize: '18px',
+                  marginLeft: '1vw'
+                }}
+              >
+                Add new wallet
+              </Typography>
+            </Button>
+          </ThemeProvider>
+        </FormControl>
       </Box>
 
       <Dialog

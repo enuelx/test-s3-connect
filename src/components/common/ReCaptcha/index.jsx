@@ -1,6 +1,10 @@
 import config from '@config';
-import ReCAPTCHA from 'react-google-recaptcha';
+import Reaptcha from 'reaptcha';
 
-export const ReCaptcha = ({ captchaRef }) => {
-  return <ReCAPTCHA ref={captchaRef} sitekey={config.captchaKey} />;
+export const ReCaptcha = ({ setCaptchaValue }) => {
+  const onVerify = (recaptchaResponse) => {
+    setCaptchaValue(recaptchaResponse);
+  };
+
+  return <Reaptcha onVerify={onVerify} sitekey={config.captchaKey} />;
 };

@@ -1,4 +1,4 @@
-import { useState, useContext, useRef } from 'react';
+import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Box, Button, FormControl } from '@mui/material';
 
@@ -10,6 +10,8 @@ import {
 } from '@components/common';
 import { ThemeProvider } from '@emotion/react';
 import { grayButton } from '@themes';
+import { toastMessages } from '@utils';
+
 export default ({
   formActionName,
   submitCallback,
@@ -22,7 +24,6 @@ export default ({
   handleWeb3Login,
   widthButtonBox
 }) => {
-  const captchaRef = useRef(null);
   const navigate = useNavigate();
 
   const userContext = useContext(UserContext);
@@ -32,36 +33,43 @@ export default ({
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
+  const [captchaValue, setCaptchaValue] = useState(null);
 
   const handleSubmit = async () => {
     setIsSubmitting(true);
 
     try {
       if (validateRepeatPassword && password !== repeatPassword) {
-        toastContext.errorMessage(
-          'Passwords do not match. No more drinking, ser'
-        );
-      } else if (useCaptcha && !captchaRef.current?.getValue()) {
-        toastContext.errorMessage(
-          'Are you a robot? If not, please confirm your humanity'
-        );
+        toastContext.errorMessage(toastMessages.error.WRONG_PASSWORD);
+      } else if (useCaptcha && !captchaValue) {
+        toastContext.errorMessage(toastMessages.error.CAPTCHA);
       } else {
         const result = await submitCallback({
           username,
           password,
-          captchaValue: captchaRef.current?.getValue()
+          captchaValue
         });
 
         userContext.setToken(result.token);
-        toastContext.successMessage(`${formActionName} successful`);
+        toastContext.successMessage(
+          toastMessages.success.GENERIC_ACTION(formActionName)
+        );
         navigate('/');
       }
     } catch (err) {
-      const message = err.response.data?.error;
+      const message = err.response?.data?.error;
 
       toastContext.errorMessage(message);
     }
     setIsSubmitting(false);
+  };
+
+  const handleWeb3Submit = async () => {
+    if (useCaptcha && !captchaValue) {
+      toastContext.errorMessage(toastMessages.error.CAPTCHA);
+    } else {
+      handleWeb3Login(captchaValue);
+    }
   };
 
   return (
@@ -77,20 +85,23 @@ export default ({
             label="confirm your password"
           />
         )}
+        {useCaptcha && (
+          <Box
+            style={{
+              padding: '3vh 0 2vh 0'
+            }}
+          >
+            <ReCaptcha setCaptchaValue={setCaptchaValue} />
+          </Box>
+        )}
         <Box
           style={{
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
-            paddingTop: '4vh',
             width: widthButtonBox
           }}
         >
-          {useCaptcha && (
-            <Box>
-              <ReCaptcha captchaRef={captchaRef} />
-            </Box>
-          )}
           <Button
             disabled={isSubmitting}
             variant="contained"
@@ -115,12 +126,10 @@ export default ({
               <Button
                 variant="contained"
                 disabled={disableWeb3}
-                onClick={handleWeb3Login}
+                onClick={handleWeb3Submit}
                 sx={{
                   width: '182px',
-
                   border: 'solid 1px',
-
                   background: 'none',
                   ':hover': {
                     bgcolor: '#787878', // theme.palette.primary.main
@@ -133,7 +142,6 @@ export default ({
             </ThemeProvider>
           )}
         </Box>
-
         {children}
       </FormControl>
     </>

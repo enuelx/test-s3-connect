@@ -1,14 +1,15 @@
 import { useState, useContext } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { UnsupportedChainIdError, useWeb3React } from '@web3-react/core';
-import { Button, Box, Container } from '@mui/material';
+import { Box, Container } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 import { UserContext, ToastContext } from '@context';
 import { accountApi, walletApi } from '@services';
 import { AccountForm } from '@components';
 import background from './style/img/loginBackground.png';
 import textLogin from '../../style/img/textLogin.png';
-import { Link } from 'react-router-dom';
+import { toastMessages } from '@utils';
 
 const Login = () => {
   const userContext = useContext(UserContext);
@@ -19,21 +20,26 @@ const Login = () => {
   const { active, account, library, error } = useWeb3React();
   const isUnsupportedChain = error instanceof UnsupportedChainIdError;
 
-  const handleWeb3Login = async () => {
+  const handleWeb3Login = async (captchaValue) => {
     setIsSubmitting(true);
 
     try {
       const message = `Welcome to Cyphanatics Dashboard!\n\nClick sign message to sign in and prove the ownership of the wallet.\n\nThis request will not trigger a blockchain transaction or cost any gas fees.\n\nWallet address:\n${account}\n\nNonce:\n${uuidv4()}`;
       const signature = await library.getSigner().signMessage(message);
-      const result = await walletApi.login(signature, message, account);
+      const result = await walletApi.login({
+        signature,
+        message,
+        account,
+        captchaValue
+      });
       setIsSubmitting(false);
 
       userContext.setToken(result.token);
-      toastContext.successMessage("Welcome, Cypher. We've been expecting you");
+      toastContext.successMessage(toastMessages.success.LOGGED);
     } catch (err) {
       const message =
         err.response.status === 401
-          ? 'Oops! Looks like this wallet is not associated to this account or the signature is invalid'
+          ? toastMessages.error.WALLET_NOT_ASSOCIATED
           : err.response.data?.error;
 
       toastContext.errorMessage(message);
@@ -90,6 +96,7 @@ const Login = () => {
           <AccountForm
             web3={true}
             formActionName="Login"
+            useCaptcha
             submitCallback={accountApi.login}
             disableWeb3={!active || isUnsupportedChain || isSubmitting}
             handleWeb3Login={handleWeb3Login}

@@ -4,6 +4,8 @@ import { Box } from '@mui/system';
 import { WalletData, CustomButton } from '@components';
 import { UserContext, ToastContext } from '@context';
 import { accountApi } from '@services';
+import { toastMessages } from '@utils';
+
 export default () => {
   const userContext = useContext(UserContext);
   const toastContext = useContext(ToastContext);
@@ -16,7 +18,7 @@ export default () => {
     await accountApi.logout(userContext.token);
     userContext.clear();
     toastContext.changeOpenNavbarLeft({ login: false, open: false });
-    toastContext.successMessage('Cypher Out!');
+    toastContext.successMessage(toastMessages.success.LOGOUT);
     window.localStorage.setItem('logout', Date.now());
   };
   return (

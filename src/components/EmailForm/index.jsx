@@ -14,6 +14,7 @@ import { UserContext, ToastContext } from '@context';
 import { emailApi } from '@services';
 import { ThemeProvider } from '@emotion/react';
 import { grayButton } from '@themes';
+import { toastMessages } from '@utils';
 export const EmailForm = () => {
   const userContext = useContext(UserContext);
   const toastContext = useContext(ToastContext);
@@ -30,9 +31,7 @@ export const EmailForm = () => {
         email: data.email
       });
 
-      toastContext.successMessage(
-        'Email updated. Please, check your email to verify your account.'
-      );
+      toastContext.successMessage(toastMessages.success.EMAIL_UPDATED);
     } catch (err) {
       const message = err.response.data?.error;
       toastContext.errorMessage(message);
@@ -46,7 +45,7 @@ export const EmailForm = () => {
     try {
       await emailApi.resendVerification(userContext.token);
       toastContext.successMessage(
-        "Verification email sent! Don't let it go cold…"
+        toastMessages.success.EMAIL_VERIFICATION_SENT
       );
     } catch (err) {
       const message = err.response.data?.error;

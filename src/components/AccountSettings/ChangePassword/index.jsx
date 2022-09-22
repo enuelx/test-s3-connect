@@ -4,11 +4,14 @@ import { Box, Button, FormControl, Typography } from '@mui/material';
 import { UnsupportedChainIdError, useWeb3React } from '@web3-react/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUnlockKeyhole, faKey } from '@fortawesome/free-solid-svg-icons';
-import { UserContext, ToastContext } from '@context';
 import { accountApi, walletApi } from '@services';
-import { PasswordTextField2 } from '../../common/PasswordTextField2';
 import { ThemeProvider } from '@emotion/react';
+
+import { UserContext, ToastContext } from '@context';
 import { grayButton, grayDisabledButton } from '@themes';
+import { PasswordTextField2 } from '@components/common/PasswordTextField2';
+import { toastMessages } from '@utils';
+
 export const ChangePassword = () => {
   const userContext = useContext(UserContext);
   const toastContext = useContext(ToastContext);
@@ -32,12 +35,11 @@ export const ChangePassword = () => {
         newPassword
       );
       userContext.setToken(data.token);
-      toastContext.successMessage('Password changed. Great Success!');
+      toastContext.successMessage(toastMessages.success.PASSWORD_CHANGED);
     } catch (err) {
-      const message =
-        err.response.status === 401
-          ? 'Invalid password'
-          : err.response.data?.error;
+      let message;
+      if (err.response.status === 401)
+        message = toastMessages.error.WRONG_PASSWORD;
       toastContext.errorMessage(message);
     }
 
@@ -50,11 +52,9 @@ export const ChangePassword = () => {
     if (
       !userContext.user.wallets.map((wallet) => wallet.wallet).includes(account)
     ) {
-      toastContext.errorMessage(
-        'Oops! Looks like this wallet is not associated to this account'
-      );
+      toastContext.errorMessage(toastMessages.error.WALLET_NOT_ASSOCIATED);
     } else if (newPassword !== repeatNewPassword) {
-      toastContext.errorMessage('Passwords do not match. No more drinking, ser');
+      toastContext.errorMessage(toastMessages.error.PASSWORD_MATCH);
     } else {
       try {
         const message = `Click sign message to sign in and prove the ownership of the wallet.\n\nThis request will not trigger a blockchain transaction or cost any gas fees.\n\nWallet address:\n${account}\n\nNonce:\n${uuidv4()}`;
@@ -68,13 +68,11 @@ export const ChangePassword = () => {
         );
 
         userContext.setToken(data.token);
-        toastContext.successMessage('Password changed. Great Success!');
+        toastContext.successMessage(toastMessages.success.PASSWORD_CHANGED);
       } catch (err) {
-        const message =
-          err.response.status === 401
-            ? 'Oops! Looks like this wallet is not associated to this account or the signature is invalid'
-            : err.response.data?.error;
-
+        let message;
+        if (err.response.status === 401)
+          message = toastMessages.error.WALLET_NOT_ASSOCIATED;
         toastContext.errorMessage(message);
       }
     }

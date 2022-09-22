@@ -13,6 +13,7 @@ import {
   faArrowRightFromBracket,
   faCircleUser
 } from '@fortawesome/free-solid-svg-icons';
+import { toastMessages } from '@utils';
 export default () => {
   const [open, setOpen] = useState(false);
   const handleDrawerClose = () => {
@@ -25,7 +26,7 @@ export default () => {
     await accountApi.logout(userContext.token);
     userContext.clear();
     toastContext.changeOpenNavbarLeft({ login: false, open: false });
-    toastContext.successMessage('Cypher Out!');
+    toastContext.successMessage(toastMessages.success.LOGOUT);
     window.localStorage.setItem('logout', Date.now());
   };
   useEffect(() => {

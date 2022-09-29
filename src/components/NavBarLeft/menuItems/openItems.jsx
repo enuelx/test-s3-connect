@@ -28,6 +28,7 @@ const OpenItems = () => {
     <>
       {paths.map((path, index) => (
         <Link
+          key={index}
           to={{
             pathname: path.url
           }}
@@ -36,7 +37,7 @@ const OpenItems = () => {
             color: select === index && '#FFF'
           }}
           onClick={() => {
-            setSelect(1);
+            setSelect(index);
           }}
         >
           <div

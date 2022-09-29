@@ -28,6 +28,7 @@ const CloseItems = () => {
     <>
       {paths.map((path, index) => (
         <Link
+          key={index}
           to={{
             pathname: path.url
           }}

@@ -2,10 +2,10 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-  faWallet,
-  faGear,
   faCloud,
-  faImage
+  faGear,
+  faImage,
+  faWallet
 } from '@fortawesome/free-solid-svg-icons';
 
 import '../style/style.css';
@@ -18,11 +18,11 @@ const paths = [
 ];
 
 const CloseItems = () => {
-  let urlPath = window.location.pathname;
+  const urlPath = window.location.pathname;
 
-  const c = paths.map((e) => e.url).indexOf(urlPath);
+  const iconIndex = paths.map((e) => e.url).indexOf(urlPath);
 
-  const [select, setSelect] = useState(c);
+  const [select, setSelect] = useState(iconIndex);
 
   return (
     <>
@@ -31,7 +31,7 @@ const CloseItems = () => {
           to={{
             pathname: path.url
           }}
-          className="closeItemLink"
+          className="itemLink"
           style={{
             color: select === index && '#FFF'
           }}

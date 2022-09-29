@@ -15,7 +15,7 @@ export default () => {
       sx={{
         marginLeft: '0px',
         marginRight: '0px',
-        height: '100%',
+        height: 'auto',
         minHeight: '100vh',
         minWidth: '100vw',
         position: 'absolute',

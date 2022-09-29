@@ -1,9 +1,12 @@
 import { useContext, useCallback, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
+import { Container, Tooltip } from '@mui/material';
+import { InfoOutlined as InfoIcon } from '@mui/icons-material';
 
 import { accountApi } from '@services';
 import { UserContext } from '@context/UserContext';
 import {
+  AccountSettings,
   ForgotPassword,
   Login,
   Register,
@@ -12,13 +15,12 @@ import {
   NavBarTop,
   ResetPassword,
   VerifyEmail,
-  NavBarLeft
+  NavBarLeft,
+  Gallery,
+  ManualVerifyPage
 } from '@components';
-import { Box } from '@mui/system';
-import AccountSettings from './components/AccountSettings';
-import ManualVerifyPage from './components/ManualVerifyPage';
-import { Tooltip } from '@mui/material';
-import { InfoOutlined as InfoIcon } from '@mui/icons-material';
+
+import '@style/style.css';
 
 function App() {
   const userContext = useContext(UserContext);
@@ -129,6 +131,7 @@ function App() {
           </>
         ) : userContext.token ? (
           <>
+            <Route path="gallery" element={<Gallery />} />
             <Route path="manual-verify" element={<ManualVerifyPage />} />
             <Route path="account-settings" element={<AccountSettings />} />
             <Route path="*" element={<Welcome />} />

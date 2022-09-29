@@ -14,6 +14,7 @@ import {
   faCircleUser
 } from '@fortawesome/free-solid-svg-icons';
 import { toastMessages } from '@utils';
+
 export default () => {
   const [open, setOpen] = useState(false);
   const handleDrawerClose = () => {

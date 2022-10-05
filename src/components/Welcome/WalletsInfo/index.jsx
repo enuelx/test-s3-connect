@@ -123,6 +123,12 @@ const WelcomeWalletsInfo = ({ userContext, toastContext }) => {
       </Box>
       <Box style={{ textAlign: 'left', marginTop: '4vh' }}>
         <Typography style={{ fontSize: '18px', color: '#787878' }}>
+          Pick a hot wallet to use in future claims and a vault wallet to
+          receive the claims and airdrops.
+        </Typography>
+      </Box>
+      <Box style={{ textAlign: 'left', marginTop: '4vh' }}>
+        <Typography style={{ fontSize: '18px', color: '#787878' }}>
           We will never do anything without your approval.
         </Typography>
       </Box>

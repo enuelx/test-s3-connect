@@ -74,9 +74,25 @@ export default {
     return result.data;
   },
 
-  async setMain(token, wallet) {
+  async setHot(token, wallet) {
     const result = await axiosInstance.post(
-      `${apiUrl}/setMain`,
+      `${apiUrl}/setHot`,
+      {
+        wallet
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    );
+
+    return result.data;
+  },
+
+  async setVault(token, wallet) {
+    const result = await axiosInstance.post(
+      `${apiUrl}/setVault`,
       {
         wallet
       },

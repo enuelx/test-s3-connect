@@ -15,9 +15,10 @@ import {
   faWallet,
   faTrash,
   faCirclePlus,
-  faStar
+  faFire,
+  faVault
 } from '@fortawesome/free-solid-svg-icons';
-import { faStar as emptyStar } from '@fortawesome/free-regular-svg-icons';
+import { facEmptyFire, facEmptyVault } from './img/customIcons';
 import { ThemeProvider } from '@emotion/react';
 
 import './style.css';
@@ -31,7 +32,8 @@ const WelcomeWalletsInfo = ({ userContext, toastContext }) => {
   const [removeWalletDialogIsOpen, setRemoveWalletDialogIsOpen] =
     useState(false);
   const [walletToDelete, setWalletToDelete] = useState(false);
-  const [overStar, setOverStar] = useState(false);
+  const [overFlame, setOverFlame] = useState(false);
+  const [overVault, setOverVault] = useState(false);
   const wallets = userContext.user?.wallets || [];
   const { active, library, account, error } = useWeb3React();
   const isUnsupportedChain = error instanceof UnsupportedChainIdError;
@@ -73,14 +75,26 @@ const WelcomeWalletsInfo = ({ userContext, toastContext }) => {
     }
   };
 
-  const setMainWallet = async (wallet) => {
+  const setHotWallet = async (wallet) => {
     try {
-      await walletApi.setMain(userContext.token, wallet);
+      await walletApi.setHot(userContext.token, wallet);
       userContext.setUser(undefined);
-      toastContext.successMessage(toastMessages.success.WALLET_MAIN_SET);
+      toastContext.successMessage(toastMessages.success.WALLET_HOT_SET);
     } catch (err) {
       const message =
-        err.response.data?.error || toastMessages.error.WALLET_MAIN_SET;
+        err.response.data?.error || toastMessages.error.WALLET_HOT_SET;
+      toastContext.errorMessage(message);
+    }
+  };
+
+  const setVaultWallet = async (wallet) => {
+    try {
+      await walletApi.setVault(userContext.token, wallet);
+      userContext.setUser(undefined);
+      toastContext.successMessage(toastMessages.success.WALLET_HOT_SET);
+    } catch (err) {
+      const message =
+        err.response.data?.error || toastMessages.error.WALLET_HOT_SET;
       toastContext.errorMessage(message);
     }
   };
@@ -141,30 +155,59 @@ const WelcomeWalletsInfo = ({ userContext, toastContext }) => {
                     alignItems: 'center'
                   }}
                 >
-                  {wallet.wallet === userContext.user.mainWallet?.wallet ? (
+                  {wallet.wallet === userContext.user.hotWallet?.wallet ? (
                     <FontAwesomeIcon
                       style={{ margin: 'auto' }}
                       color="#787878"
-                      icon={faStar}
+                      icon={faFire}
                       size="lg"
                     />
                   ) : (
                     <FontAwesomeIcon
                       className="clickable"
                       onClick={() => {
-                        setMainWallet(wallet.wallet);
+                        setHotWallet(wallet.wallet);
                       }}
                       icon={
-                        overStar?.over && overStar?.overIndexStart === index
-                          ? faStar
-                          : emptyStar
+                        overFlame?.over && overFlame?.overIndexStart === index
+                          ? faFire
+                          : facEmptyFire
                       }
                       size="lg"
                       onMouseOver={() =>
-                        setOverStar({ over: true, overIndexStart: index })
+                        setOverFlame({ over: true, overIndexStart: index })
                       }
                       onMouseLeave={() =>
-                        setOverStar({ over: false, overIndexStart: -1 })
+                        setOverFlame({ over: false, overIndexStart: -1 })
+                      }
+                    />
+                  )}
+
+                  {wallet.wallet === userContext.user.vaultWallet?.wallet ? (
+                    <FontAwesomeIcon
+                      style={{ marginLeft: '0.5vw' }}
+                      color="#787878"
+                      icon={faVault}
+                      size="lg"
+                    />
+                  ) : (
+                    <FontAwesomeIcon
+                      className="clickable"
+                      onClick={() => {
+                        setVaultWallet(wallet.wallet);
+                      }}
+                      icon={
+                        overVault?.over && overVault?.overIndexStart === index
+                          ? faVault
+                          : facEmptyVault
+                      }
+                      size="lg"
+                      style={{ marginLeft: '0.5vw' }}
+                      onMouseOver={() =>
+                        setOverVault({ over: true, overIndexStart: index })
+                      }
+                      onMouseLeave={() =>
+                        setOverVault({ over: false, overIndexStart: -1 })
                       }
                     />
                   )}
@@ -177,7 +220,7 @@ const WelcomeWalletsInfo = ({ userContext, toastContext }) => {
                     }}
                     icon={faTrash}
                     size="lg"
-                    style={{ marginLeft: '1vw' }}
+                    style={{ marginLeft: '0.5vw' }}
                   />
                 </Box>
               </Box>

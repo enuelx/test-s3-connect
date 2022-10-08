@@ -6,5 +6,11 @@ export const ReCaptcha = ({ setCaptchaValue }) => {
     setCaptchaValue(recaptchaResponse);
   };
 
-  return <Reaptcha onVerify={onVerify} sitekey={config.captchaKey} />;
+  return (
+    <Reaptcha
+      className="txtCapchat"
+      onVerify={onVerify}
+      sitekey={config.captchaKey}
+    />
+  );
 };

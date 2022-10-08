@@ -54,6 +54,7 @@ export const ForgotPassword = () => {
       }}
     >
       <Grid
+        className=" containerForgorPass"
         style={{
           display: 'flex',
           justifyContent: 'center',
@@ -63,7 +64,7 @@ export const ForgotPassword = () => {
           marginLeft: '18vw'
         }}
       >
-        <Box width="50vw">
+        <Box className="txtEmailForgotPass" width="50vw">
           <FormControl fullWidth>
             <Box
               display="flex"

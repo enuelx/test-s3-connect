@@ -29,6 +29,7 @@ export default () => {
     >
       <Box>
         <img
+          className="imgRegister"
           style={{
             position: 'absolute',
             width: '100%',
@@ -43,6 +44,7 @@ export default () => {
         />
       </Box>
       <img
+        className="imgTextRegister"
         style={{
           width: '500px',
           position: 'absolute',
@@ -54,6 +56,7 @@ export default () => {
         alt=""
       />
       <img
+        className="imgTextRegister2"
         style={{
           width: '300px',
           position: 'absolute',
@@ -65,7 +68,7 @@ export default () => {
         alt=""
       />
 
-      <Box sx={{ marginLeft: '10vw' }}>
+      <Box className="boxContenedorForm" sx={{ marginLeft: '10vw' }}>
         <AccountForm
           formActionName="Register"
           submitCallback={accountApi.signUp}

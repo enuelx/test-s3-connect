@@ -49,6 +49,7 @@ const Login = () => {
 
   return (
     <Container
+      className="boxPrincipalLogin"
       sx={{
         marginLeft: '0px',
         marginRight: '0px',
@@ -66,34 +67,13 @@ const Login = () => {
       }}
     >
       <Box>
-        <img
-          style={{
-            position: 'absolute',
-            width: '100%',
-            height: '100%',
-            maxWidth: '85%',
-            right: 0,
-            top: 0,
-            objectFit: 'cover'
-          }}
-          src={background}
-          alt=""
-        />
+        <img className="imgLogin" src={background} alt="" />
       </Box>
-      <img
-        style={{
-          width: '500px',
-          position: 'absolute',
-          top: '50px',
-          left: '0px',
-          marginLeft: '7.7vw'
-        }}
-        src={textLogin}
-        alt=""
-      />
-      <Box sx={{ marginLeft: '10vw' }}>
+      <img className="loginMobile" src={textLogin} alt="" />
+      <Box className="boxContenedorForm" sx={{ marginLeft: '10vw' }}>
         <Box>
           <AccountForm
+            className="formularioLogin"
             web3={true}
             formActionName="Login"
             useCaptcha
@@ -104,11 +84,7 @@ const Login = () => {
             margin="370px"
           >
             <Link
-              style={{
-                color: 'white',
-                marginTop: '30px',
-                textDecoration: 'none'
-              }}
+              className="textLogin"
               to={{
                 pathname: '/register'
               }}
@@ -116,11 +92,7 @@ const Login = () => {
               Not a member yet? Create an account
             </Link>
             <Link
-              style={{
-                color: 'white',
-                marginTop: '30px',
-                textDecoration: 'none'
-              }}
+              className="textLogin"
               to={{
                 pathname: '/forgot-password'
               }}

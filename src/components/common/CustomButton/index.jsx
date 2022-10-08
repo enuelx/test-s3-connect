@@ -29,6 +29,7 @@ export default ({
             variant={variant}
             onClick={onClick}
             size={size}
+            className="buttonWallet"
             sx={{
               width: '200px',
 
@@ -41,7 +42,7 @@ export default ({
               ':hover': {
                 bgcolor: 'transparent' // theme.palette.primary.main
               },
-              marginRight: '20px',
+              marginRight: '0px',
               marginBottom: '0px',
               borderRadius: '0px 10px 0px 10px'
             }}
@@ -60,6 +61,7 @@ export default ({
         variant={variant}
         onClick={onClick}
         size={size}
+        className="buttonWallet"
         sx={{
           width: text == 'reload' || text == 'logout' ? '50px' : '250px',
           marginTop: '10px',

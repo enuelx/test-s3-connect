@@ -19,7 +19,7 @@ import AccountSettings from './components/AccountSettings';
 import ManualVerifyPage from './components/ManualVerifyPage';
 import { Tooltip } from '@mui/material';
 import { InfoOutlined as InfoIcon } from '@mui/icons-material';
-
+import './App.css';
 function App() {
   const userContext = useContext(UserContext);
 

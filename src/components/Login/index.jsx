@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { UnsupportedChainIdError, useWeb3React } from '@web3-react/core';
 import { Box, Container } from '@mui/material';
@@ -19,7 +19,7 @@ const Login = () => {
 
   const { active, account, library, error } = useWeb3React();
   const isUnsupportedChain = error instanceof UnsupportedChainIdError;
-
+  const [isMobile, setIsMobile] = useState(false);
   const handleWeb3Login = async (captchaValue) => {
     setIsSubmitting(true);
 
@@ -46,7 +46,11 @@ const Login = () => {
     }
     setIsSubmitting(false);
   };
-
+  useEffect(() => {
+    if (document.body.clientWidth < 540) {
+      setIsMobile(true);
+    }
+  }, []);
   return (
     <Container
       className="boxPrincipalLogin"
@@ -82,6 +86,7 @@ const Login = () => {
             handleWeb3Login={handleWeb3Login}
             widthButtonBox="380px"
             margin="370px"
+            isMobile={isMobile}
           >
             <Link
               className="textLogin"
@@ -89,10 +94,12 @@ const Login = () => {
                 pathname: '/register'
               }}
             >
-              Not a member yet? Create an account
+              {isMobile
+                ? 'Create an account'
+                : 'Not a member yet? Create an account'}
             </Link>
             <Link
-              className="textLogin"
+              className="textLoginForgot"
               to={{
                 pathname: '/forgot-password'
               }}

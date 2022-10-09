@@ -22,7 +22,8 @@ export default ({
   web3 = false,
   disableWeb3,
   handleWeb3Login,
-  widthButtonBox
+  widthButtonBox,
+  isMobile
 }) => {
   const navigate = useNavigate();
 
@@ -106,17 +107,31 @@ export default ({
             disabled={isSubmitting}
             variant="contained"
             onClick={handleSubmit}
-            sx={{
-              //marginTop: margin,
-              width: '182px',
-              background: 'none',
+            sx={
+              isMobile
+                ? {
+                    //marginTop: margin,
+                    width: '132px',
+                    background: 'none',
+                    height: '30px',
+                    border: 'solid 1px',
+                    ':hover': {
+                      bgcolor: '#787878', // theme.palette.primary.main
+                      color: 'white'
+                    }
+                  }
+                : {
+                    //marginTop: margin,
+                    width: '182px',
+                    background: 'none',
 
-              border: 'solid 1px',
-              ':hover': {
-                bgcolor: '#787878', // theme.palette.primary.main
-                color: 'white'
-              }
-            }}
+                    border: 'solid 1px',
+                    ':hover': {
+                      bgcolor: '#787878', // theme.palette.primary.main
+                      color: 'white'
+                    }
+                  }
+            }
           >
             {formActionName}
           </Button>
@@ -127,17 +142,31 @@ export default ({
                 variant="contained"
                 disabled={disableWeb3}
                 onClick={handleWeb3Submit}
-                sx={{
-                  width: '182px',
-                  border: 'solid 1px',
-                  background: 'none',
-                  ':hover': {
-                    bgcolor: '#787878', // theme.palette.primary.main
-                    color: 'white'
-                  }
-                }}
+                sx={
+                  isMobile
+                    ? {
+                        width: '132px',
+                        border: 'solid 1px',
+                        marginRight: '100px',
+                        background: 'none',
+                        height: '30px',
+                        ':hover': {
+                          bgcolor: '#787878', // theme.palette.primary.main
+                          color: 'white'
+                        }
+                      }
+                    : {
+                        width: '182px',
+                        border: 'solid 1px',
+                        background: 'none',
+                        ':hover': {
+                          bgcolor: '#787878', // theme.palette.primary.main
+                          color: 'white'
+                        }
+                      }
+                }
               >
-                Web3 Login
+                {isMobile ? 'Web3' : 'Web3 Login'}
               </Button>
             </ThemeProvider>
           )}

@@ -76,8 +76,16 @@ export default ({
   return (
     <>
       <FormControl fullWidth sx={{ marginTop: margin }}>
-        <UsernameTextField username={username} setUsername={setUsername} />
-        <PasswordTextField password={password} setPassword={setPassword} />
+        <UsernameTextField
+          isMobile={isMobile}
+          username={username}
+          setUsername={setUsername}
+        />
+        <PasswordTextField
+          isMobile={isMobile}
+          password={password}
+          setPassword={setPassword}
+        />
         {validateRepeatPassword && (
           <PasswordTextField
             margin="20px"

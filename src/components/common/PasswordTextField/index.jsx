@@ -19,7 +19,8 @@ export const PasswordTextField = ({
   margin,
   password,
   setPassword,
-  label = 'password'
+  label = 'password',
+  isMobile
 }) => {
   const [showPassword, setShowPassword] = useState(false);
 
@@ -30,7 +31,7 @@ export const PasswordTextField = ({
           style={{ marginRight: '1vw', marginBottom: '1vh' }}
           color="antiquewhite"
           icon={faKey}
-          size="lg"
+          size={isMobile ? '' : 'lg'}
         />
         <TextField
           InputLabelProps={{
@@ -55,13 +56,27 @@ export const PasswordTextField = ({
               <InputAdornment position="end">
                 <IconButton onClick={() => setShowPassword(!showPassword)}>
                   {showPassword ? (
-                    <HideIcon sx={{ color: 'antiquewhite' }} />
+                    <HideIcon
+                      sx={{
+                        color: 'antiquewhite',
+                        height: isMobile ? '0.9em' : '1em'
+                      }}
+                    />
                   ) : (
-                    <ShowIcon sx={{ color: 'antiquewhite' }} />
+                    <ShowIcon
+                      sx={{
+                        color: 'antiquewhite',
+                        height: isMobile ? '0.9em' : '1em'
+                      }}
+                    />
                   )}
                 </IconButton>
                 <Tooltip
-                  sx={{ textTransform: 'none', color: 'antiquewhite' }}
+                  sx={{
+                    textTransform: 'none',
+                    color: 'antiquewhite',
+                    height: isMobile ? '0.9em' : '1em'
+                  }}
                   arrow
                   placement="right"
                   describeChild
@@ -74,7 +89,12 @@ export const PasswordTextField = ({
                     </span>
                   }
                 >
-                  <InfoIcon />
+                  <InfoIcon
+                    sx={{
+                      color: 'antiquewhite',
+                      height: isMobile ? '0.9em' : '1em'
+                    }}
+                  />
                 </Tooltip>
               </InputAdornment>
             )

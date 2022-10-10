@@ -92,6 +92,7 @@ export default ({
             password={repeatPassword}
             setPassword={setRepeatPassword}
             label="confirm your password"
+            isMobile={isMobile}
           />
         )}
         {useCaptcha && (
@@ -119,7 +120,8 @@ export default ({
               isMobile
                 ? {
                     //marginTop: margin,
-                    width: '132px',
+                    width:
+                      formActionName === 'Create Account' ? 'auto' : '132px',
                     background: 'none',
                     height: '30px',
                     border: 'solid 1px',

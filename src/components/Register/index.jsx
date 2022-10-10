@@ -8,8 +8,15 @@ import {
   createAccountText
 } from './style/img';
 import textLogin from '../../style/img/textLogin.png';
+import { useEffect, useState } from 'react';
 
 export default () => {
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    if (document.body.clientWidth < 540) {
+      setIsMobile(true);
+    }
+  }, []);
   return (
     <Container
       sx={{
@@ -70,18 +77,19 @@ export default () => {
 
       <Box className="boxContenedorForm" sx={{ marginLeft: '10vw' }}>
         <AccountForm
-          formActionName="Register"
+          formActionName={isMobile ? 'Create Account' : 'Register'}
           submitCallback={accountApi.signUp}
           validateRepeatPassword
           useCaptcha
           widthButtonBox="500px"
           margin="400px"
+          isMobile={isMobile}
         >
           <Link
             to={{
               pathname: '/login'
             }}
-            style={{ color: 'white', marginTop: '4vh' }}
+            style={{ color: 'white', marginTop: isMobile ? '1.5vh' : '4vh' }}
           >
             Already a member? Log in
           </Link>

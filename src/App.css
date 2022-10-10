@@ -106,7 +106,14 @@ button {
       left: 30px!important;
       margin-left:0px!important;
     }
+    .imgTextRegister{
 
+      width: 300px!important;
+      position: absolute!important;
+      top: 30px!important;
+      left: 15px!important;
+      margin-left:0px!important;
+    }
 
     .imgLogin{
 
@@ -153,14 +160,7 @@ button {
     width: 174px!important;
     padding-left: 0px!important;
     }
-    .imgTextRegister{
-
-      width: 400px!important;
-      position: absolute!important;
-      top: 0px!important;
-      left:0px!important;
-      margin-left: 0px!important;
-    }
+    
     .imgTextRegister2{
 
       width: 250px!important;

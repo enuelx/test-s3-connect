@@ -1,4 +1,4 @@
-import { useContext, useCallback, useEffect } from 'react';
+import { useContext, useCallback, useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 import { accountApi } from '@services';
@@ -20,9 +20,15 @@ import ManualVerifyPage from './components/ManualVerifyPage';
 import { Tooltip } from '@mui/material';
 import { InfoOutlined as InfoIcon } from '@mui/icons-material';
 import './App.css';
+import NavBarBottomMobile from './components/NavBarBottomMobile';
 function App() {
   const userContext = useContext(UserContext);
-
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    if (document.body.clientWidth < 540) {
+      setIsMobile(true);
+    }
+  }, []);
   const getAccountDetails = useCallback(async () => {
     try {
       if (userContext.token) {
@@ -85,8 +91,9 @@ function App() {
       {/*<Box sx={{ flexGrow: 0 }}>
           <WalletData />
       </Box>*/}
-      {userContext.token && <NavBarLeft />}
+      {userContext.token && !isMobile && <NavBarLeft />}
       {<NavBarTop />}
+      {isMobile && <NavBarBottomMobile />}
       {userContext.token && (
         <div style={{ position: 'absolute', bottom: 50, right: 50 }}>
           <div

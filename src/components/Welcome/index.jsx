@@ -15,7 +15,7 @@ const Welcome = () => {
       style={{
         backgroundColor: '#252525',
         width: '100vw',
-        height: '100vh',
+        height: 'auto',
         minHeight: '100vh',
         minWidth: '100vw'
       }}

@@ -1,11 +1,16 @@
-import * as React from 'react';
+import { useContext, useState } from 'react';
+import { Box } from '@mui/system';
+
+import { WalletData, CustomButton } from '@components';
+import { UserContext, ToastContext } from '@context';
+import { accountApi } from '@services';
+import { toastMessages } from '@utils';
 import PropTypes from 'prop-types';
 import { Global } from '@emotion/react';
 import { styled } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import { grey } from '@mui/material/colors';
 import Button from '@mui/material/Button';
-import Box from '@mui/material/Box';
 import Skeleton from '@mui/material/Skeleton';
 import Typography from '@mui/material/Typography';
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
@@ -13,6 +18,8 @@ import { Grid } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faWallet, faGear, faCloud } from '@fortawesome/free-solid-svg-icons';
+import { faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons';
+
 const drawerBleeding = 56;
 
 const Root = styled('div')(() => ({
@@ -37,7 +44,7 @@ const Puller = styled(Box)(() => ({
 
 function NavBarBottomMobile(props) {
   const { window } = props;
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   let c = 1;
   let urlPath = window !== undefined ? window.location.pathname : '';
 
@@ -47,11 +54,24 @@ function NavBarBottomMobile(props) {
   if (urlPath === '/account-settings') {
     c = 3;
   }
-  const [select, setSelect] = React.useState(c);
+  const [select, setSelect] = useState(c);
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
   };
-
+  const userContext = useContext(UserContext);
+  const toastContext = useContext(ToastContext);
+  const reloadUserDetailsHandler = () => {
+    // set details to undefined so that spinner will be displayed and
+    // getUserDetails will be invoked from useEffect
+    userContext.setUser(undefined);
+  };
+  const logoutHandler = async () => {
+    await accountApi.logout(userContext.token);
+    userContext.clear();
+    toastContext.changeOpenNavbarLeft({ login: false, open: false });
+    toastContext.successMessage(toastMessages.success.LOGOUT);
+    window.localStorage.setItem('logout', Date.now());
+  };
   // This is used only for the example
   const container =
     window !== undefined ? () => window().document.body : undefined;
@@ -62,7 +82,7 @@ function NavBarBottomMobile(props) {
       <Global
         styles={{
           '.MuiDrawer-root > .MuiPaper-root': {
-            height: `calc(50% - ${drawerBleeding}px)`,
+            //height: `calc(50% - ${drawerBleeding}px)`,
             height: `auto`,
             overflow: 'visible'
           }
@@ -126,12 +146,19 @@ function NavBarBottomMobile(props) {
                     display: 'flex',
                     justifyContent: 'center',
                     alignItems: 'center',
-                    height: '6vh',
+                    flexDirection: 'column',
+                    height: 'auto',
                     marginTop: '0.5vh',
                     marginBottom: '0.5vh'
                   }}
                 >
-                  <FontAwesomeIcon size="lg" icon={faCloud} />
+                  <FontAwesomeIcon
+                    size="lg"
+                    icon={faCloud}
+                    style={{ marginLeft: 'auto', marginRight: 'auto' }}
+                  />
+
+                  <p style={{ fontSize: '0.9rem' }}>Sync</p>
                 </div>
               </Link>
             </Grid>
@@ -156,12 +183,18 @@ function NavBarBottomMobile(props) {
                     display: 'flex',
                     justifyContent: 'center',
                     alignItems: 'center',
-                    height: '6vh',
+                    flexDirection: 'column',
+                    height: 'auto',
                     marginTop: '0.5vh',
                     marginBottom: '0.5vh'
                   }}
                 >
-                  <FontAwesomeIcon icon={faWallet} size="lg" />
+                  <FontAwesomeIcon
+                    icon={faWallet}
+                    size="lg"
+                    style={{ marginLeft: 'auto', marginRight: 'auto' }}
+                  />
+                  <p style={{ fontSize: '0.9rem' }}>Add Wallet</p>
                 </div>
               </Link>
             </Grid>
@@ -186,7 +219,8 @@ function NavBarBottomMobile(props) {
                     display: 'flex',
                     justifyContent: 'center',
                     alignItems: 'center',
-                    height: '6vh',
+                    flexDirection: 'column',
+                    height: 'auto',
                     marginTop: '0.5vh',
                     marginBottom: '0.5vh'
                   }}
@@ -196,42 +230,40 @@ function NavBarBottomMobile(props) {
                     size="lg"
                     icon={faGear}
                   />
+                  <p style={{ fontSize: '0.9rem' }}>Settings</p>
                 </div>
               </Link>
             </Grid>
             <Grid item xs={3}>
-              <Link
-                to={{
-                  pathname: '/account-settings'
-                }}
-                style={{
-                  marginTop: '1vh',
-                  marginLeft: 'auto',
-                  marginRight: 'auto',
-                  textDecoration: 'none',
-                  color: select === 3 ? '#FFF' : '#787878'
-                }}
-                onClick={() => {
-                  setSelect(3);
-                }}
-              >
+              {userContext.token && (
                 <div
                   style={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    height: '6vh',
-                    marginTop: '0.5vh',
-                    marginBottom: '0.5vh'
+                    marginLeft: 'auto',
+                    marginRight: 'auto',
+                    textDecoration: 'none',
+                    color: '#787878'
                   }}
                 >
-                  <FontAwesomeIcon
-                    style={{ marginLeft: 'auto', marginRight: 'auto' }}
-                    size="lg"
-                    icon={faGear}
-                  />
+                  <div
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      flexDirection: 'column',
+                      height: 'auto',
+                      marginTop: '0.5vh',
+                      marginBottom: '0.5vh'
+                    }}
+                  >
+                    <FontAwesomeIcon
+                      style={{ marginLeft: 'auto', marginRight: 'auto' }}
+                      size="lg"
+                      icon={faArrowRightFromBracket}
+                    />
+                    <p style={{ fontSize: '0.9rem' }}>Logout</p>
+                  </div>
                 </div>
-              </Link>
+              )}
             </Grid>
           </Grid>
         </StyledBox>

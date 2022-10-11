@@ -92,7 +92,7 @@ function App() {
           <WalletData />
       </Box>*/}
       {userContext.token && !isMobile && <NavBarLeft />}
-      {<NavBarTop />}
+      {!isMobile && <NavBarTop />}
       {isMobile && <NavBarBottomMobile />}
       {userContext.token && (
         <div style={{ position: 'absolute', bottom: 50, right: 50 }}>

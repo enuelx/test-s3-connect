@@ -4,7 +4,7 @@ import { Loader } from '@components';
 import { useNftsData } from './Hooks';
 
 export const Gallery = () => {
-  const { loading, nftsData, update } = useNftsData();
+  const { loading, nftsData } = useNftsData();
 
   return (
     <Container className="backgroundContainer">
@@ -12,14 +12,16 @@ export const Gallery = () => {
         <Loader />
       ) : (
         <Grid className="gridContainer">
-          {nftsData && nftsData.length > 0 ? (
+          {nftsData ? (
             nftsData.map((nft, i) => (
               <div key={i}>
-                <p>{nft}</p>
+                <p>
+                  nft {i}: {nft}
+                </p>
               </div>
             ))
           ) : (
-            <div>Nothing to show</div>
+            <>Nothing to show</>
           )}
         </Grid>
       )}

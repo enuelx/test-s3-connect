@@ -33,18 +33,20 @@ export const useNftsData = () => {
   const userContext = useContext(UserContext);
   const contract = useCypherContract();
 
-  const tokensId = useMemo(() => {
-    return userContext.user?.wallets?.reduce((prev, { cypherHoldings }) => {
-      return prev.concat(cypherHoldings);
-    }, []);
-  }, [userContext.user]);
+  // const tokensId = useMemo(() => {
+  //   return;
+  // }, [userContext.user]);
 
   const update = useCallback(async () => {
-    if (contract && tokensId) {
+    if (contract) {
       setLoading(true);
-      const nftsPromise = tokensId.map((tokenId) => {
-        getNftData({ nftContract: contract, nftId: tokenId });
-      });
+      const nftsPromise = userContext.user?.wallets
+        ?.reduce((prev, { cypherHoldings }) => {
+          return prev.concat(cypherHoldings);
+        }, [])
+        .map((tokenId) => {
+          getNftData({ nftContract: contract, nftId: tokenId });
+        });
 
       const nfts = await Promise.all(nftsPromise);
 
@@ -52,11 +54,13 @@ export const useNftsData = () => {
 
       setLoading(false);
     }
-  }, [contract, tokensId]);
+  }, [contract, userContext.user]);
 
   useEffect(() => {
-    update();
-  }, [update]);
+    if (userContext.user && userContext.user?.wallets > 0) {
+      update();
+    }
+  }, [update, userContext.user]);
 
   return { loading, nftsData, update };
 };

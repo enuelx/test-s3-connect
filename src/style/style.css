@@ -5,3 +5,12 @@
   min-height: 100vh;
   min-width: 100vw;
 }
+
+.gridContainer {
+  display: 'flex';
+  justify-content: 'space-between';
+  flex-wrap: 'wrap';
+  padding-top: '13vh';
+  margin-left: '23vw';
+  width: '52vw';
+}

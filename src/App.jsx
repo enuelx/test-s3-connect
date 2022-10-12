@@ -94,6 +94,7 @@ function App() {
       {userContext.token && !isMobile && <NavBarLeft />}
       {!isMobile && <NavBarTop />}
       {isMobile && <NavBarBottomMobile />}
+
       {userContext.token && (
         <div style={{ position: 'absolute', bottom: 50, right: 50 }}>
           <div

@@ -9,7 +9,7 @@ import {
 } from './style/img';
 import textLogin from '../../style/img/textLogin.png';
 
-export default () => {
+export const Register = () => {
   return (
     <Container
       sx={{

@@ -1,20 +1,22 @@
 import { Box, Drawer, IconButton, Typography } from '@mui/material';
 import { useContext, useEffect, useState } from 'react';
-import './style/style.css';
 import MenuIcon from '@mui/icons-material/Menu';
-import ColliderMenu from './style/img/colliderMenu.png';
-import CloseC from './style/img/CloseC.png';
-import OpenItems from './menuItems/openItems';
-import CloseItems from './menuItems/closeItems';
-import { UserContext, ToastContext } from '@context';
-import { accountApi } from '@services';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faArrowRightFromBracket,
   faCircleUser
 } from '@fortawesome/free-solid-svg-icons';
+
+import ColliderMenu from './style/img/colliderMenu.png';
+import CloseC from './style/img/CloseC.png';
+import './style/style.css';
+import OpenItems from './menuItems/openItems';
+import CloseItems from './menuItems/closeItems';
+import { UserContext, ToastContext } from '@context';
 import { toastMessages } from '@utils';
-export default () => {
+import { accountApi } from '@services';
+
+export const NavBarLeft = () => {
   const [open, setOpen] = useState(false);
   const handleDrawerClose = () => {
     setOpen(!open);

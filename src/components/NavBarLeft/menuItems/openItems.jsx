@@ -2,23 +2,10 @@ import { Typography } from '@mui/material';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faCloud,
-  faGear,
-  faTrophy,
-  faWallet
-} from '@fortawesome/free-solid-svg-icons';
 
 import '../style/style.css';
 
-const paths = [
-  { url: '/', text: 'Sync', icon: faCloud },
-  { url: '/challengers', text: 'Challengers', icon: faTrophy },
-  { url: '/manual-verify', text: 'Add wallet manually', icon: faWallet },
-  { url: '/account-settings', text: 'Account settings', icon: faGear }
-];
-
-const OpenItems = () => {
+const OpenItems = ({ paths }) => {
   const urlPath = window.location.pathname;
   const iconIndex = paths.map((e) => e.url).indexOf(urlPath);
 

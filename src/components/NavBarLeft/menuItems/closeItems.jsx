@@ -1,23 +1,10 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faCloud,
-  faGear,
-  faTrophy,
-  faWallet
-} from '@fortawesome/free-solid-svg-icons';
 
 import '../style/style.css';
 
-const paths = [
-  { url: '/', icon: faCloud },
-  { url: '/challengers', icon: faTrophy },
-  { url: '/manual-verify', icon: faWallet },
-  { url: '/account-settings', icon: faGear }
-];
-
-const CloseItems = () => {
+const CloseItems = ({ paths }) => {
   const urlPath = window.location.pathname;
 
   const iconIndex = paths.map((e) => e.url).indexOf(urlPath);

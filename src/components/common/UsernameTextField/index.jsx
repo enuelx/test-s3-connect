@@ -12,7 +12,7 @@ export const UsernameTextField = ({ username, setUsername, isMobile }) => {
           style={{ marginRight: '1vw', marginBottom: '1vh' }}
           color="antiquewhite"
           icon={faUserAstronaut}
-          size={isMobile ? '' : 'lg'}
+          size={'lg'}
         />
 
         <TextField

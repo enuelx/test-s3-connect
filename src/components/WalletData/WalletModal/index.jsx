@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import {
+  Button,
   Dialog,
   DialogTitle,
   List,
@@ -16,7 +17,8 @@ import './style.css';
 import { CustomButton } from '@components/common';
 import MetamaskLogo from './img/MetaMask.png';
 import WalletConnectLogo from './img/WalletConnect.png';
-
+import { faWallet } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 export default ({ login, isMobile }) => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -41,7 +43,14 @@ export default ({ login, isMobile }) => {
   return (
     <div>
       {isMobile ? (
-        'aosjdnajslkdn'
+        <Button variant="contained" onClick={handleOpen}>
+          <FontAwesomeIcon
+            size="lg"
+            icon={faWallet}
+            style={{ marginRight: '1vh' }}
+          />
+          {'Connect Wallet'}
+        </Button>
       ) : (
         <CustomButton
           login={login}

@@ -25,7 +25,7 @@ import {
   faArrowRightFromBracket
 } from '@fortawesome/free-solid-svg-icons';
 
-const drawerBleeding = 56;
+const drawerBleeding = 70;
 
 const Root = styled('div')(() => ({
   height: '100%',
@@ -88,8 +88,8 @@ function NavBarBottomMobile(props) {
         <Global
           styles={{
             '.MuiDrawer-root > .MuiPaper-root': {
-              //height: `calc(50% - ${drawerBleeding}px)`,
-              height: `auto`,
+              height: `calc(27% - ${drawerBleeding}px)`,
+              //height: `auto`,
               overflow: 'visible'
             }
           }}
@@ -114,7 +114,8 @@ function NavBarBottomMobile(props) {
               borderTopRightRadius: 8,
               visibility: 'visible',
               right: 0,
-              left: 0
+              left: 0,
+              height: drawerBleeding
             }}
           >
             <Puller onClick={() => toggleDrawer(true)} />
@@ -279,11 +280,12 @@ function NavBarBottomMobile(props) {
       <div
         style={{
           position: 'fixed',
-          bottom: 0,
+          bottom: 4,
           zIndex: 9999999,
           display: 'flex',
           alignItems: 'center',
-          justifyContent: 'center'
+          justifyContent: 'center',
+          width: '100%'
         }}
       >
         <WalletData isMobile={true} login={userContext.token} />
@@ -293,7 +295,8 @@ function NavBarBottomMobile(props) {
             onClick={reloadUserDetailsHandler}
             style={{
               color: userContext.token ? '#787878' : '#fff',
-              border: 'solid 1px'
+              border: 'solid 1px',
+              marginLeft: '2vh'
             }}
           >
             <FontAwesomeIcon size="lg" icon={faRotate} />

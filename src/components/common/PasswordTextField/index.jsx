@@ -31,7 +31,7 @@ export const PasswordTextField = ({
           style={{ marginRight: '1vw', marginBottom: '1vh' }}
           color="antiquewhite"
           icon={faKey}
-          size={isMobile ? '' : 'lg'}
+          size={'lg'}
         />
         <TextField
           InputLabelProps={{

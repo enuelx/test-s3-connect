@@ -9,9 +9,7 @@ import PropTypes from 'prop-types';
 import { Global } from '@emotion/react';
 import { styled } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
-import { grey } from '@mui/material/colors';
 import Button from '@mui/material/Button';
-import Skeleton from '@mui/material/Skeleton';
 import Typography from '@mui/material/Typography';
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 import { Grid } from '@mui/material';
@@ -24,8 +22,8 @@ import {
   faRotate,
   faArrowRightFromBracket
 } from '@fortawesome/free-solid-svg-icons';
-
-const drawerBleeding = 70;
+import './style.css';
+const drawerBleeding = 72;
 
 const Root = styled('div')(() => ({
   height: '100%',
@@ -66,8 +64,6 @@ function NavBarBottomMobile(props) {
   const userContext = useContext(UserContext);
   const toastContext = useContext(ToastContext);
   const reloadUserDetailsHandler = () => {
-    // set details to undefined so that spinner will be displayed and
-    // getUserDetails will be invoked from useEffect
     userContext.setUser(undefined);
   };
   const logoutHandler = async () => {
@@ -77,7 +73,6 @@ function NavBarBottomMobile(props) {
     toastContext.successMessage(toastMessages.success.LOGOUT);
     window.localStorage.setItem('logout', Date.now());
   };
-  // This is used only for the example
   const container =
     window !== undefined ? () => window().document.body : undefined;
 
@@ -88,7 +83,7 @@ function NavBarBottomMobile(props) {
         <Global
           styles={{
             '.MuiDrawer-root > .MuiPaper-root': {
-              height: `calc(27% - ${drawerBleeding}px)`,
+              height: `calc(28% - ${drawerBleeding}px)`,
               //height: `auto`,
               overflow: 'visible'
             }
@@ -137,11 +132,8 @@ function NavBarBottomMobile(props) {
                   to={{
                     pathname: '/'
                   }}
+                  className="linkMobile"
                   style={{
-                    marginTop: '1vh',
-                    marginLeft: 'auto',
-                    marginRight: 'auto',
-                    textDecoration: 'none',
                     color: select === 1 ? '#FFF' : '#787878'
                   }}
                   onClick={() => {
@@ -175,12 +167,9 @@ function NavBarBottomMobile(props) {
                     pathname: '/manual-verify'
                   }}
                   style={{
-                    marginTop: '1vh',
-                    marginLeft: 'auto',
-                    marginRight: 'auto',
-                    textDecoration: 'none',
                     color: select === 2 ? '#FFF' : '#787878'
                   }}
+                  className="linkMobile"
                   onClick={() => {
                     setSelect(2);
                   }}
@@ -210,11 +199,8 @@ function NavBarBottomMobile(props) {
                   to={{
                     pathname: '/account-settings'
                   }}
+                  className="linkMobile"
                   style={{
-                    marginTop: '1vh',
-                    marginLeft: 'auto',
-                    marginRight: 'auto',
-                    textDecoration: 'none',
                     color: select === 3 ? '#FFF' : '#787878'
                   }}
                   onClick={() => {
@@ -306,19 +292,8 @@ function NavBarBottomMobile(props) {
     </>
   );
 }
-{
-  /*<CustomButton
-            text="reload"
-            onClick={reloadUserDetailsHandler}
-            sx={{ marginLeft: '2px' }}
-            login={userContext.token}
-          />*/
-}
+
 NavBarBottomMobile.propTypes = {
-  /**
-   * Injected by the documentation to work in an iframe.
-   * You won't need it on your project.
-   */
   window: PropTypes.func
 };
 

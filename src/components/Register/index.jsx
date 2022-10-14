@@ -10,7 +10,7 @@ import {
 import textLogin from '../../style/img/textLogin.png';
 import { useEffect, useState } from 'react';
 
-export default () => {
+export const Register = () => {
   const [isMobile, setIsMobile] = useState(false);
   useEffect(() => {
     if (document.body.clientWidth < 540) {

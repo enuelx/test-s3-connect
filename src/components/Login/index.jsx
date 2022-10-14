@@ -11,7 +11,7 @@ import background from './style/img/loginBackground.png';
 import textLogin from '../../style/img/textLogin.png';
 import { toastMessages } from '@utils';
 
-const Login = () => {
+export const Login = () => {
   const userContext = useContext(UserContext);
   const toastContext = useContext(ToastContext);
 
@@ -112,5 +112,3 @@ const Login = () => {
     </Container>
   );
 };
-
-export default Login;

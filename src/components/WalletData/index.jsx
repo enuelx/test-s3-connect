@@ -6,7 +6,7 @@ import { faWallet } from '@fortawesome/free-solid-svg-icons';
 import WalletModal from './WalletModal';
 import { connectors } from '@config/web3';
 
-export default ({ login, isMobile }) => {
+export const WalletData = ({ login, isMobile }) => {
   const { active, activate, account, deactivate } = useWeb3React();
 
   const connectMetamask = useCallback(() => {

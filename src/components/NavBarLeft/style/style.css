@@ -1,6 +1,33 @@
-.openDrawer{
-width: 2850px;
+.openDrawer {
+  width: 2850px;
 }
-.closeDrawer{
-width: 50px;
+.closeDrawer {
+  width: 50px;
+}
+
+.itemLink {
+  margin-top: 1vh;
+  margin-left: auto;
+  margin-right: auto;
+  text-decoration: none;
+  color: #787878;
+}
+
+.closeItemIcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 6vh;
+  margin-top: 0.5vh;
+  margin-bottom: 0.5vh;
+}
+
+.openItemIcon {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  height: 6vh;
+  margin-top: 0.5vh;
+  margin-bottom: 0.5vh;
 }

@@ -1,12 +1,11 @@
 export { AccountSettings } from './AccountSettings';
 export { ManualVerifyPage } from './ManualVerifyPage';
-export { default as Login } from './Login';
-export { default as Register } from './Register';
-export { default as Welcome } from './Welcome';
-export { default as WalletData } from './WalletData';
-export { default as NavBarTop } from './NavBarTop';
-export { default as NavBarLeft } from './NavBarLeft';
-export { default as ManualVerify } from './ManualVerifyPage/ManualVerify';
+export { Login } from './Login';
+export { Register } from './Register';
+export { Welcome } from './Welcome';
+export { WalletData } from './WalletData';
+export { NavBarTop } from './NavBarTop';
+export { NavBarLeft } from './NavBarLeft';
 export { VerifyEmail } from './VerifyEmail';
 export { ForgotPassword } from './ForgotPassword';
 export { ResetPassword } from './ResetPassword';

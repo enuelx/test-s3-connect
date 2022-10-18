@@ -1,6 +1,6 @@
 import { useContext, useCallback, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { Container, Tooltip } from '@mui/material';
+import { Tooltip } from '@mui/material';
 import { InfoOutlined as InfoIcon } from '@mui/icons-material';
 
 import { accountApi } from '@services';
@@ -19,6 +19,8 @@ import {
   Gallery,
   ManualVerifyPage
 } from '@components';
+
+import '@style/style.css';
 
 import '@style/style.css';
 
@@ -84,9 +86,6 @@ function App() {
   const wallets = userContext.user?.wallets || [];
   return (
     <div>
-      {/*<Box sx={{ flexGrow: 0 }}>
-          <WalletData />
-      </Box>*/}
       {userContext.token && <NavBarLeft />}
       {<NavBarTop />}
       {userContext.token && (

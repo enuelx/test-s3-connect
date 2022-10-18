@@ -6,7 +6,7 @@ import { UserContext, ToastContext } from '@context';
 import { Loader } from '@components';
 import DiscordCard from './DiscordCard';
 
-const Welcome = () => {
+export const Welcome = () => {
   const userContext = useContext(UserContext);
   const toastContext = useContext(ToastContext);
 
@@ -34,5 +34,3 @@ const Welcome = () => {
     </Container>
   );
 };
-
-export default Welcome;

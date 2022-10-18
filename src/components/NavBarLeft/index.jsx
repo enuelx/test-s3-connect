@@ -4,7 +4,10 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faArrowRightFromBracket,
-  faCircleUser
+  faCircleUser,
+  faCloud,
+  faGear,
+  faWallet
 } from '@fortawesome/free-solid-svg-icons';
 
 import ColliderMenu from './style/img/colliderMenu.png';
@@ -16,7 +19,14 @@ import { UserContext, ToastContext } from '@context';
 import { toastMessages } from '@utils';
 import { accountApi } from '@services';
 
-export default () => {
+const paths = [
+  { url: '/', text: 'Sync', icon: faCloud },
+  { url: '/gallery', icon: faImage },
+  { url: '/manual-verify', text: 'Add wallet manually', icon: faWallet },
+  { url: '/account-settings', text: 'Account settings', icon: faGear }
+];
+
+export const NavBarLeft = () => {
   const [open, setOpen] = useState(false);
   const handleDrawerClose = () => {
     setOpen(!open);
@@ -84,7 +94,7 @@ export default () => {
             marginTop: '15vh'
           }}
         >
-          {open ? <OpenItems /> : <CloseItems />}
+          {open ? <OpenItems paths={paths} /> : <CloseItems paths={paths} />}
         </div>
         {open ? (
           <Box

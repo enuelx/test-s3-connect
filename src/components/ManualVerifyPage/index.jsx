@@ -16,7 +16,7 @@ import {
 const theme = createTheme({
   typography: { fontSize: 17 }
 });
-const ManualVerifyPage = () => {
+export const ManualVerifyPage = () => {
   const steps = [
     'Connect hot wallet',
     'Transfer Cypher',
@@ -54,15 +54,7 @@ const ManualVerifyPage = () => {
   };
   useEffect(() => {}, [stepState]);
   return (
-    <Container
-      style={{
-        backgroundColor: '#252525',
-        width: '100%',
-        height: '100%',
-        minHeight: '100vh',
-        minWidth: '100vw'
-      }}
-    >
+    <Container className="backgroundContainer">
       <Grid
         style={{
           display: 'flex',
@@ -155,5 +147,3 @@ const ManualVerifyPage = () => {
     </Container>
   );
 };
-
-export default ManualVerifyPage;

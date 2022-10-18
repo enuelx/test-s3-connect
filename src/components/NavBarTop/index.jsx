@@ -6,7 +6,7 @@ import { UserContext, ToastContext } from '@context';
 import { accountApi } from '@services';
 import { toastMessages } from '@utils';
 
-export default () => {
+export const NavBarTop = () => {
   const userContext = useContext(UserContext);
   const toastContext = useContext(ToastContext);
   const reloadUserDetailsHandler = () => {

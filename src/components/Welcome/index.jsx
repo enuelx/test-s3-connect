@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { Container, Grid } from '@mui/material';
 
 import WalletData from './WalletsInfo';
@@ -6,20 +6,12 @@ import { UserContext, ToastContext } from '@context';
 import { Loader } from '@components';
 import DiscordCard from './DiscordCard';
 
-const Welcome = () => {
+export const Welcome = () => {
   const userContext = useContext(UserContext);
   const toastContext = useContext(ToastContext);
 
   return (
-    <Container
-      style={{
-        backgroundColor: '#252525',
-        width: '100vw',
-        height: '100vh',
-        minHeight: '100vh',
-        minWidth: '100vw'
-      }}
-    >
+    <Container className="backgroundContainer">
       {userContext.user === null ? (
         'Error loading user'
       ) : !userContext.user ? (
@@ -42,5 +34,3 @@ const Welcome = () => {
     </Container>
   );
 };
-
-export default Welcome;

@@ -16,9 +16,9 @@ import {
   faTrash,
   faCirclePlus,
   faFire,
-  faVault
+  faSnowflake
 } from '@fortawesome/free-solid-svg-icons';
-import { facEmptyFire, facEmptyVault } from './img/customIcons';
+import { facEmptyFire, facEmptySnowflake } from './img/customIcons';
 import { ThemeProvider } from '@emotion/react';
 
 import './style.css';
@@ -124,7 +124,7 @@ const WelcomeWalletsInfo = ({ userContext, toastContext }) => {
       <Box style={{ textAlign: 'left', marginTop: '4vh' }}>
         <Typography style={{ fontSize: '18px', color: '#787878' }}>
           Pick a hot wallet to use for any required interaction (i.e.:
-          authentication) and a vault wallet to get your airdrops.
+          authentication) and a vault/cold wallet to get your airdrops.
         </Typography>
       </Box>
       <Box style={{ textAlign: 'left', marginTop: '4vh' }}>
@@ -194,7 +194,7 @@ const WelcomeWalletsInfo = ({ userContext, toastContext }) => {
                     <FontAwesomeIcon
                       style={{ marginLeft: '0.5vw' }}
                       color="#787878"
-                      icon={faVault}
+                      icon={faSnowflake}
                       size="lg"
                     />
                   ) : (
@@ -205,8 +205,8 @@ const WelcomeWalletsInfo = ({ userContext, toastContext }) => {
                       }}
                       icon={
                         overVault?.over && overVault?.overIndexStart === index
-                          ? faVault
-                          : facEmptyVault
+                          ? faSnowflake
+                          : facEmptySnowflake
                       }
                       size="lg"
                       style={{ marginLeft: '0.5vw' }}
@@ -257,7 +257,7 @@ const WelcomeWalletsInfo = ({ userContext, toastContext }) => {
           <ThemeProvider theme={grayButton}>
             <Button
               onClick={
-                !active || isUnsupportedChain ? () => {} : associateWallet
+                !active || isUnsupportedChain ? () => { } : associateWallet
               }
               disabled={!active || isUnsupportedChain}
               sx={{

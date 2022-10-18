@@ -1,20 +1,31 @@
 import { Box, Drawer, IconButton, Typography } from '@mui/material';
 import { useContext, useEffect, useState } from 'react';
-import './style/style.css';
 import MenuIcon from '@mui/icons-material/Menu';
-import ColliderMenu from './style/img/colliderMenu.png';
-import CloseC from './style/img/CloseC.png';
-import OpenItems from './menuItems/openItems';
-import CloseItems from './menuItems/closeItems';
-import { UserContext, ToastContext } from '@context';
-import { accountApi } from '@services';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faArrowRightFromBracket,
-  faCircleUser
+  faCircleUser,
+  faCloud,
+  faGear,
+  faWallet
 } from '@fortawesome/free-solid-svg-icons';
+
+import ColliderMenu from './style/img/colliderMenu.png';
+import CloseC from './style/img/CloseC.png';
+import './style/style.css';
+import OpenItems from './menuItems/openItems';
+import CloseItems from './menuItems/closeItems';
+import { UserContext, ToastContext } from '@context';
 import { toastMessages } from '@utils';
-export default () => {
+import { accountApi } from '@services';
+
+const paths = [
+  { url: '/', text: 'Sync', icon: faCloud },
+  { url: '/manual-verify', text: 'Add wallet manually', icon: faWallet },
+  { url: '/account-settings', text: 'Account settings', icon: faGear }
+];
+
+export const NavBarLeft = () => {
   const [open, setOpen] = useState(false);
   const handleDrawerClose = () => {
     setOpen(!open);
@@ -82,7 +93,7 @@ export default () => {
             marginTop: '15vh'
           }}
         >
-          {open ? <OpenItems /> : <CloseItems />}
+          {open ? <OpenItems paths={paths} /> : <CloseItems paths={paths} />}
         </div>
         {open ? (
           <Box

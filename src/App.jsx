@@ -1,9 +1,11 @@
 import { useContext, useCallback, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
+import { Tooltip } from '@mui/material';
 
 import { accountApi } from '@services';
 import { UserContext } from '@context/UserContext';
 import {
+  AccountSettings,
   ForgotPassword,
   Login,
   Register,
@@ -12,13 +14,12 @@ import {
   NavBarTop,
   ResetPassword,
   VerifyEmail,
-  NavBarLeft
+  NavBarLeft,
+  ManualVerifyPage
 } from '@components';
-import { Box } from '@mui/system';
-import AccountSettings from './components/AccountSettings';
-import ManualVerifyPage from './components/ManualVerifyPage';
-import { Tooltip } from '@mui/material';
 import { InfoOutlined as InfoIcon } from '@mui/icons-material';
+
+import '@style/style.css';
 
 function App() {
   const userContext = useContext(UserContext);
@@ -82,9 +83,6 @@ function App() {
   const wallets = userContext.user?.wallets || [];
   return (
     <div>
-      {/*<Box sx={{ flexGrow: 0 }}>
-          <WalletData />
-      </Box>*/}
       {userContext.token && <NavBarLeft />}
       {<NavBarTop />}
       {userContext.token && (

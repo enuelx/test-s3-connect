@@ -1,9 +1,10 @@
 import { useContext, useEffect, useState } from 'react';
 import { ethers } from 'ethers';
-import { Container, Grid } from '@mui/material';
+import { Container, Typography } from '@mui/material';
 import axios from 'axios';
-import config from '@config';
 
+import config from '@config';
+import { filesService } from '@services';
 import { Loader } from '@components';
 import { UserContext } from '@context';
 import { cypherContract } from '@artifacts';
@@ -12,6 +13,14 @@ export const Gallery = () => {
   const userContext = useContext(UserContext);
   const [loading, setLoading] = useState(true);
   const [nftsData, setNftsData] = useState([]);
+
+  const downloadCypherFile = async (nftId) => {
+    const downloadUrl = await filesService.getCypherFileUrl(
+      nftId,
+      userContext.token
+    );
+    window.open(downloadUrl, '_blank', 'noopener,noreferrer');
+  };
 
   useEffect(() => {
     (async () => {
@@ -40,7 +49,7 @@ export const Gallery = () => {
             const metadata = await axios.get(uri);
             const imgUri = metadata.data.image;
 
-            return imgUri;
+            return { id, imgUri };
           })
         );
 
@@ -61,14 +70,20 @@ export const Gallery = () => {
             paddingTop: '30px'
           }}
         >
+          <Typography>Welcome to the Cypher gallery</Typography>
           {nftsData?.length > 0 ? (
-            <ul>
-              {nftsData.map((nft, i) => (
-                <li key={i}>
-                  nft {i}: {nft}
-                </li>
-              ))}
-            </ul>
+            nftsData.map((nft, i) => (
+              <img
+                style={{
+                  margin: '10px',
+                  width: '10vw',
+                  cursor: 'pointer'
+                }}
+                src={nft.imgUri}
+                key={nft.id}
+                onClick={() => downloadCypherFile(nft.id)}
+              />
+            ))
           ) : (
             <>Nothing to show</>
           )}

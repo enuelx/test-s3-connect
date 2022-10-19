@@ -7,7 +7,8 @@ import {
   faCircleUser,
   faCloud,
   faGear,
-  faWallet
+  faWallet,
+  faImage
 } from '@fortawesome/free-solid-svg-icons';
 
 import ColliderMenu from './style/img/colliderMenu.png';
@@ -21,7 +22,7 @@ import { accountApi } from '@services';
 
 const paths = [
   { url: '/', text: 'Sync', icon: faCloud },
-  { url: '/gallery', icon: faImage },
+  { url: '/gallery', text: 'Gallery', icon: faImage },
   { url: '/manual-verify', text: 'Add wallet manually', icon: faWallet },
   { url: '/account-settings', text: 'Account settings', icon: faGear }
 ];

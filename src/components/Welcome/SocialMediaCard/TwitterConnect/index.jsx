@@ -7,6 +7,14 @@ import { twitterUserApi } from '@services';
 import { grayButton } from '@themes';
 
 export default ({ userContext }) => {
+  const handleConnectTwitter = async () => {
+    if (userContext.token) {
+      const url = await twitterUserApi.getLinkLogin(userContext.token);
+      window.open(url, '_blank');
+      userContext.setUser(undefined); // To force reload user data
+    }
+  };
+
   return (
     <ThemeProvider theme={grayButton}>
       <Button
@@ -22,12 +30,7 @@ export default ({ userContext }) => {
           borderRadius: '0px 10px 0px 10px'
         }}
         variant="contained"
-        onClick={async () => {
-          if (userContext.token) {
-            const url = await twitterUserApi.getLinkLogin(userContext.token);
-            window.open(url, '_blank');
-          }
-        }}
+        onClick={handleConnectTwitter}
       >
         <FontAwesomeIcon icon={faCirclePlus} size="lg" />
         <Typography

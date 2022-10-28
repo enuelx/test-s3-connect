@@ -15,7 +15,8 @@ import {
   ResetPassword,
   VerifyEmail,
   NavBarLeft,
-  ManualVerifyPage
+  ManualVerifyPage,
+  AssociateTwitterPage
 } from '@components';
 import { InfoOutlined as InfoIcon } from '@mui/icons-material';
 
@@ -129,6 +130,7 @@ function App() {
           <>
             <Route path="manual-verify" element={<ManualVerifyPage />} />
             <Route path="account-settings" element={<AccountSettings />} />
+            <Route path="twitter/login" element={<AssociateTwitterPage />} />
             <Route path="*" element={<Welcome />} />
           </>
         ) : (

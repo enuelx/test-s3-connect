@@ -4,7 +4,7 @@ import { Container, Grid } from '@mui/material';
 import WalletData from './WalletsInfo';
 import { UserContext, ToastContext } from '@context';
 import { Loader } from '@components';
-import DiscordCard from './DiscordCard';
+import SocialMediaCard from './SocialMediaCard';
 
 export const Welcome = () => {
   const userContext = useContext(UserContext);
@@ -28,7 +28,7 @@ export const Welcome = () => {
           }}
         >
           <WalletData userContext={userContext} toastContext={toastContext} />
-          <DiscordCard userContext={userContext} toastContext={toastContext} />
+          <SocialMediaCard userContext={userContext} toastContext={toastContext} />
         </Grid>
       )}
     </Container>

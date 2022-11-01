@@ -1,4 +1,4 @@
-import { useContext, useCallback, useEffect } from 'react';
+import { useContext, useCallback, useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { Tooltip } from '@mui/material';
 
@@ -19,12 +19,24 @@ import {
   AssociateTwitterPage
 } from '@components';
 import { InfoOutlined as InfoIcon } from '@mui/icons-material';
+import './App.css';
+import NavBarBottomMobile from './components/NavBarBottomMobile';
 
 import '@style/style.css';
 
 function App() {
   const userContext = useContext(UserContext);
-
+  const [isMobile, setIsMobile] = useState(false);
+  const [menu, setMenu] = useState(null);
+  const [textMenu, setTextMenu] = useState('');
+  useEffect(() => {
+    if (document.body.clientWidth < 850) {
+      setIsMobile(true);
+    }
+  }, []);
+  const handleChangeMenu = (index) => {
+    setMenu(index);
+  };
   const getAccountDetails = useCallback(async () => {
     try {
       if (userContext.token) {
@@ -48,7 +60,17 @@ function App() {
       getAccountDetails();
     }
   }, [userContext.user, getAccountDetails]);
-
+  useEffect(() => {
+    if (menu) {
+      setTextMenu(
+        menu === 1
+          ? 'Dashboard'
+          : menu === 2
+          ? 'Manually Sync'
+          : 'Account Settings'
+      );
+    }
+  }, [menu]);
   const verifyAccount = useCallback(async () => {
     try {
       const data = await accountApi.refreshToken();
@@ -84,25 +106,29 @@ function App() {
   const wallets = userContext.user?.wallets || [];
   return (
     <div>
+      {/*<Box sx={{ flexGrow: 0 }}>
+          <WalletData />
+      </Box>*/}
       {userContext.token && <NavBarLeft />}
       {<NavBarTop />}
       {userContext.token && (
-        <div style={{ position: 'absolute', bottom: 50, right: 50 }}>
-          <div
-            style={{
-              marginTop: '2vh',
-              backgroundColor: '#3E3E3E',
-              width: '250px',
-              height: '32px',
-              color: '#787878',
-              textAlign: 'center',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              borderRadius: '0px 10px 0px 10px'
-            }}
-          >
-            Cyphers Hodling:{' '}
+        <NavBarBottomMobile handleChangeMenu={handleChangeMenu} />
+      )}
+
+      {userContext.token && (
+        <div className="divApp">
+          <div className="textMobile">
+            <h3 style={{ color: 'rgb(120, 120, 120)' }}>
+              Hi {userContext?.user?.username}
+              <br></br>
+              <span style={{ color: '#fff', fontSize: '1.3rem' }}>
+                {textMenu}
+              </span>
+            </h3>
+          </div>
+
+          <div className="holdings">
+            {isMobile ? 'Hodling:' : 'Cyphers Hodling:'}
             {wallets.reduce((prev, { cypherHoldings }) => {
               return prev + cypherHoldings.length;
             }, 0)}

@@ -6,3 +6,35 @@
 .clickable:hover {
   color: #fff;
 }
+
+.divWalletInfo{
+  width: 380px;
+}
+.divSocialMedia{
+  width: 380px;
+}
+@media screen and (max-width: 850px)   {
+  .divWalletInfo{
+    margin-top:6vh !important;
+  }
+  .divSocialMedia{
+    margin-top:6vh !important;
+  }
+}
+/*
+1024
+
+1440
+.divWalletInfo{
+    margin-bottom: 20px!important;
+  
+  }
+  325 y 500
+  .divWalletInfo{
+    margin-bottom: 20px!important;
+  }
+  501 y 768
+  .divWalletInfo{
+    margin-bottom: 20px!important;
+  }
+*/

@@ -18,6 +18,7 @@ import { emailApi } from '@services';
 import { whiteButton } from '@themes';
 import { ReCaptcha } from '@components/common';
 import { toastMessages } from '@utils';
+import './style.css';
 
 export const ForgotPassword = () => {
   const navigate = useNavigate();
@@ -53,17 +54,8 @@ export const ForgotPassword = () => {
         minWidth: '100vw'
       }}
     >
-      <Grid
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          flexWrap: 'wrap',
-          alignItems: 'center',
-          paddingTop: '24vh',
-          marginLeft: '18vw'
-        }}
-      >
-        <Box width="50vw">
+      <Grid className=" containerForgotPass">
+        <Box className="txtEmailForgotPass" width="50vw">
           <FormControl fullWidth>
             <Box
               display="flex"

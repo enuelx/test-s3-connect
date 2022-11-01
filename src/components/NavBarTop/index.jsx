@@ -5,6 +5,7 @@ import { WalletData, CustomButton } from '@components';
 import { UserContext, ToastContext } from '@context';
 import { accountApi } from '@services';
 import { toastMessages } from '@utils';
+import './style.css';
 
 export const NavBarTop = () => {
   const userContext = useContext(UserContext);
@@ -33,6 +34,7 @@ export const NavBarTop = () => {
       >
         {userContext.token && (
           <CustomButton
+            fromTop={true}
             text="reload"
             onClick={reloadUserDetailsHandler}
             sx={{ marginLeft: '2px' }}
@@ -40,11 +42,16 @@ export const NavBarTop = () => {
           />
         )}
 
-        <Box sx={{ flexGrow: 0, zIndex: '999999' }}>
-          <WalletData login={userContext.token} />
+        <Box className={'boxWalletData'}>
+          <WalletData
+            fromTop={!userContext.token ? false : true}
+            login={userContext.token}
+          />
         </Box>
+
         {userContext.token && (
           <CustomButton
+            fromTop={true}
             text="logout"
             onClick={logoutHandler}
             sx={{ marginLeft: '2px' }}

@@ -1,7 +1,7 @@
 .backgroundContainer {
   background-color: #252525;
   width: 100%;
-  height: 100%;
+  height: auto;
   min-height: 100vh;
   min-width: 100vw;
 }

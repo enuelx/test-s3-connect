@@ -1,0 +1,49 @@
+.imgRegister {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  right: 0px;
+  max-width: 85%;
+  bottom: 0px;
+}
+.imgTextRegister {
+  width: 500px;
+  position: absolute;
+  top: 50px;
+  left: 0px;
+  margin-left: 7.7vw;
+}
+.imgTextRegister2 {
+  width: 300px;
+  position: absolute;
+  top: 370px;
+  left: 59px;
+  margin-left: 7.7vw;
+}
+@media screen and (max-width: 560px) {
+  .imgRegister {
+    position: absolute !important;
+    width: 140% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    right: 0px !important;
+    max-width: 165% !important;
+    bottom: 0px !important;
+  }
+  .imgTextRegister {
+    width: 300px !important;
+    position: absolute !important;
+    top: 30px !important;
+    left: 15px !important;
+    margin-left: 0px !important;
+  }
+  .imgTextRegister2 {
+    width: 250px !important;
+    position: absolute !important;
+    top: 250px !important;
+    left: 0px !important;
+    margin-left: 15vw !important;
+    display: none !important;
+  }
+}

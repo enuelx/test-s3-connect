@@ -100,7 +100,7 @@ const WelcomeWalletsInfo = ({ userContext, toastContext }) => {
   };
 
   return (
-    <div style={{ width: '380px' }}>
+    <div className="divWalletInfo">
       <Box
         style={{
           width: '100%',

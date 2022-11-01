@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { UnsupportedChainIdError, useWeb3React } from '@web3-react/core';
 import { Box, Container } from '@mui/material';
@@ -10,6 +10,7 @@ import { AccountForm } from '@components';
 import background from './style/img/loginBackground.png';
 import textLogin from '../../style/img/textLogin.png';
 import { toastMessages } from '@utils';
+import './style.css';
 
 export const Login = () => {
   const userContext = useContext(UserContext);
@@ -19,7 +20,7 @@ export const Login = () => {
 
   const { active, account, library, error } = useWeb3React();
   const isUnsupportedChain = error instanceof UnsupportedChainIdError;
-
+  const [isMobile, setIsMobile] = useState(false);
   const handleWeb3Login = async (captchaValue) => {
     setIsSubmitting(true);
 
@@ -46,54 +47,21 @@ export const Login = () => {
     }
     setIsSubmitting(false);
   };
-
+  useEffect(() => {
+    if (document.body.clientWidth < 850) {
+      setIsMobile(true);
+    }
+  }, []);
   return (
-    <Container
-      sx={{
-        marginLeft: '0px',
-        marginRight: '0px',
-        height: 'auto',
-        minHeight: '100vh',
-        minWidth: '100vw',
-        position: 'absolute',
-        left: 0,
-        top: 0,
-        backgroundRepeat: 'no-repeat!important',
-
-        objectFit: 'cover!important',
-
-        background: ` radial-gradient(circle at center, #460036 0, #200017, #18000ee8 80%)`
-      }}
-    >
+    <Container className="boxPrincipalLogin">
       <Box>
-        <img
-          style={{
-            position: 'absolute',
-            width: '100%',
-            height: '100%',
-            maxWidth: '85%',
-            right: 0,
-            top: 0,
-            objectFit: 'cover'
-          }}
-          src={background}
-          alt=""
-        />
+        <img className="imgLogin" src={background} alt="" />
       </Box>
-      <img
-        style={{
-          width: '500px',
-          position: 'absolute',
-          top: '50px',
-          left: '0px',
-          marginLeft: '7.7vw'
-        }}
-        src={textLogin}
-        alt=""
-      />
-      <Box sx={{ marginLeft: '10vw' }}>
+      <img className="loginMobile" src={textLogin} alt="" />
+      <Box className="boxContenedorFormLogin">
         <Box>
           <AccountForm
+            className="formularioLogin"
             web3={true}
             formActionName="Login"
             useCaptcha
@@ -102,25 +70,21 @@ export const Login = () => {
             handleWeb3Login={handleWeb3Login}
             widthButtonBox="380px"
             margin="370px"
+            isMobile={isMobile}
           >
             <Link
-              style={{
-                color: 'white',
-                marginTop: '30px',
-                textDecoration: 'none'
-              }}
+              className="textLogin"
               to={{
                 pathname: '/register'
               }}
             >
-              Not a member yet? Create an account
+              <span className="textMobile">Create an account</span>
+              <span className="textNoMobile">
+                Not a member yet? Create an account
+              </span>
             </Link>
             <Link
-              style={{
-                color: 'white',
-                marginTop: '30px',
-                textDecoration: 'none'
-              }}
+              className="textLoginForgot"
               to={{
                 pathname: '/forgot-password'
               }}

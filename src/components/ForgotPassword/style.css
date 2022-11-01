@@ -1,0 +1,16 @@
+.containerForgotPass {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: center;
+  padding-top: 24vh;
+  margin-left: 14vw;
+}
+@media screen and (max-width: 560px) {
+  .containerForgotPass {
+    margin-left: 9vw !important;
+  }
+  .txtEmailForgotPass {
+    width: 400px !important;
+  }
+}

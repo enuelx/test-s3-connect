@@ -22,7 +22,7 @@ import manualValidationStatus from './manualValidationStatus';
 import { ThemeProvider } from '@emotion/react';
 import { grayButton, whiteButton, grayButtonVerify } from '@themes';
 import { toastMessages } from '@utils';
-
+import './style.css';
 const ManualVerify = ({ stepState, setStepState }) => {
   const userContext = useContext(UserContext);
   const toastContext = useContext(ToastContext);
@@ -318,10 +318,14 @@ const ManualVerify = ({ stepState, setStepState }) => {
     </Box>
   ) : stepState === 3 ? (
     <Box style={{ marginTop: '3vh' }}>
-      <Typography style={{ color: 'rgb(120, 120, 120)' }}>
+      <Typography
+        style={{ color: 'rgb(120, 120, 120)' }}
+        className="typhoWalletStep3"
+      >
         Congrats, wallet verified, check it in your wallets section
       </Typography>
       <Box
+        className="typhoWalletApprovedStep3"
         style={{
           border: '1px solid #fff',
           marginTop: '4vh',
@@ -448,6 +452,7 @@ const ManualVerify = ({ stepState, setStepState }) => {
           <Button
             style={{
               marginTop: '4vh',
+              marginBottom: '2vh',
               backgroundColor: '#3E3E3E',
               borderRadius: '0px 10px 0px 10px'
             }}

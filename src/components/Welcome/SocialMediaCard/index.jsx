@@ -64,7 +64,7 @@ const SocialMediaCard = ({ userContext }) => {
   ];
 
   return (
-    <div style={{ width: '380px' }}>
+    <div className='divSocialMedia' style={{ width: '380px' }}>
       <Box
         style={{
           width: '100%',

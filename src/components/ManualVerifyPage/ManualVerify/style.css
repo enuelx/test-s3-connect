@@ -1,0 +1,19 @@
+.typhoWalletApprovedStep3 {
+  border: 1px solid #fff;
+  margin-top: 4vh;
+  min-height: 35px;
+  width: 450px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+@media screen and (min-width: 325px) and (max-width: 500px) {
+  .typhoWalletStep3 {
+    width: 400px !important;
+    text-align: center !important;
+  }
+
+  .typhoWalletApprovedStep3 {
+    width: 400px !important;
+  }
+}

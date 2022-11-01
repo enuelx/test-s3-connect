@@ -45,11 +45,13 @@ export const NavBarLeft = () => {
   }, []);
   return (
     <Drawer
+      className="noneMobile"
       variant="permanent"
-      sx={{ height: '100%' }}
+      sx={{ height: '100% !important' }}
       PaperProps={{
         sx: {
-          backgroundColor: '#3E3E3E'
+          backgroundColor: '#3E3E3E',
+          height: '100% !important'
         }
       }}
       open={open}

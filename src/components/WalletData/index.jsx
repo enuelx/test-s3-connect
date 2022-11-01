@@ -3,10 +3,11 @@ import { useWeb3React } from '@web3-react/core';
 import { Chip } from '@mui/material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faWallet } from '@fortawesome/free-solid-svg-icons';
+
 import WalletModal from './WalletModal';
 import { connectors } from '@config/web3';
 
-export const WalletData = ({ login }) => {
+export const WalletData = ({ login, isMobile, fromTop }) => {
   const { active, activate, account, deactivate } = useWeb3React();
 
   const connectMetamask = useCallback(() => {
@@ -47,7 +48,7 @@ export const WalletData = ({ login }) => {
     </div>
   ) : (
     <div>
-      <WalletModal login={login} />
+      <WalletModal fromTop={fromTop} isMobile={isMobile} login={login} />
     </div>
   );
 };

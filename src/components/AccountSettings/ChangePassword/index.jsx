@@ -102,7 +102,7 @@ export const ChangePassword = () => {
           Change Password
         </Typography>
       </Box>
-      <Box style={{ textAlign: 'left', marginTop: '4vh' }}>
+      <Box style={{ textAlign: 'left', marginTop: '3vh' }}>
         <Typography style={{ fontSize: '18px', color: '#787878' }}>
           To change the password, you can choose to enter your previous
           password, or sign a message with a wallet associated to your account.
@@ -200,16 +200,7 @@ export const ChangePassword = () => {
             </Button>
           </ThemeProvider>
         </Box>
-        <Box
-          style={{
-            textAlign: 'center',
-            display: 'flex',
-            alignItems: 'center',
-            flexWrap: 'wrap',
-            justifyContent: 'start',
-            marginTop: '3vh'
-          }}
-        >
+        <Box className="boxChangePassWallet">
           <ThemeProvider theme={grayDisabledButton}>
             <Button
               variant="contained"

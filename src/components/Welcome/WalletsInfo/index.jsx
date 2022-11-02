@@ -244,7 +244,7 @@ const WelcomeWalletsInfo = ({ userContext, toastContext }) => {
       <Box
         style={{
           textAlign: 'center',
-          marginTop: '4vh',
+          marginTop: '3vh',
           display: 'flex',
           alignItems: 'center',
           justifyContent: wallets.length > 0 ? '' : 'left'
@@ -262,6 +262,7 @@ const WelcomeWalletsInfo = ({ userContext, toastContext }) => {
               disabled={!active || isUnsupportedChain}
               sx={{
                 background: 'transparent',
+                marginTop: '1vh',
                 paddingTop: '1vh',
                 border: 'solid 1px',
                 alignSelf: 'baseline',

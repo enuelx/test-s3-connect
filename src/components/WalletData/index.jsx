@@ -6,6 +6,7 @@ import { faWallet } from '@fortawesome/free-solid-svg-icons';
 
 import WalletModal from './WalletModal';
 import { connectors } from '@config/web3';
+import './style.css';
 
 export const WalletData = ({ login, isMobile, fromTop }) => {
   const { active, activate, account, deactivate } = useWeb3React();
@@ -28,16 +29,7 @@ export const WalletData = ({ login, isMobile, fromTop }) => {
       <div>
         <Chip
           variant="outlined"
-          sx={{
-            color: '#787878',
-            marginTop: '10px',
-            marginRight: '20px',
-            padding: '20px 5px 20px 5px',
-            fontSize: '18px',
-            '& .MuiChip-deleteIcon': {
-              color: '#787878'
-            }
-          }}
+          className={fromTop ? 'chipWallet' : 'chipWalletMobile'}
           label={`${account.substring(0, 6)}...${account.substring(
             account.length - 6
           )}`}

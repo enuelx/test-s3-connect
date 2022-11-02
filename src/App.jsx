@@ -16,27 +16,29 @@ import {
   VerifyEmail,
   NavBarLeft,
   ManualVerifyPage,
+  TournamentPage,
   AssociateTwitterPage
 } from '@components';
 import { InfoOutlined as InfoIcon } from '@mui/icons-material';
 import './App.css';
 import NavBarBottomMobile from './components/NavBarBottomMobile';
 
-import '@style/style.css';
-
 function App() {
   const userContext = useContext(UserContext);
   const [isMobile, setIsMobile] = useState(false);
   const [menu, setMenu] = useState(null);
   const [textMenu, setTextMenu] = useState('');
+
   useEffect(() => {
     if (document.body.clientWidth < 850) {
       setIsMobile(true);
     }
   }, []);
+
   const handleChangeMenu = (index) => {
     setMenu(index);
   };
+
   const getAccountDetails = useCallback(async () => {
     try {
       if (userContext.token) {
@@ -60,6 +62,7 @@ function App() {
       getAccountDetails();
     }
   }, [userContext.user, getAccountDetails]);
+
   useEffect(() => {
     if (menu) {
       setTextMenu(
@@ -71,6 +74,7 @@ function App() {
       );
     }
   }, [menu]);
+
   const verifyAccount = useCallback(async () => {
     try {
       const data = await accountApi.refreshToken();
@@ -103,12 +107,9 @@ function App() {
       window.removeEventListener('storage', syncLogout);
     };
   }, [syncLogout]);
-  const wallets = userContext.user?.wallets || [];
+
   return (
-    <div>
-      {/*<Box sx={{ flexGrow: 0 }}>
-          <WalletData />
-      </Box>*/}
+    <div className="App">
       {userContext.token && <NavBarLeft />}
       {<NavBarTop />}
       {userContext.token && (
@@ -129,9 +130,7 @@ function App() {
 
           <div className="holdings">
             {isMobile ? 'Hodling:' : 'Cyphers Hodling:'}
-            {wallets.reduce((prev, { cypherHoldings }) => {
-              return prev + cypherHoldings.length;
-            }, 0)}
+            {userContext.user?.cyphersHoldingAmount}
             <Tooltip
               arrow
               placement="top"
@@ -155,6 +154,7 @@ function App() {
         ) : userContext.token ? (
           <>
             <Route path="manual-verify" element={<ManualVerifyPage />} />
+            <Route path="tournament" element={<TournamentPage />} />
             <Route path="account-settings" element={<AccountSettings />} />
             <Route path="twitter/login" element={<AssociateTwitterPage />} />
             <Route path="*" element={<Welcome />} />

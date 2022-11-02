@@ -7,6 +7,7 @@ import {
   faCircleUser,
   faCloud,
   faGear,
+  faTrophy,
   faWallet
 } from '@fortawesome/free-solid-svg-icons';
 
@@ -22,6 +23,7 @@ import { accountApi } from '@services';
 const paths = [
   { url: '/', text: 'Sync', icon: faCloud },
   { url: '/manual-verify', text: 'Add wallet manually', icon: faWallet },
+  { url: '/tournament', text: 'Tournament', icon: faTrophy },
   { url: '/account-settings', text: 'Account settings', icon: faGear }
 ];
 

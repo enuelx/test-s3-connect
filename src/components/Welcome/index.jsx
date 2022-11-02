@@ -18,7 +18,7 @@ export const Welcome = () => {
       ) : !userContext.user ? (
         <Loader />
       ) : (
-        <Grid className="gridWelcome">
+        <Grid className='gridWelcome'>
           <WalletData userContext={userContext} toastContext={toastContext} />
           <SocialMediaCard
             userContext={userContext}

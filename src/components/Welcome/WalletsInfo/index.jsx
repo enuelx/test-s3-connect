@@ -257,7 +257,7 @@ const WelcomeWalletsInfo = ({ userContext, toastContext }) => {
           <ThemeProvider theme={grayButton}>
             <Button
               onClick={
-                !active || isUnsupportedChain ? () => { } : associateWallet
+                !active || isUnsupportedChain ? () => {} : associateWallet
               }
               disabled={!active || isUnsupportedChain}
               sx={{

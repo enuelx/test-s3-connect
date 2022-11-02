@@ -1,0 +1,27 @@
+.containerTournament {
+  background-color: #252525;
+  width: auto;
+  height: auto;
+  min-height: 100vh;
+  min-width: 100vw;
+}
+
+.gridTournament {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding-top: 13vh;
+  margin-left: 25vw;
+  width: 52vw;
+}
+
+@media screen and (max-width: 850px) {
+  .gridTournament {
+    display: flex;
+    justify-content: center;
+    padding-top: 15vh;
+    width: auto;
+    margin-left: 3vh;
+    padding-bottom: 110px;
+  }
+}

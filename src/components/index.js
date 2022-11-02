@@ -9,6 +9,7 @@ export { NavBarLeft } from './NavBarLeft';
 export { VerifyEmail } from './VerifyEmail';
 export { ForgotPassword } from './ForgotPassword';
 export { ResetPassword } from './ResetPassword';
+export { TournamentPage } from './TournamentPage';
 export { AssociateTwitterPage } from './AssociateTwitterPage';
 
 export * from './common';

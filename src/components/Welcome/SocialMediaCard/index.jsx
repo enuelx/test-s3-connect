@@ -1,89 +1,21 @@
-import { Box, Typography } from '@mui/material';
+import { Box } from '@mui/material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserGroup } from '@fortawesome/free-solid-svg-icons';
-import { faDiscord, faTwitter } from '@fortawesome/free-brands-svg-icons';
 
-import DiscordCodeModal from './DiscordCodeModal';
+import DiscordConnect from './DiscordConnect';
 import TwitterConnect from './TwitterConnect';
-
-const Section = ({ title, displayData, interactButton, icon }) => {
-  return (
-    <Box style={{ marginBottom: '3vh' }}>
-      <Box style={{ display: 'flex' }}>
-        <FontAwesomeIcon color="#fff" icon={icon} size="lg" />
-        <Typography
-          style={{ marginLeft: '0.7vw', fontSize: '18px', color: '#787878' }}
-        >
-          Connect {title}
-        </Typography>
-      </Box>
-      <Box
-        style={{
-          marginTop: '1vh'
-        }}
-      >
-        <Typography style={{ fontSize: '18px', color: '#787878' }}>
-          {title} user: {displayData ?? ' ---------- '}
-        </Typography>
-      </Box>
-      {interactButton()}
-    </Box>
-  );
-};
+import './style.css';
 
 const SocialMediaCard = ({ userContext }) => {
-  const socialMedias = [
-    {
-      title: 'Discord',
-      displayData: userContext.user?.discordUser?.discordTag,
-      interactButton: () => {
-        if (!userContext.user.discordUser?.discordTag) {
-          return (
-            <div style={{ marginTop: '1vh' }}>
-              <DiscordCodeModal />
-            </div>
-          );
-        }
-      },
-      icon: faDiscord
-    },
-    {
-      title: 'Twitter',
-      displayData: userContext.user?.twitterUser?.username,
-      interactButton: () => {
-        if (!userContext.user.twitterUser?.username) {
-          return (
-            <div style={{ marginTop: '1vh' }}>
-              <TwitterConnect userContext={userContext} />
-            </div>
-          );
-        }
-      },
-      icon: faTwitter
-    }
-  ];
-
   return (
-    <div className='divSocialMedia' style={{ width: '380px' }}>
+    <div className="divSocialMedia" style={{ width: '380px' }}>
       <Box
-        style={{
-          width: '100%',
-          height: '120px',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          marginLeft: 'auto',
-          marginRight: 'auto',
-          backgroundColor: '#3E3E3E',
-          borderRadius: '5px',
-          marginBottom: '4vh'
-        }}
+        className='boxSocialMedia'
       >
         <FontAwesomeIcon color="#fff" icon={faUserGroup} size="3x" />
       </Box>
-      {socialMedias.map((socialMedia) => (
-        <Section key={socialMedia.title} {...socialMedia} />
-      ))}
+      <DiscordConnect userContext={userContext} />
+      <TwitterConnect userContext={userContext} />
     </div>
   );
 };

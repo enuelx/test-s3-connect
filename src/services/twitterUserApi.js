@@ -34,5 +34,21 @@ export default {
     );
 
     return result.data;
+  },
+
+  async updateShareAuth({ token, shareAuth }) {
+    const result = await axiosInstance.post(
+      `${apiUrl}/shareAuth`,
+      {
+        shareAuth
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    );
+
+    return result.data;
   }
 };

@@ -4,11 +4,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faArrowRightFromBracket,
-  faCircleUser,
-  faCloud,
-  faGear,
-  faTrophy,
-  faWallet
+  faCircleUser
 } from '@fortawesome/free-solid-svg-icons';
 
 import ColliderMenu from './style/img/colliderMenu.png';

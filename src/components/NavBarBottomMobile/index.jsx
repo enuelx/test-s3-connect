@@ -1,5 +1,4 @@
 import { useContext, useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
 import { styled } from '@mui/material/styles';
 import {
   Box,
@@ -12,9 +11,6 @@ import {
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-  faWallet,
-  faGear,
-  faCloud,
   faRotate,
   faArrowRightFromBracket
 } from '@fortawesome/free-solid-svg-icons';
@@ -22,7 +18,7 @@ import {
 import { WalletData } from '@components';
 import { UserContext, ToastContext } from '@context';
 import { accountApi } from '@services';
-import { toastMessages } from '@utils';
+import { toastMessages, webAppPaths as paths } from '@utils';
 import './style.css';
 
 const drawerBleeding = 77;
@@ -49,27 +45,25 @@ const Puller = styled(Box)(() => ({
 }));
 
 function NavBarBottomMobile(props) {
-  const { window } = props;
   const { handleChangeMenu } = props;
-  const [open, setOpen] = useState(false);
-  let c = 1;
-  let urlPath = window !== undefined ? window.location.pathname : '';
 
-  if (urlPath === '/manual-verify') {
-    c = 2;
-  }
-  if (urlPath === '/account-settings') {
-    c = 3;
-  }
-  const [select, setSelect] = useState(c);
+  const userContext = useContext(UserContext);
+  const toastContext = useContext(ToastContext);
+
+  const [open, setOpen] = useState(false);
+
+  const urlPath = window.location.pathname;
+  const iconIndex = paths.map((e) => e.url).indexOf(urlPath);
+  const [select, setSelect] = useState(iconIndex);
+
   const toggleDrawer = () => {
     setOpen(!open);
   };
-  const userContext = useContext(UserContext);
-  const toastContext = useContext(ToastContext);
+
   const reloadUserDetailsHandler = () => {
     userContext.setUser(undefined);
   };
+
   const logoutHandler = async () => {
     await accountApi.logout(userContext.token);
     userContext.clear();
@@ -77,11 +71,14 @@ function NavBarBottomMobile(props) {
     toastContext.successMessage(toastMessages.success.LOGOUT);
     window.localStorage.setItem('logout', Date.now());
   };
+
   const container =
-    window !== undefined ? () => window().document.body : undefined;
+    window !== undefined ? () => window.document.body : undefined;
+
   useEffect(() => {
     handleChangeMenu(select);
   }, [select]);
+
   return (
     <>
       <Root className="blockMobile">
@@ -106,17 +103,10 @@ function NavBarBottomMobile(props) {
           }}
         >
           <StyledBox
+            className="styledBox"
             sx={{
-              position: 'absolute',
               top: -drawerBleeding,
-              borderTopLeftRadius: 8,
-              borderTopRightRadius: 8,
-              visibility: 'visible',
-              right: 0,
-              left: 0,
-              height: drawerBleeding,
-              display: 'flex',
-              justifyContent: 'center'
+              height: drawerBleeding
             }}
           >
             <Puller onClick={() => toggleDrawer(true)} />
@@ -129,107 +119,36 @@ function NavBarBottomMobile(props) {
             }}
           >
             <Grid container>
-              <Grid item xs={3}>
-                <Link
-                  to={{
-                    pathname: '/'
-                  }}
-                  className="linkMobile"
-                  style={{
-                    color: select === 1 ? '#FFF' : '#787878'
-                  }}
-                  onClick={() => {
-                    setSelect(1);
-                  }}
-                >
-                  <div
+              {paths.map((path, index) => (
+                <Grid key={path.url} item xs={12 / (paths.length + 1)}>
+                  <Link
+                    to={{
+                      pathname: path.url
+                    }}
+                    className="linkMobile"
                     style={{
-                      display: 'flex',
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                      flexDirection: 'column',
-                      height: 'auto',
-                      marginTop: '0.5vh',
-                      marginBottom: '0.5vh'
+                      color: select === index ? '#FFF' : '#787878'
+                    }}
+                    onClick={() => {
+                      setSelect(index);
                     }}
                   >
-                    <FontAwesomeIcon
-                      size="lg"
-                      icon={faCloud}
-                      style={{ marginLeft: 'auto', marginRight: 'auto' }}
-                    />
+                    <div className="divMenuOption">
+                      <FontAwesomeIcon
+                        size="lg"
+                        icon={path.icon}
+                        style={{ marginLeft: 'auto', marginRight: 'auto' }}
+                      />
 
-                    <p style={{ fontSize: '0.9rem' }}>Sync</p>
-                  </div>
-                </Link>
-              </Grid>
-              <Grid item xs={3}>
-                <Link
-                  to={{
-                    pathname: '/manual-verify'
-                  }}
-                  style={{
-                    color: select === 2 ? '#FFF' : '#787878'
-                  }}
-                  className="linkMobile"
-                  onClick={() => {
-                    setSelect(2);
-                  }}
-                >
-                  <div
-                    style={{
-                      display: 'flex',
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                      flexDirection: 'column',
-                      height: 'auto',
-                      marginTop: '0.5vh',
-                      marginBottom: '0.5vh'
-                    }}
-                  >
-                    <FontAwesomeIcon
-                      icon={faWallet}
-                      size="lg"
-                      style={{ marginLeft: 'auto', marginRight: 'auto' }}
-                    />
-                    <p style={{ fontSize: '0.9rem' }}>Add Wallet</p>
-                  </div>
-                </Link>
-              </Grid>
-              <Grid item xs={3}>
-                <Link
-                  to={{
-                    pathname: '/account-settings'
-                  }}
-                  className="linkMobile"
-                  style={{
-                    color: select === 3 ? '#FFF' : '#787878'
-                  }}
-                  onClick={() => {
-                    setSelect(3);
-                  }}
-                >
-                  <div
-                    style={{
-                      display: 'flex',
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                      flexDirection: 'column',
-                      height: 'auto',
-                      marginTop: '0.5vh',
-                      marginBottom: '0.5vh'
-                    }}
-                  >
-                    <FontAwesomeIcon
-                      style={{ marginLeft: 'auto', marginRight: 'auto' }}
-                      size="lg"
-                      icon={faGear}
-                    />
-                    <p style={{ fontSize: '0.9rem' }}>Settings</p>
-                  </div>
-                </Link>
-              </Grid>
-              <Grid item xs={3}>
+                      <p style={{ fontSize: '0.9rem', textAlign: 'center' }}>
+                        {path.text}
+                      </p>
+                    </div>
+                  </Link>
+                </Grid>
+              ))}
+
+              <Grid item xs={12 / (paths.length + 1)}>
                 {userContext.token && (
                   <div
                     style={{
@@ -257,7 +176,9 @@ function NavBarBottomMobile(props) {
                         size="lg"
                         icon={faArrowRightFromBracket}
                       />
-                      <p style={{ fontSize: '0.9rem' }}>Logout</p>
+                      <p style={{ fontSize: '0.9rem', textAlign: 'center' }}>
+                        Logout
+                      </p>
                     </div>
                   </div>
                 )}
@@ -285,9 +206,5 @@ function NavBarBottomMobile(props) {
     </>
   );
 }
-
-NavBarBottomMobile.propTypes = {
-  window: PropTypes.func
-};
 
 export default NavBarBottomMobile;

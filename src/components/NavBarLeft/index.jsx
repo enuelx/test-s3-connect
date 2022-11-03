@@ -17,15 +17,8 @@ import './style/style.css';
 import OpenItems from './menuItems/openItems';
 import CloseItems from './menuItems/closeItems';
 import { UserContext, ToastContext } from '@context';
-import { toastMessages } from '@utils';
+import { toastMessages, webAppPaths as paths } from '@utils';
 import { accountApi } from '@services';
-
-const paths = [
-  { url: '/', text: 'Sync', icon: faCloud },
-  { url: '/manual-verify', text: 'Add wallet manually', icon: faWallet },
-  { url: '/tournament', text: 'Tournament', icon: faTrophy },
-  { url: '/account-settings', text: 'Account settings', icon: faGear }
-];
 
 export const NavBarLeft = () => {
   const [open, setOpen] = useState(false);

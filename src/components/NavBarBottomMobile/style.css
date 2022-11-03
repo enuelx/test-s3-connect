@@ -4,9 +4,36 @@
   margin-right: auto;
   text-decoration: none !important;
 }
+
 .divBottom {
   display: none !important;
 }
+
+.blockMobile {
+  display: none !important;
+}
+
+.styledBox {
+  position: absolute;
+  border-top-left-radius: 8;
+  border-top-right-radius: 8;
+  visibility: visible;
+  right: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.divMenuOption {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: auto;
+  margin-top: 0.5vh;
+  margin-bottom: 0.5vh;
+}
+
 @media screen and (max-width: 850px) {
   .divBottom {
     position: fixed;
@@ -16,5 +43,9 @@
     align-items: center;
     justify-content: center;
     width: 100%;
+  }
+
+  .blockMobile {
+    display: block !important;
   }
 }

@@ -63,9 +63,7 @@ button {
 .textMobile {
   display: none !important;
 }
-.blockMobile {
-  display: none !important;
-}
+
 @media screen and (max-width: 850px) {
   .textNoMobile {
     display: none !important;
@@ -90,9 +88,6 @@ button {
   }
   .noneMobile {
     display: none !important;
-  }
-  .blockMobile {
-    display: block !important;
   }
 }
 

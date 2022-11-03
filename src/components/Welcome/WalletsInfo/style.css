@@ -10,14 +10,3 @@
 .divWalletInfo {
   width: 380px;
 }
-.divSocialMedia {
-  width: 380px;
-}
-@media screen and (max-width: 850px) {
-  .divWalletInfo {
-    margin-top: 6vh !important;
-  }
-  .divSocialMedia {
-    margin-top: 6vh !important;
-  }
-}

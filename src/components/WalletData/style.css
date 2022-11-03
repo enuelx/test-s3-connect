@@ -8,7 +8,16 @@
 .chipWallet .MuiChip-deleteIcon {
   color: #787878 !important;
 }
-
+.chipWalletNoLogin{
+  color: #787878 !important;
+  margin-top: 10px !important;
+  margin-right: 20px !important;
+  padding: 20px 5px 20px 5px !important;
+  font-size: 18px !important;
+}
+.chipWalletNoLogin .MuiChip-deleteIcon {
+  color: #787878 !important;
+}
 @media screen and (max-width: 850px) {
   .chipWallet {
     display: none !important;
@@ -24,5 +33,10 @@
   }
   .chipWalletMobile .MuiChip-label {
     color: #787878 !important;
+  }
+
+  .chipWalletNoLogin{
+    position:absolute!important;
+    left:10px!important;
   }
 }

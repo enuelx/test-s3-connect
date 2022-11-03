@@ -29,7 +29,13 @@ export const WalletData = ({ login, isMobile, fromTop }) => {
       <div>
         <Chip
           variant="outlined"
-          className={fromTop ? 'chipWallet' : 'chipWalletMobile'}
+          className={
+            isMobile
+              ? 'chipWalletMobile'
+              : login
+              ? 'chipWallet'
+              : 'chipWalletNoLogin'
+          }
           label={`${account.substring(0, 6)}...${account.substring(
             account.length - 6
           )}`}

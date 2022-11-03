@@ -56,7 +56,7 @@ export const TournamentPage = () => {
     <Container className="containerTournament">
       <Grid className="gridTournament">
         <div>
-          <Typography variant="h4">Tournament Challengers</Typography>
+          <Typography variant="h4">The Moshpit Tournament Challengers</Typography>
 
           <Typography sx={{ marginTop: '3vh' }}>
             Each Cypher you hodl gives you a tournament entry, meaning you can

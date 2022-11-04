@@ -22,3 +22,14 @@ input:-webkit-autofill:active {
 input:-webkit-autofill {
   -webkit-text-fill-color: antiquewhite;
 }
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: #333;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(120, 120, 120);
+}

@@ -4,3 +4,5 @@ export { default as discordUserApi } from './discordUserApi';
 export { default as shippingAddressApi } from './shippingAddressApi';
 export { default as emailApi } from './emailApi';
 export { default as filesService } from './filesService';
+export { default as challengersApi } from './challengersApi';
+export { default as twitterUserApi } from './twitterUserApi';

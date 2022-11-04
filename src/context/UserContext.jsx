@@ -4,11 +4,31 @@ const UserContext = createContext();
 
 const UserProvider = ({ children }) => {
   const [token, setToken] = useState(null);
-  const [user, setUser] = useState(undefined);
+  const [user, _setUser] = useState(undefined);
 
   function clear() {
     setToken(null);
-    setUser(undefined);
+    _setUser(undefined);
+  }
+
+  function setUser(newUser) {
+    if (!newUser) {
+      _setUser(newUser);
+    } else {
+      const wallets = newUser.wallets || [];
+      const cyphersHoldingAmount = newUser.wallets?.reduce(
+        (prev, { cypherHoldings }) => {
+          return prev + cypherHoldings.length;
+        },
+        0
+      );
+      const updatedUser = {
+        ...newUser,
+        wallets,
+        cyphersHoldingAmount
+      };
+      _setUser(updatedUser);
+    }
   }
 
   const value = {

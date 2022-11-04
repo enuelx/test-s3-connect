@@ -6,3 +6,7 @@
 .clickable:hover {
   color: #fff;
 }
+
+.divWalletInfo {
+  width: 380px;
+}

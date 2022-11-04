@@ -30,7 +30,7 @@ export const PasswordTextField = ({
           style={{ marginRight: '1vw', marginBottom: '1vh' }}
           color="antiquewhite"
           icon={faKey}
-          size="lg"
+          size={'lg'}
         />
         <TextField
           InputLabelProps={{
@@ -55,13 +55,27 @@ export const PasswordTextField = ({
               <InputAdornment position="end">
                 <IconButton onClick={() => setShowPassword(!showPassword)}>
                   {showPassword ? (
-                    <HideIcon sx={{ color: 'antiquewhite' }} />
+                    <HideIcon
+                      sx={{
+                        color: 'antiquewhite',
+                        height: '1em'
+                      }}
+                    />
                   ) : (
-                    <ShowIcon sx={{ color: 'antiquewhite' }} />
+                    <ShowIcon
+                      sx={{
+                        color: 'antiquewhite',
+                        height: '1em'
+                      }}
+                    />
                   )}
                 </IconButton>
                 <Tooltip
-                  sx={{ textTransform: 'none', color: 'antiquewhite' }}
+                  sx={{
+                    textTransform: 'none',
+                    color: 'antiquewhite',
+                    height: '1em'
+                  }}
                   arrow
                   placement="right"
                   describeChild
@@ -74,7 +88,12 @@ export const PasswordTextField = ({
                     </span>
                   }
                 >
-                  <InfoIcon />
+                  <InfoIcon
+                    sx={{
+                      color: 'antiquewhite',
+                      height: '1em'
+                    }}
+                  />
                 </Tooltip>
               </InputAdornment>
             )

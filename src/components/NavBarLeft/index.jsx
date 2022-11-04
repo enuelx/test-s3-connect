@@ -4,11 +4,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faArrowRightFromBracket,
-  faCircleUser,
-  faCloud,
-  faGear,
-  faWallet,
-  faImage
+  faCircleUser
 } from '@fortawesome/free-solid-svg-icons';
 
 import ColliderMenu from './style/img/colliderMenu.png';
@@ -17,15 +13,8 @@ import './style/style.css';
 import OpenItems from './menuItems/openItems';
 import CloseItems from './menuItems/closeItems';
 import { UserContext, ToastContext } from '@context';
-import { toastMessages } from '@utils';
+import { toastMessages, webAppPaths as paths } from '@utils';
 import { accountApi } from '@services';
-
-const paths = [
-  { url: '/', text: 'Sync', icon: faCloud },
-  { url: '/gallery', text: 'Gallery', icon: faImage },
-  { url: '/manual-verify', text: 'Add wallet manually', icon: faWallet },
-  { url: '/account-settings', text: 'Account settings', icon: faGear }
-];
 
 export const NavBarLeft = () => {
   const [open, setOpen] = useState(false);
@@ -47,11 +36,13 @@ export const NavBarLeft = () => {
   }, []);
   return (
     <Drawer
+      className="noneMobile"
       variant="permanent"
-      sx={{ height: '100%' }}
+      sx={{ height: '100% !important' }}
       PaperProps={{
         sx: {
-          backgroundColor: '#3E3E3E'
+          backgroundColor: '#3E3E3E',
+          height: '100% !important'
         }
       }}
       open={open}

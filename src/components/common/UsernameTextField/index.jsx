@@ -12,7 +12,7 @@ export const UsernameTextField = ({ username, setUsername }) => {
           style={{ marginRight: '1vw', marginBottom: '1vh' }}
           color="antiquewhite"
           icon={faUserAstronaut}
-          size="lg"
+          size={'lg'}
         />
 
         <TextField
@@ -37,13 +37,21 @@ export const UsernameTextField = ({ username, setUsername }) => {
             endAdornment: (
               <InputAdornment position="end">
                 <Tooltip
-                  sx={{ color: 'antiquewhite' }}
+                  sx={{
+                    color: 'antiquewhite',
+                    height: '1em'
+                  }}
                   arrow
                   placement="right"
                   describeChild
                   title="Username must be at least 4 characters long"
                 >
-                  <InfoIcon />
+                  <InfoIcon
+                    sx={{
+                      color: 'antiquewhite',
+                      height: '1em'
+                    }}
+                  />
                 </Tooltip>
               </InputAdornment>
             )

@@ -3,10 +3,12 @@ import { useWeb3React } from '@web3-react/core';
 import { Chip } from '@mui/material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faWallet } from '@fortawesome/free-solid-svg-icons';
+
 import WalletModal from './WalletModal';
 import { connectors } from '@config/web3';
+import './style.css';
 
-export const WalletData = ({ login }) => {
+export const WalletData = ({ login, isMobile, fromTop }) => {
   const { active, activate, account, deactivate } = useWeb3React();
 
   const connectMetamask = useCallback(() => {
@@ -27,16 +29,13 @@ export const WalletData = ({ login }) => {
       <div>
         <Chip
           variant="outlined"
-          sx={{
-            color: '#787878',
-            marginTop: '10px',
-            marginRight: '20px',
-            padding: '20px 5px 20px 5px',
-            fontSize: '18px',
-            '& .MuiChip-deleteIcon': {
-              color: '#787878'
-            }
-          }}
+          className={
+            isMobile
+              ? 'chipWalletMobile'
+              : login
+              ? 'chipWallet'
+              : 'chipWalletNoLogin'
+          }
           label={`${account.substring(0, 6)}...${account.substring(
             account.length - 6
           )}`}
@@ -47,7 +46,7 @@ export const WalletData = ({ login }) => {
     </div>
   ) : (
     <div>
-      <WalletModal login={login} />
+      <WalletModal fromTop={fromTop} isMobile={isMobile} login={login} />
     </div>
   );
 };

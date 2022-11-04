@@ -15,7 +15,8 @@ const success = Object.freeze({
   VALIDATION_FINISHED: 'Validation finished! Go check your wallets',
   WALLET_ASSOCIATED: "Wallet associated! How 'bout a crisp high-five!",
   WALLET_REMOVED: 'Wallet removed successfully! Cheers.',
-  WALLET_MAIN_SET: "Ok, that's your main wallet now!"
+  WALLET_MAIN_SET: "Ok, that's your main wallet now!",
+  TWITTER_LINK_SUCCESS: 'Twitter account linked successfully!'
 });
 
 const error = Object.freeze({
@@ -32,7 +33,9 @@ const error = Object.freeze({
     "Damn. There's been an error removing your wallet. Try again?",
   WALLET_NOT_ASSOCIATED:
     'Oops! Looks like this wallet is not associated to this account',
-  WRONG_PASSWORD: "That's not your password"
+  WRONG_PASSWORD: "That's not your password",
+  TWITTER_LINK_INVALID:
+    'Something is not quite right with twitter, try again later.'
 });
 
 export default {

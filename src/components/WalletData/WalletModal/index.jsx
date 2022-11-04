@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import {
+  Button,
   Dialog,
   DialogTitle,
   List,
@@ -9,6 +10,8 @@ import {
   ListItemText
 } from '@mui/material';
 import { UnsupportedChainIdError, useWeb3React } from '@web3-react/core';
+import { faWallet } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { connectors } from '@config/web3';
 
@@ -17,7 +20,7 @@ import { CustomButton } from '@components/common';
 import MetamaskLogo from './img/MetaMask.png';
 import WalletConnectLogo from './img/WalletConnect.png';
 
-export default ({ login }) => {
+export default ({ login, isMobile, fromTop }) => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -40,7 +43,23 @@ export default ({ login }) => {
 
   return (
     <div>
-      <CustomButton login={login} text="Connect Wallet" onClick={handleOpen} />
+      {isMobile ? (
+        <Button variant="contained" onClick={handleOpen}>
+          <FontAwesomeIcon
+            size="lg"
+            icon={faWallet}
+            style={{ marginRight: '1vh' }}
+          />
+          {'Connect Wallet'}
+        </Button>
+      ) : (
+        <CustomButton
+          fromTop={fromTop}
+          login={login}
+          text="Connect Wallet"
+          onClick={handleOpen}
+        />
+      )}
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Choose your wallet</DialogTitle>
         <List>

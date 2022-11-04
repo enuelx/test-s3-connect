@@ -10,5 +10,7 @@ export { VerifyEmail } from './VerifyEmail';
 export { ForgotPassword } from './ForgotPassword';
 export { ResetPassword } from './ResetPassword';
 export { Gallery } from './Gallery';
+export { TournamentPage } from './TournamentPage';
+export { AssociateTwitterPage } from './AssociateTwitterPage';
 
 export * from './common';

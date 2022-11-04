@@ -1,7 +1,14 @@
 import { useEffect, useState } from 'react';
-import { Box, Container, Grid, Step, StepLabel, Stepper } from '@mui/material';
+import {
+  Box,
+  Container,
+  createTheme,
+  Grid,
+  Step,
+  StepLabel,
+  Stepper
+} from '@mui/material';
 import styled from '@emotion/styled';
-import { createTheme } from '@mui/material';
 import { ThemeProvider } from '@emotion/react';
 
 import ManualVerify from './ManualVerify';
@@ -12,6 +19,7 @@ import {
   WALLET_A,
   WALLET_B
 } from './style/icons';
+import './style.css';
 
 const theme = createTheme({
   typography: { fontSize: 17 }
@@ -53,19 +61,16 @@ export const ManualVerifyPage = () => {
     }
     return;
   };
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    if (document.body.clientWidth < 850) {
+      setIsMobile(true);
+    }
+  }, []);
   useEffect(() => {}, [stepState]);
   return (
-    <Container className="backgroundContainer">
-      <Grid
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          flexWrap: 'wrap',
-          paddingTop: '20vh',
-          marginLeft: '23vw'
-        }}
-      >
+    <Container className="containerChangePass">
+      <Grid className="gridWalletStep">
         <div style={{ width: '800px' }}>
           <Box
             style={{
@@ -111,8 +116,6 @@ export const ManualVerifyPage = () => {
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
-                marginLeft: 'auto',
-                marginRight: 'auto',
                 marginTop: '5vh'
               }}
             >

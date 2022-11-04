@@ -1,7 +1,7 @@
 import { useState, useContext } from 'react';
 import { Dialog, Box, Typography, Divider, Button } from '@mui/material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye } from '@fortawesome/free-solid-svg-icons';
+import { faCirclePlus } from '@fortawesome/free-solid-svg-icons';
 import { ThemeProvider } from '@emotion/react';
 
 import { UserContext, ToastContext } from '@context';
@@ -32,15 +32,7 @@ export default () => {
 
   return (
     <>
-      <Box
-        style={{
-          textAlign: 'center',
-          marginTop: '4vh',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'left'
-        }}
-      >
+      <Box>
         <ThemeProvider theme={grayButton}>
           <Button
             sx={{
@@ -56,14 +48,14 @@ export default () => {
             }}
             onClick={handleOpen}
           >
-            <FontAwesomeIcon icon={faEye} size="lg" />
+            <FontAwesomeIcon icon={faCirclePlus} size="lg" />
             <Typography
               style={{
                 fontSize: '18px',
-                marginLeft: '1vw'
+                marginLeft: '0.7vw'
               }}
             >
-              Connect discord account
+              Connect Discord account
             </Typography>
           </Button>
         </ThemeProvider>

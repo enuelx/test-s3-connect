@@ -11,7 +11,7 @@ import {
 import { ThemeProvider } from '@emotion/react';
 import { grayButton } from '@themes';
 import { toastMessages } from '@utils';
-
+import './style.css';
 export default ({
   formActionName,
   submitCallback,
@@ -22,7 +22,8 @@ export default ({
   web3 = false,
   disableWeb3,
   handleWeb3Login,
-  widthButtonBox
+  widthButtonBox,
+  isMobile
 }) => {
   const navigate = useNavigate();
 
@@ -106,17 +107,11 @@ export default ({
             disabled={isSubmitting}
             variant="contained"
             onClick={handleSubmit}
-            sx={{
-              //marginTop: margin,
-              width: '182px',
-              background: 'none',
-
-              border: 'solid 1px',
-              ':hover': {
-                bgcolor: '#787878', // theme.palette.primary.main
-                color: 'white'
-              }
-            }}
+            className={
+              formActionName === 'Create Account'
+                ? 'accountButton'
+                : 'loginButton'
+            }
           >
             {formActionName}
           </Button>
@@ -127,17 +122,10 @@ export default ({
                 variant="contained"
                 disabled={disableWeb3}
                 onClick={handleWeb3Submit}
-                sx={{
-                  width: '182px',
-                  border: 'solid 1px',
-                  background: 'none',
-                  ':hover': {
-                    bgcolor: '#787878', // theme.palette.primary.main
-                    color: 'white'
-                  }
-                }}
+                className="web3Button"
               >
-                Web3 Login
+                <span className="textMobile">Web3</span>
+                <span className="textNoMobile">Web3 Login</span>
               </Button>
             </ThemeProvider>
           )}

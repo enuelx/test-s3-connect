@@ -73,7 +73,8 @@ export default ({ userContext }) => {
                 color: '#787878'
               }}
             >
-              I accept that collider uses my twitter username
+              I authorize Collider Craftworks to share a link to my Twitter
+              profile on their website.
             </Typography>
           </div>
         )}

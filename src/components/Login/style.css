@@ -23,8 +23,9 @@
   max-width: 85%;
   right: 0;
   top: 0;
-  object-fit: 'cover';
+  object-fit: cover;
 }
+
 .loginMobile {
   width: 500px !important;
   position: absolute !important;
@@ -32,19 +33,23 @@
   left: 0px !important;
   margin-left: 7.7vw !important;
 }
+
 .boxContenedorFormLogin {
   margin-left: 10vw;
 }
+
 .textLogin {
   color: white !important;
   margin-top: 30px !important;
   text-decoration: none !important;
 }
+
 .textLoginForgot {
   color: white !important;
   margin-top: 30px !important;
   text-decoration: none !important;
 }
+
 @media screen and (max-width: 1300px) {
   .imgLogin {
     width: 150vw !important;
@@ -52,11 +57,13 @@
     position: fixed !important;
   }
 }
+
 @media screen and (max-width: 850px) {
   .textLoginForgot {
     display: none;
   }
 }
+
 @media screen and (max-width: 768px) {
   .imgLogin {
     width: 150vw !important;
@@ -103,6 +110,7 @@
     display: none;
   }
 }
+
 @media screen and (min-width: 319px) and (max-width: 424px) {
   .boxContenedorFormLogin {
     margin-left: 4vw;
@@ -117,6 +125,7 @@
     object-fit: cover !important;
   }
 }
+
 @media screen and (max-width: 768px) and (min-width: 560px) {
   .imgLogin {
     width: 150vw !important;

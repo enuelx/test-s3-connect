@@ -113,9 +113,11 @@ function NavBarBottomMobile(props) {
           </StyledBox>
           <StyledBox
             sx={{
-              pb: 2,
-              height: '100%',
-              overflow: 'auto'
+              marginTop: '-20px',
+              pb: 3,
+              height: '120%',
+              overflow: 'auto',
+              zIndex: 1
             }}
           >
             <Grid container>

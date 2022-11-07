@@ -179,9 +179,8 @@ export const TournamentPage = () => {
                   }
                 }}
                 disabled={
-                  true
-                  // userContext.user?.challengers?.length >=
-                  // userContext.user?.cyphersHoldingAmount
+                  userContext.user?.challengers?.length >=
+                  userContext.user?.cyphersHoldingAmount
                 }
                 onClick={submitAddChallenger}
               >

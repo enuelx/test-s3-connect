@@ -50,6 +50,7 @@ const ToastProvider = ({ children }) => {
           onClose={handleToastClose}
           autoHideDuration={5000}
           style={{
+            zIndex: 999999999999,
             marginLeft: openNavBarLeft.login
               ? openNavBarLeft.open
                 ? '23vw'

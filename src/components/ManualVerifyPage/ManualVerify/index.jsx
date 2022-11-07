@@ -22,7 +22,7 @@ import manualValidationStatus from './manualValidationStatus';
 import { ThemeProvider } from '@emotion/react';
 import { grayButton, whiteButton, grayButtonVerify } from '@themes';
 import { toastMessages } from '@utils';
-
+import './style.css';
 const ManualVerify = ({ stepState, setStepState }) => {
   const userContext = useContext(UserContext);
   const toastContext = useContext(ToastContext);
@@ -120,16 +120,14 @@ const ManualVerify = ({ stepState, setStepState }) => {
     <Loader />
   ) : stepState === 1 ? (
     <Box style={{ marginTop: '3vh' }}>
-      <Typography style={{ color: 'rgb(120, 120, 120)' }}>
+      <Typography>
         Please transfer a Cypher NFT from the verified wallet (A) to the wallet
         you want to verify (B).
         <br /> You’ll need to use your favorite platform or marketplace to make
         this transfer. The Accounts System DOES NOT make these transfers, just
         tracks them in the blockchain to verify your wallet.
       </Typography>
-      <Typography style={{ color: 'rgb(120, 120, 120)', marginTop: '2vh' }}>
-        From:
-      </Typography>
+      <Typography style={{ marginTop: '2vh' }}>From:</Typography>
       <Box
         style={{
           border: '1px solid rgb(120, 120, 120)',
@@ -148,9 +146,7 @@ const ManualVerify = ({ stepState, setStepState }) => {
         </Typography>
       </Box>
 
-      <Typography style={{ color: 'rgb(120, 120, 120)', marginTop: '2vh' }}>
-        To:
-      </Typography>
+      <Typography style={{ marginTop: '2vh' }}>To:</Typography>
       <Box
         style={{
           border: '1px solid rgb(120, 120, 120)',
@@ -219,16 +215,14 @@ const ManualVerify = ({ stepState, setStepState }) => {
     </Box>
   ) : stepState === 2 ? (
     <Box style={{ marginTop: '3vh' }}>
-      <Typography style={{ color: 'rgb(120, 120, 120)' }}>
+      <Typography>
         Now, please transfer the Cypher NFT from the wallet to verify (B) back
         to the original wallet (A).
         <br /> You’ll need to use your favorite platform or marketplace to make
         this transfer. The Accounts System DOES NOT make these transfers, just
         tracks them in the blockchain to verify your wallet.
       </Typography>
-      <Typography style={{ color: 'rgb(120, 120, 120)', marginTop: '2vh' }}>
-        From:
-      </Typography>
+      <Typography style={{ marginTop: '2vh' }}>From:</Typography>
       <Box
         style={{
           border: '1px solid rgb(120, 120, 120)',
@@ -246,9 +240,7 @@ const ManualVerify = ({ stepState, setStepState }) => {
           {manualValidation?.toVerifyWallet}
         </Typography>
       </Box>
-      <Typography style={{ color: 'rgb(120, 120, 120)', marginTop: '2vh' }}>
-        Back to:
-      </Typography>
+      <Typography style={{ marginTop: '2vh' }}>Back to:</Typography>
       <Box
         style={{
           border: '1px solid rgb(120, 120, 120)',
@@ -318,10 +310,13 @@ const ManualVerify = ({ stepState, setStepState }) => {
     </Box>
   ) : stepState === 3 ? (
     <Box style={{ marginTop: '3vh' }}>
-      <Typography style={{ color: 'rgb(120, 120, 120)' }}>
+      <Typography
+        className="typhoWalletStep3"
+      >
         Congrats, wallet verified, check it in your wallets section
       </Typography>
       <Box
+        className="typhoWalletApprovedStep3"
         style={{
           border: '1px solid #fff',
           marginTop: '4vh',
@@ -357,7 +352,7 @@ const ManualVerify = ({ stepState, setStepState }) => {
     </Box>
   ) : (
     <Box>
-      <Typography style={{ color: 'rgb(120, 120, 120)' }}>
+      <Typography>
         This option allows you to associate additional wallets to your account
         without having to sign a transaction with us. Keep in mind you need at
         least one wallet already verified (i.e.: A hot wallet with a Cypher). To
@@ -366,7 +361,7 @@ const ManualVerify = ({ stepState, setStepState }) => {
       </Typography>
       <br />
       <Box component="form">
-        <Typography style={{ color: 'rgb(120, 120, 120)' }}>
+        <Typography>
           Select the wallet from where you will move your cypher
         </Typography>
         <FormControl
@@ -413,7 +408,7 @@ const ManualVerify = ({ stepState, setStepState }) => {
               })}
           </Select>
         </FormControl>
-        <Typography style={{ color: 'rgb(120, 120, 120)', marginTop: '2vh' }}>
+        <Typography style={{ marginTop: '2vh' }}>
           Enter the wallet you want to validate
         </Typography>
         <FormControl style={{ marginTop: '2vh' }} fullWidth>
@@ -448,6 +443,7 @@ const ManualVerify = ({ stepState, setStepState }) => {
           <Button
             style={{
               marginTop: '4vh',
+              marginBottom: '2vh',
               backgroundColor: '#3E3E3E',
               borderRadius: '0px 10px 0px 10px'
             }}

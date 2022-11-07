@@ -1,5 +1,5 @@
 .App {
-  text-align: center;
+  color: rgb(120, 120, 120);
 }
 
 .App-logo {
@@ -39,4 +39,76 @@
 
 button {
   font-size: calc(10px + 2vmin);
+}
+.divApp {
+  position: absolute;
+  bottom: 50px;
+  right: 50px;
+}
+.holdings {
+  margin-top: 2vh;
+  background-color: #3e3e3e;
+  width: 250px;
+  height: 32px;
+  color: #787878;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0px 10px 0px 10px;
+}
+.textNoMobile {
+  display: block !important;
+}
+.textMobile {
+  display: none !important;
+}
+
+@media screen and (max-width: 850px) {
+  .textNoMobile {
+    display: none !important;
+  }
+  .textMobile {
+    display: block !important;
+  }
+
+  .divApp {
+    top: 0 !important;
+    display: flex !important;
+    right: 5vw !important;
+    justify-content: space-between;
+    width: 80%;
+    height: 110px;
+  }
+  .buttonWallet {
+    font-size: xx-small !important;
+    width: 174px !important;
+    position: absolute !important;
+    left: 10px !important;
+  }
+  .noneMobile {
+    display: none !important;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .holdings {
+    margin-top: 2vh;
+    background-color: #3e3e3e;
+    width: 120px;
+    height: 40px;
+    color: #787878;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0px 10px 0px 10px;
+  }
+}
+
+@media screen and (max-width: 560px) {
+  .boxContenedorForm {
+    margin-right: 42.5px;
+    margin-top: -140px;
+  }
 }

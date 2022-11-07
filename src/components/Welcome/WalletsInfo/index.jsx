@@ -100,7 +100,7 @@ const WelcomeWalletsInfo = ({ userContext, toastContext }) => {
   };
 
   return (
-    <div style={{ width: '380px' }}>
+    <div className="divWalletInfo">
       <Box
         style={{
           width: '100%',
@@ -244,7 +244,7 @@ const WelcomeWalletsInfo = ({ userContext, toastContext }) => {
       <Box
         style={{
           textAlign: 'center',
-          marginTop: '4vh',
+          marginTop: '3vh',
           display: 'flex',
           alignItems: 'center',
           justifyContent: wallets.length > 0 ? '' : 'left'
@@ -257,11 +257,12 @@ const WelcomeWalletsInfo = ({ userContext, toastContext }) => {
           <ThemeProvider theme={grayButton}>
             <Button
               onClick={
-                !active || isUnsupportedChain ? () => { } : associateWallet
+                !active || isUnsupportedChain ? () => {} : associateWallet
               }
               disabled={!active || isUnsupportedChain}
               sx={{
                 background: 'transparent',
+                marginTop: '1vh',
                 paddingTop: '1vh',
                 border: 'solid 1px',
                 alignSelf: 'baseline',

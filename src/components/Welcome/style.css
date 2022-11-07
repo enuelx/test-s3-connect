@@ -1,0 +1,25 @@
+.classContainerWelcome {
+  background-color: #252525;
+  width: auto;
+  height: auto;
+  min-height: 100vh;
+  min-width: 100vw;
+}
+.gridWelcome {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding-top: 13vh;
+  margin-left: 25vw;
+  width: 52vw;
+}
+@media screen and (max-width: 850px) {
+  .gridWelcome {
+    display: flex;
+    justify-content: center;
+    padding-top: 50px;
+    width: auto;
+    margin-left: 0;
+    padding-bottom: 110px;
+  }
+}

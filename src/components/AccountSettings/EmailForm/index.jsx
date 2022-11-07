@@ -77,7 +77,7 @@ export const EmailForm = () => {
           Verify your email
         </Typography>
       </Box>
-      <Box style={{ marginTop: '4vh', width: '100%' }}>
+      <Box style={{ marginTop: '3vh', width: '100%' }}>
         <FormControl style={{ width: '100%' }}>
           <TextField
             label="Email"

@@ -1,4 +1,4 @@
-import { useContext, useCallback, useEffect } from 'react';
+import { useContext, useCallback, useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { Tooltip } from '@mui/material';
 
@@ -15,14 +15,29 @@ import {
   ResetPassword,
   VerifyEmail,
   NavBarLeft,
-  ManualVerifyPage
+  ManualVerifyPage,
+  TournamentPage,
+  AssociateTwitterPage
 } from '@components';
 import { InfoOutlined as InfoIcon } from '@mui/icons-material';
-
-import '@style/style.css';
+import './App.css';
+import NavBarBottomMobile from './components/NavBarBottomMobile';
 
 function App() {
   const userContext = useContext(UserContext);
+  const [isMobile, setIsMobile] = useState(false);
+  const [menu, setMenu] = useState(null);
+  const [textMenu, setTextMenu] = useState('');
+
+  useEffect(() => {
+    if (document.body.clientWidth < 850) {
+      setIsMobile(true);
+    }
+  }, []);
+
+  const handleChangeMenu = (index) => {
+    setMenu(index);
+  };
 
   const getAccountDetails = useCallback(async () => {
     try {
@@ -47,6 +62,18 @@ function App() {
       getAccountDetails();
     }
   }, [userContext.user, getAccountDetails]);
+
+  useEffect(() => {
+    if (menu) {
+      setTextMenu(
+        menu === 1
+          ? 'Dashboard'
+          : menu === 2
+          ? 'Manually Sync'
+          : 'Account Settings'
+      );
+    }
+  }, [menu]);
 
   const verifyAccount = useCallback(async () => {
     try {
@@ -80,31 +107,30 @@ function App() {
       window.removeEventListener('storage', syncLogout);
     };
   }, [syncLogout]);
-  const wallets = userContext.user?.wallets || [];
+
   return (
-    <div>
+    <div className="App">
       {userContext.token && <NavBarLeft />}
       {<NavBarTop />}
       {userContext.token && (
-        <div style={{ position: 'absolute', bottom: 50, right: 50 }}>
-          <div
-            style={{
-              marginTop: '2vh',
-              backgroundColor: '#3E3E3E',
-              width: '250px',
-              height: '32px',
-              color: '#787878',
-              textAlign: 'center',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              borderRadius: '0px 10px 0px 10px'
-            }}
-          >
-            Cyphers Hodling:{' '}
-            {wallets.reduce((prev, { cypherHoldings }) => {
-              return prev + cypherHoldings.length;
-            }, 0)}
+        <NavBarBottomMobile handleChangeMenu={handleChangeMenu} />
+      )}
+
+      {userContext.token && (
+        <div className="divApp">
+          <div className="textMobile">
+            <h3 style={{ color: 'rgb(120, 120, 120)' }}>
+              Hi {userContext?.user?.username}
+              <br></br>
+              <span style={{ color: '#fff', fontSize: '1.3rem' }}>
+                {textMenu}
+              </span>
+            </h3>
+          </div>
+
+          <div className="holdings">
+            {isMobile ? 'Hodling:' : 'Cyphers Hodling:'}
+            {userContext.user?.cyphersHoldingAmount}
             <Tooltip
               arrow
               placement="top"
@@ -128,7 +154,9 @@ function App() {
         ) : userContext.token ? (
           <>
             <Route path="manual-verify" element={<ManualVerifyPage />} />
+            <Route path="tournament" element={<TournamentPage />} />
             <Route path="account-settings" element={<AccountSettings />} />
+            <Route path="twitter/login" element={<AssociateTwitterPage />} />
             <Route path="*" element={<Welcome />} />
           </>
         ) : (

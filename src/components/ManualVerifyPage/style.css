@@ -1,0 +1,31 @@
+.containerChangePass {
+  background-color: #252525;
+  width: auto;
+  height: auto;
+  min-height: 100vh;
+  min-width: 100vw;
+  padding-left: 18vw !important;
+}
+.gridWalletStep {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  padding-top: 20vh;
+  margin-left: 10vw;
+}
+@media screen and (max-width: 850px) {
+  .gridWalletStep {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 20vh;
+    margin-left: 10vw !important;
+    width: 75vw !important ;
+    padding-bottom: 100px;
+  }
+  .containerChangePass {
+    display: flex !important;
+    padding-left: 0 !important;
+  }
+}

@@ -12,5 +12,6 @@ export { ResetPassword } from './ResetPassword';
 export { Gallery } from './Gallery';
 export { TournamentPage } from './TournamentPage';
 export { AssociateTwitterPage } from './AssociateTwitterPage';
+export { NavBarBottomMobile } from './NavBarBottomMobile';
 
 export * from './common';

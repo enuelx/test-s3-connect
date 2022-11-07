@@ -44,9 +44,7 @@ const Puller = styled(Box)(() => ({
   marginBottom: 5
 }));
 
-function NavBarBottomMobile(props) {
-  const { handleChangeMenu } = props;
-
+export const NavBarBottomMobile = ({ handleChangeMenu }) => {
   const userContext = useContext(UserContext);
   const toastContext = useContext(ToastContext);
 
@@ -207,6 +205,4 @@ function NavBarBottomMobile(props) {
       </div>
     </>
   );
-}
-
-export default NavBarBottomMobile;
+};

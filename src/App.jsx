@@ -19,11 +19,10 @@ import {
   Gallery,
   ManualVerifyPage,
   TournamentPage,
-  AssociateTwitterPage
+  AssociateTwitterPage,
+  NavBarBottomMobile
 } from '@components';
-import { InfoOutlined as InfoIcon } from '@mui/icons-material';
 import './App.css';
-import NavBarBottomMobile from './components/NavBarBottomMobile';
 
 function App() {
   const userContext = useContext(UserContext);

@@ -65,7 +65,12 @@ export default () => {
         open={open}
         onClose={handleClose}
         PaperProps={{
-          sx: { width: '60%', height: '30%', backgroundColor: '#3E3E3E' }
+          sx: {
+            width: 'fit-content',
+            height: 'fit-content',
+            paddingBottom: '2vh',
+            backgroundColor: '#3E3E3E'
+          }
         }}
       >
         <Box style={{ textAlign: 'center' }}>

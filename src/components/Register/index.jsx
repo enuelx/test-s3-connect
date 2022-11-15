@@ -3,10 +3,7 @@ import { Link } from 'react-router-dom';
 
 import { accountApi } from '@services';
 import { AccountForm } from '@components';
-import {
-  registerBackground as background,
-  createAccountText
-} from './style/img';
+import { createAccountText, cypherChosen } from './style/img';
 import textLogin from '../../style/img/textLogin.png';
 import { useEffect, useState } from 'react';
 import './style.css';
@@ -19,25 +16,9 @@ export const Register = () => {
     }
   }, []);
   return (
-    <Container
-      sx={{
-        marginLeft: '0px',
-        marginRight: '0px',
-        height: 'auto',
-        minHeight: '100vh',
-        minWidth: '100vw',
-        position: 'absolute',
-        left: 0,
-        top: 0,
-        backgroundRepeat: 'no-repeat!important',
-        objectFit: 'cover!important',
-        background: `linear-gradient(90deg, #2a2d23, #6d705e)`,
-        overflowX: 'hidden',
-        overflowY: 'hidden'
-      }}
-    >
+    <Container className="mainContainer">
       <Box>
-        <img className="imgRegister" src={background} alt="" />
+        <img className="imgRegister" src={cypherChosen} alt="" />
       </Box>
       <img className="imgTextRegister" src={textLogin} alt="" />
       <img className="imgTextRegister2" src={createAccountText} alt="" />

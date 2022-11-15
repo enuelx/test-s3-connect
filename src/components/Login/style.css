@@ -9,12 +9,7 @@
   top: 0px;
   background-repeat: no-repeat !important;
   object-fit: cover !important;
-  background: radial-gradient(
-    circle at center,
-    #460036 0,
-    #200017,
-    #18000ee8 80%
-  );
+  background-image: url('../../style/img/bgMoshpit.png');
 }
 .imgLogin {
   position: absolute;

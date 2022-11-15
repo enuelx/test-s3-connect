@@ -42,13 +42,7 @@
 
 @media screen and (max-width: 560px) {
   .imgRegister {
-    position: absolute !important;
-    width: 140% !important;
-    height: 100% !important;
-    object-fit: cover !important;
-    right: 0px !important;
-    max-width: 165% !important;
-    bottom: 0px !important;
+    display: none;
   }
   .imgTextRegister {
     width: 300px !important;

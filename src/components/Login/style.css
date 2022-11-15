@@ -9,13 +9,9 @@
   top: 0px;
   background-repeat: no-repeat !important;
   object-fit: cover !important;
-  background: radial-gradient(
-    circle at center,
-    #460036 0,
-    #200017,
-    #18000ee8 80%
-  );
+  background-image: url('../../style/img/bgMoshpit.png');
 }
+
 .imgLogin {
   position: absolute;
   width: 100%;
@@ -50,26 +46,9 @@
   text-decoration: none !important;
 }
 
-@media screen and (max-width: 1300px) {
-  .imgLogin {
-    width: 150vw !important;
-    max-width: 150vh !important;
-    position: fixed !important;
-  }
-}
-
 @media screen and (max-width: 850px) {
   .textLoginForgot {
     display: none;
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .imgLogin {
-    width: 150vw !important;
-    max-width: 150vh !important;
-    position: fixed !important;
-    right: -200px !important;
   }
 }
 
@@ -78,19 +57,16 @@
     margin-right: 42.5px;
     margin-top: -140px;
   }
+
   .boxPrincipalLogin {
     width: 432px !important;
     position: fixed !important;
   }
+
   .imgLogin {
-    position: absolute !important;
-    width: 700px !important;
-    height: 100% !important;
-    max-width: 160% !important;
-    right: -50px !important;
-    top: 0px !important;
-    object-fit: cover !important;
+    display: none;
   }
+
   .loginMobile {
     width: 300px !important;
     position: absolute !important;
@@ -102,10 +78,12 @@
   .formularioLogin {
     margin-top: 300px !important;
   }
+
   .textLogin {
     font-size: initial !important;
     margin-top: 10px !important;
   }
+
   .textLoginForgot {
     display: none;
   }
@@ -114,23 +92,5 @@
 @media screen and (min-width: 319px) and (max-width: 424px) {
   .boxContenedorFormLogin {
     margin-left: 4vw;
-  }
-  .imgLogin {
-    position: absolute !important;
-    width: 700px !important;
-    height: 100% !important;
-    max-width: 160% !important;
-    right: 10px !important;
-    top: 0px !important;
-    object-fit: cover !important;
-  }
-}
-
-@media screen and (max-width: 768px) and (min-width: 560px) {
-  .imgLogin {
-    width: 150vw !important;
-    max-width: 150vh !important;
-    position: fixed !important;
-    right: -200px !important;
   }
 }

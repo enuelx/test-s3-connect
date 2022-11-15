@@ -1,3 +1,19 @@
+.mainContainer {
+  margin-left: 0px;
+  margin-right: 0px;
+  height: auto;
+  min-height: 100vh;
+  min-width: 100vw;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background-repeat: no-repeat !important;
+  object-fit: cover !important;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  background-image: url('../../style/img/bgMoshpit.png');
+}
+
 .imgRegister {
   position: absolute;
   width: 100%;
@@ -7,6 +23,7 @@
   max-width: 85%;
   bottom: 0px;
 }
+
 .imgTextRegister {
   width: 500px;
   position: absolute;
@@ -14,6 +31,7 @@
   left: 0px;
   margin-left: 7.7vw;
 }
+
 .imgTextRegister2 {
   width: 300px;
   position: absolute;
@@ -21,15 +39,10 @@
   left: 59px;
   margin-left: 7.7vw;
 }
+
 @media screen and (max-width: 560px) {
   .imgRegister {
-    position: absolute !important;
-    width: 140% !important;
-    height: 100% !important;
-    object-fit: cover !important;
-    right: 0px !important;
-    max-width: 165% !important;
-    bottom: 0px !important;
+    display: none;
   }
   .imgTextRegister {
     width: 300px !important;

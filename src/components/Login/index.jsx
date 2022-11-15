@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import { UserContext, ToastContext } from '@context';
 import { accountApi, walletApi } from '@services';
 import { AccountForm } from '@components';
-import background from './style/img/loginBackground.png';
+import background from './style/img/cypherOutlaw.png';
 import textLogin from '../../style/img/textLogin.png';
 import { toastMessages } from '@utils';
 import './style.css';

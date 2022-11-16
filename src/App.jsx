@@ -16,6 +16,7 @@ import {
   VerifyEmail,
   NavBarLeft,
   ManualVerifyPage,
+  BenefitCalculator,
   TournamentPage,
   AssociateTwitterPage
 } from '@components';
@@ -156,6 +157,7 @@ function App() {
             <Route path="manual-verify" element={<ManualVerifyPage />} />
             <Route path="tournament" element={<TournamentPage />} />
             <Route path="account-settings" element={<AccountSettings />} />
+            <Route path="benefit-calculator" element={<BenefitCalculator />} />
             <Route path="twitter/login" element={<AssociateTwitterPage />} />
             <Route path="*" element={<Welcome />} />
           </>

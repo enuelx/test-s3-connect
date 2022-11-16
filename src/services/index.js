@@ -5,3 +5,4 @@ export { default as shippingAddressApi } from './shippingAddressApi';
 export { default as emailApi } from './emailApi';
 export { default as challengersApi } from './challengersApi';
 export { default as twitterUserApi } from './twitterUserApi';
+export { default as benefitsLambda } from './benefitsLambda';

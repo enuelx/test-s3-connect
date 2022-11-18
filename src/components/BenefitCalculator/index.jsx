@@ -5,7 +5,7 @@ import './style.css';
 export const BenefitCalculator = () => {
   return (
     <Container className="containerBenefitsCalculator">
-      <Grid className="gridAccount">
+      <Grid className="gridAccount benefitsContainer">
         <BenefitCalculatorComponent />
       </Grid>
     </Container>

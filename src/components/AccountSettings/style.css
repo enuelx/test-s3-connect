@@ -15,6 +15,10 @@
   width: 52vw;
 }
 
+.benefitsContainer {
+  justify-content: center
+}
+
 .boxChangePassWallet {
   text-align: center;
   display: flex;

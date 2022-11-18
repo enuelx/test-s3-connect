@@ -6,6 +6,7 @@ import { faCalculator } from '@fortawesome/free-solid-svg-icons';
 import { UserContext, ToastContext } from '@context';
 import { benefitsLambda } from '@services';
 import { Loader } from '@components';
+import BenefitsMessage from './BenefitsMessage';
 
 export const BenefitCalculatorComponent = () => {
   const userContext = useContext(UserContext);
@@ -25,8 +26,8 @@ export const BenefitCalculatorComponent = () => {
         const benefits = await benefitsLambda.getBenefits(
           listWallets.join(',')
         );
-        const message = benefits.data['message'];
-        setBenefits(message);
+        const benefitsJSON = benefits.data['benefits'];
+        setBenefits(benefitsJSON);
       } catch (err) {
         toastContext.errorMessage();
       }
@@ -39,11 +40,14 @@ export const BenefitCalculatorComponent = () => {
         <FontAwesomeIcon color="#fff" icon={faCalculator} size="3x" />
       </Box>
       <Box style={{ marginTop: '3vh' }}>
-        <Typography>Benefits Calculator</Typography>
+        <Typography variant="h4" style={{ marginTop: '15px' }}>
+          Benefits Calculator
+        </Typography>
+
         {benefits === null ? (
           <Loader />
-        ) : benefits === '' ? (
-          <Typography>
+        ) : JSON.stringify(benefits) === '{}' ? (
+          <Typography style={{ marginTop: '15px' }}>
             You're missing on the good stuff!{' '}
             <Link
               target="_blank"
@@ -56,7 +60,7 @@ export const BenefitCalculatorComponent = () => {
             and start getting your holder benefits!
           </Typography>
         ) : (
-          <Typography style={{ whiteSpace: 'pre-wrap' }}>{benefits}</Typography>
+          <BenefitsMessage benefits={benefits} />
         )}
       </Box>
     </div>

@@ -11,5 +11,9 @@ export default [
   { url: '/manual-verify', text: 'Add wallet manually', icon: faWallet },
   { url: '/tournament', text: 'Tournament', icon: faTrophy },
   { url: '/account-settings', text: 'Account settings', icon: faGear },
-  { url: '/benefit-calculator', text: 'Benefits calculator', icon: faCalculator }
+  {
+    url: '/benefit-calculator',
+    text: 'Benefits calculator',
+    icon: faCalculator
+  }
 ];

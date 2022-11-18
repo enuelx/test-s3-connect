@@ -7,6 +7,7 @@ export default {
   async getBenefits(wallets) {
     const result = await axios.get(benefitsLambdaUrl, {
       params: {
+        format: "True",
         wallets
       }
     });

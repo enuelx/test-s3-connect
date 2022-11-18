@@ -1,5 +1,5 @@
 import { Container, Grid } from '@mui/material';
-import { BenefitCalculatorComponent } from './BenefitCalculatorComponent';
+import { BenefitCalculatorComponent } from './BenefitComponent';
 import './style.css';
 
 export const BenefitCalculator = () => {

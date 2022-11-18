@@ -23,12 +23,14 @@ import {
 import { InfoOutlined as InfoIcon } from '@mui/icons-material';
 import './App.css';
 import NavBarBottomMobile from './components/NavBarBottomMobile';
+import { webAppPaths as paths } from '@utils';
 
 function App() {
   const userContext = useContext(UserContext);
   const [isMobile, setIsMobile] = useState(false);
   const [menu, setMenu] = useState(null);
   const [textMenu, setTextMenu] = useState('');
+
 
   useEffect(() => {
     if (document.body.clientWidth < 850) {
@@ -65,15 +67,10 @@ function App() {
   }, [userContext.user, getAccountDetails]);
 
   useEffect(() => {
-    if (menu) {
-      setTextMenu(
-        menu === 1
-          ? 'Dashboard'
-          : menu === 2
-          ? 'Manually Sync'
-          : 'Account Settings'
-      );
-    }
+    const urlPath = window.location.pathname;
+    const iconIndex = paths.map((e) => e.url).indexOf(urlPath);
+    const pathText = paths[iconIndex].text
+    setTextMenu(pathText)
   }, [menu]);
 
   const verifyAccount = useCallback(async () => {

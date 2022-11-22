@@ -31,7 +31,6 @@ function App() {
   const [menu, setMenu] = useState(null);
   const [textMenu, setTextMenu] = useState('');
 
-
   useEffect(() => {
     if (document.body.clientWidth < 850) {
       setIsMobile(true);
@@ -69,8 +68,10 @@ function App() {
   useEffect(() => {
     const urlPath = window.location.pathname;
     const iconIndex = paths.map((e) => e.url).indexOf(urlPath);
-    const pathText = paths[iconIndex].text
-    setTextMenu(pathText)
+    if (iconIndex !== -1) {
+      const pathText = paths[iconIndex].text;
+      setTextMenu(pathText);
+    }
   }, [menu]);
 
   const verifyAccount = useCallback(async () => {

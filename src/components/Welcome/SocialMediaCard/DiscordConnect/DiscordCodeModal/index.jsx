@@ -92,7 +92,7 @@ export default () => {
               target="_blank"
               style={{ color: '#fff' }}
             >
-              #holders-verification
+              #account-system
             </a>{' '}
             in our discord server and interact with the bot, where you will be
             prompted to insert this code.

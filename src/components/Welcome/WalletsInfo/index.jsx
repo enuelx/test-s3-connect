@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { UnsupportedChainIdError, useWeb3React } from '@web3-react/core';
 import {
@@ -28,6 +28,7 @@ import { ReCaptcha } from '@components/common';
 import { toastMessages } from '@utils';
 
 const WelcomeWalletsInfo = ({ userContext, toastContext }) => {
+  const captchaRef = useRef(null);
   const [captchaValue, setCaptchaValue] = useState(null);
   const [removeWalletDialogIsOpen, setRemoveWalletDialogIsOpen] =
     useState(false);
@@ -61,6 +62,7 @@ const WelcomeWalletsInfo = ({ userContext, toastContext }) => {
 
       toastContext.errorMessage(message);
     }
+    captchaRef.current?.reset();
   };
 
   const removeWallet = async (wallet) => {
@@ -252,7 +254,10 @@ const WelcomeWalletsInfo = ({ userContext, toastContext }) => {
       >
         <FormControl>
           {active && !isUnsupportedChain && (
-            <ReCaptcha setCaptchaValue={setCaptchaValue} />
+            <ReCaptcha
+              captchaRef={captchaRef}
+              setCaptchaValue={setCaptchaValue}
+            />
           )}
           <ThemeProvider theme={grayButton}>
             <Button

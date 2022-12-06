@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   Box,
@@ -21,6 +21,7 @@ import { toastMessages } from '@utils';
 import './style.css';
 
 export const ForgotPassword = () => {
+  const captchaRef = useRef(null);
   const navigate = useNavigate();
   const toastContext = useContext(ToastContext);
 
@@ -42,6 +43,7 @@ export const ForgotPassword = () => {
       const message = err.response?.data?.error;
       toastContext.errorMessage(message);
     }
+    captchaRef.current?.reset();
   };
 
   return (
@@ -139,7 +141,10 @@ export const ForgotPassword = () => {
                 </Button>
               </ThemeProvider>
             </Box>
-            <ReCaptcha setCaptchaValue={setCaptchaValue} />
+            <ReCaptcha
+              captchaRef={captchaRef}
+              setCaptchaValue={setCaptchaValue}
+            />
           </FormControl>
         </Box>
       </Grid>

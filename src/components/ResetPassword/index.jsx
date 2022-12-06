@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useRef, useState } from 'react';
 import { Box, Button, Container, FormControl, Grid } from '@mui/material';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 
@@ -10,6 +10,7 @@ import { whiteButton } from '@themes';
 import { toastMessages } from '../../utils';
 
 export const ResetPassword = () => {
+  const captchaRef = useRef(null);
   const navigate = useNavigate();
   const toastContext = useContext(ToastContext);
   const [searchParams, setSearchParams] = useSearchParams();
@@ -38,6 +39,7 @@ export const ResetPassword = () => {
       }
     }
 
+    captchaRef.current.reset();
     setIsSubmitting(false);
   };
 
@@ -87,7 +89,10 @@ export const ResetPassword = () => {
                 Reset Password
               </Button>
             </ThemeProvider>
-            <ReCaptcha setCaptchaValue={setCaptchaValue} />
+            <ReCaptcha
+              captchaRef={captchaRef}
+              setCaptchaValue={setCaptchaValue}
+            />
           </Box>
         </FormControl>
       </Grid>

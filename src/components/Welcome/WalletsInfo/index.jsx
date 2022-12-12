@@ -18,7 +18,7 @@ import {
   faFire,
   faSnowflake
 } from '@fortawesome/free-solid-svg-icons';
-import { facEmptyFire, facEmptySnowflake } from './img/customIcons';
+import { facEmptyFire, facEmptySnowflake } from '@style/img/customIcons';
 import { ThemeProvider } from '@emotion/react';
 
 import './style.css';
@@ -262,7 +262,7 @@ const WelcomeWalletsInfo = ({ userContext, toastContext }) => {
           <ThemeProvider theme={grayButton}>
             <Button
               onClick={
-                !active || isUnsupportedChain ? () => {} : associateWallet
+                !active || isUnsupportedChain ? () => { } : associateWallet
               }
               disabled={!active || isUnsupportedChain}
               sx={{

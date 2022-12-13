@@ -1,9 +1,8 @@
-import { useRef } from 'react';
 import config from '@config';
 import Reaptcha from 'reaptcha';
 
 export const ReCaptcha = ({ setCaptchaValue, captchaRef }) => {
-  const onVerify = (recaptchaResponse) => {
+  const onVerify = recaptchaResponse => {
     setCaptchaValue(recaptchaResponse);
   };
 

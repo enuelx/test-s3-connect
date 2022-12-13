@@ -19,12 +19,12 @@ export default {
     return `https://api.twitter.com/oauth/authenticate?oauth_token=${result.data.oauth_token}`;
   },
 
-  async associateUser({ oauth_token, oauth_verifier, token }) {
+  async associateUser({ oauthToken, oauthVerifier, token }) {
     const result = await axiosInstance.post(
       apiUrl,
       {
-        oauth_token,
-        oauth_verifier
+        oauthToken,
+        oauthVerifier
       },
       {
         headers: {

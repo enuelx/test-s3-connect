@@ -1,13 +1,13 @@
-import { useState, useContext } from 'react';
+import { useContext, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { Box, Button, FormControl, Typography } from '@mui/material';
 import { UnsupportedChainIdError, useWeb3React } from '@web3-react/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUnlockKeyhole, faKey } from '@fortawesome/free-solid-svg-icons';
+import { faKey, faUnlockKeyhole } from '@fortawesome/free-solid-svg-icons';
 import { accountApi, walletApi } from '@services';
 import { ThemeProvider } from '@emotion/react';
 
-import { UserContext, ToastContext } from '@context';
+import { ToastContext, UserContext } from '@context';
 import { grayButton, grayDisabledButton } from '@themes';
 import { PasswordTextField2 } from '@components/common/PasswordTextField2';
 import { toastMessages } from '@utils';
@@ -50,7 +50,7 @@ export const ChangePassword = () => {
     setIsSubmitting(true);
 
     if (
-      !userContext.user.wallets.map((wallet) => wallet.wallet).includes(account)
+      !userContext.user.wallets.map(wallet => wallet.wallet).includes(account)
     ) {
       toastContext.errorMessage(toastMessages.error.WALLET_NOT_ASSOCIATED);
     } else if (newPassword !== repeatNewPassword) {

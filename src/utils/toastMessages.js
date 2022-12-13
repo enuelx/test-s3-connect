@@ -4,7 +4,7 @@ const success = Object.freeze({
   EMAIL_VERIFICATION_SENT: "Verification email sent! Don't let it go cold…",
   EMAIL_VERIFIED: 'Email verified',
   EMAIL_FORGOT_PASSWORD_SENT: 'Email sent! Check your inbox (or spam folder)',
-  GENERIC_ACTION: (action) => `Successfully ${action}!`,
+  GENERIC_ACTION: action => `Successfully ${action}!`,
   LOGGED: "Welcome, Cypher. We've been expecting you",
   LOGOUT: 'Cypher Out!',
   PASSWORD_CHANGED: 'Alright, you have a new password now!',

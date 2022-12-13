@@ -28,7 +28,7 @@ export const UsernameTextField = ({ username, setUsername }) => {
           required
           label="username"
           value={username}
-          onChange={(e) => {
+          onChange={e => {
             setUsername(e.target.value);
           }}
           variant="standard"

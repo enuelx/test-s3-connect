@@ -12,8 +12,8 @@ import CloseC from './style/img/CloseC.png';
 import './style/style.css';
 import OpenItems from './menuItems/openItems';
 import CloseItems from './menuItems/closeItems';
-import { UserContext, ToastContext } from '@context';
-import { toastMessages, webAppPaths as paths } from '@utils';
+import { ToastContext, UserContext } from '@context';
+import { webAppPaths as paths, toastMessages } from '@utils';
 import { accountApi } from '@services';
 
 export const NavBarLeft = () => {
@@ -32,7 +32,7 @@ export const NavBarLeft = () => {
     window.localStorage.setItem('logout', Date.now());
   };
   useEffect(() => {
-    toastContext.changeOpenNavbarLeft({ login: true, open: open });
+    toastContext.changeOpenNavbarLeft({ login: true, open });
   }, []);
   return (
     <Drawer

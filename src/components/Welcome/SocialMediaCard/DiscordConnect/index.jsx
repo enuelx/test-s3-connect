@@ -4,7 +4,7 @@ import { faDiscord } from '@fortawesome/free-brands-svg-icons';
 
 import DiscordCodeModal from './DiscordCodeModal';
 
-export default ({ userContext }) => {
+const DiscordConnect = ({ userContext }) => {
   return (
     <Box style={{ marginBottom: '3vh' }}>
       <Box style={{ display: 'flex' }}>
@@ -33,3 +33,5 @@ export default ({ userContext }) => {
     </Box>
   );
 };
+
+export default DiscordConnect;

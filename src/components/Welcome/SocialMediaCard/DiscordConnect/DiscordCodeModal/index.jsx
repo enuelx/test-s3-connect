@@ -1,14 +1,14 @@
-import { useState, useContext } from 'react';
-import { Dialog, Box, Typography, Divider, Button } from '@mui/material';
+import { useContext, useState } from 'react';
+import { Box, Button, Dialog, Divider, Typography } from '@mui/material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCirclePlus } from '@fortawesome/free-solid-svg-icons';
 import { ThemeProvider } from '@emotion/react';
 
-import { UserContext, ToastContext } from '@context';
+import { ToastContext, UserContext } from '@context';
 import { discordUserApi } from '@services';
 import { grayButton } from '@themes';
 
-export default () => {
+const DiscordCodeModal = () => {
   const [open, setOpen] = useState(false);
   const [associateCode, setAssociateCode] = useState('');
 
@@ -91,6 +91,7 @@ export default () => {
               href="https://discord.com/channels/920306036517253171/961604478056939591"
               target="_blank"
               style={{ color: '#fff' }}
+              rel="noreferrer"
             >
               #account-system
             </a>{' '}
@@ -118,3 +119,5 @@ export default () => {
     </>
   );
 };
+
+export default DiscordCodeModal;

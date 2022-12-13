@@ -2,20 +2,20 @@ import { useEffect, useState } from 'react';
 import {
   Box,
   Container,
-  createTheme,
   Grid,
   Step,
   StepLabel,
-  Stepper
+  Stepper,
+  createTheme
 } from '@mui/material';
 import styled from '@emotion/styled';
 import { ThemeProvider } from '@emotion/react';
 
 import ManualVerify from './ManualVerify';
 import {
-  RIGHT_ARROW,
-  LEFT_ARROW,
   BOTH_ARROWS,
+  LEFT_ARROW,
+  RIGHT_ARROW,
   WALLET_A,
   WALLET_B
 } from './style/icons';
@@ -59,15 +59,18 @@ export const ManualVerifyPage = () => {
     if (stepState === 3) {
       return BOTH_ARROWS;
     }
-    return;
   };
-  const [isMobile, setIsMobile] = useState(false);
+
+  const [_isMobile, setIsMobile] = useState(false);
+
   useEffect(() => {
     if (document.body.clientWidth < 850) {
       setIsMobile(true);
     }
   }, []);
+
   useEffect(() => {}, [stepState]);
+
   return (
     <Container className="containerChangePass">
       <Grid className="gridWalletStep">

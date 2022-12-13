@@ -17,7 +17,7 @@ const connectors = {
   WalletConnect
 };
 
-const getLibrary = (provider) => {
+const getLibrary = provider => {
   return new Web3Provider(provider);
 };
 

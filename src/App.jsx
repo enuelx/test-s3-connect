@@ -1,4 +1,4 @@
-import { useContext, useCallback, useEffect, useState } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { Tooltip } from '@mui/material';
 
@@ -6,19 +6,19 @@ import { accountApi } from '@services';
 import { UserContext } from '@context/UserContext';
 import {
   AccountSettings,
-  ForgotPassword,
-  Login,
-  Register,
-  Loader,
-  Welcome,
-  NavBarTop,
-  ResetPassword,
-  VerifyEmail,
-  NavBarLeft,
-  ManualVerifyPage,
+  AssociateTwitterPage,
   BenefitCalculator,
+  ForgotPassword,
+  Loader,
+  Login,
+  ManualVerifyPage,
+  NavBarLeft,
+  NavBarTop,
+  Register,
+  ResetPassword,
   TournamentPage,
-  AssociateTwitterPage
+  VerifyEmail,
+  Welcome
 } from '@components';
 import { InfoOutlined as InfoIcon } from '@mui/icons-material';
 import './App.css';
@@ -37,7 +37,7 @@ function App() {
     }
   }, []);
 
-  const handleChangeMenu = (index) => {
+  const handleChangeMenu = index => {
     setMenu(index);
   };
 
@@ -67,9 +67,9 @@ function App() {
 
   useEffect(() => {
     const urlPath = window.location.pathname;
-    const iconIndex = paths.map((e) => e.url).indexOf(urlPath);
+    const iconIndex = paths.map(e => e.url).indexOf(urlPath);
     if (iconIndex !== -1) {
-      const pathText = paths[iconIndex].text;
+      const pathText = paths[parseInt(iconIndex)].text;
       setTextMenu(pathText);
     }
   }, [menu]);
@@ -93,7 +93,7 @@ function App() {
   /**
    * Sync logout across tabs
    */
-  const syncLogout = useCallback((event) => {
+  const syncLogout = useCallback(event => {
     if (event.key === 'logout') {
       // If using react-router-dom, you may call history.push("/")
       window.location.reload();

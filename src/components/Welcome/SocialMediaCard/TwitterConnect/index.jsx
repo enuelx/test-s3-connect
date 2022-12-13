@@ -8,7 +8,7 @@ import { faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { twitterUserApi } from '@services';
 import { grayButton } from '@themes';
 
-export default ({ userContext }) => {
+const TwitterConnect = ({ userContext }) => {
   const [checkAuth, setCheckAuth] = useState(false);
 
   useEffect(() => {
@@ -18,12 +18,13 @@ export default ({ userContext }) => {
   const handleConnectTwitter = async () => {
     if (userContext.token) {
       const url = await twitterUserApi.getLinkLogin(userContext.token);
+      // eslint-disable-next-line security/detect-non-literal-fs-filename
       window.open(url, '_blank');
       userContext.setUser(undefined); // To force reload user data
     }
   };
 
-  const handleTwitterAcceptChange = async (event) => {
+  const handleTwitterAcceptChange = async event => {
     try {
       await twitterUserApi.updateShareAuth({
         token: userContext.token,
@@ -64,7 +65,7 @@ export default ({ userContext }) => {
                 color: '#787878',
                 '&.Mui-checked': { color: '#787878' }
               }}
-              onChange={(event) => handleTwitterAcceptChange(event)}
+              onChange={event => handleTwitterAcceptChange(event)}
             />
             <Typography
               style={{
@@ -113,3 +114,5 @@ export default ({ userContext }) => {
     </Box>
   );
 };
+
+export default TwitterConnect;

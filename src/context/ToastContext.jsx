@@ -1,5 +1,5 @@
 import { createContext, useState } from 'react';
-import { Snackbar, Alert } from '@mui/material';
+import { Alert, Snackbar } from '@mui/material';
 
 const ToastContext = createContext();
 
@@ -22,13 +22,13 @@ const ToastProvider = ({ children }) => {
         severity: 'error'
       });
     },
-    successMessage: (message) => {
+    successMessage: message => {
       setState({
         message,
         severity: 'success'
       });
     },
-    changeOpenNavbarLeft: (open) => {
+    changeOpenNavbarLeft: open => {
       setOpenNavBarLeft(open);
     }
   };

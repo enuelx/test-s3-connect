@@ -1,8 +1,8 @@
 import { useContext } from 'react';
 import { Box } from '@mui/system';
 
-import { WalletData, CustomButton } from '@components';
-import { UserContext, ToastContext } from '@context';
+import { CustomButton, WalletData } from '@components';
+import { ToastContext, UserContext } from '@context';
 import { accountApi } from '@services';
 import { toastMessages } from '@utils';
 import './style.css';
@@ -43,10 +43,7 @@ export const NavBarTop = () => {
         )}
 
         <Box className={'boxWalletData'}>
-          <WalletData
-            fromTop={!userContext.token ? false : true}
-            login={userContext.token}
-          />
+          <WalletData fromTop={!!userContext.token} login={userContext.token} />
         </Box>
 
         {userContext.token && (

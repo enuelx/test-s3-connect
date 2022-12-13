@@ -1,5 +1,5 @@
-import { useEffect, useContext } from 'react';
-import { useSearchParams, useNavigate } from 'react-router-dom';
+import { useContext, useEffect } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 import { Loader } from '@components';
 import { ToastContext } from '@context';
@@ -8,7 +8,7 @@ import { toastMessages } from '@utils';
 
 export const VerifyEmail = () => {
   const navigate = useNavigate();
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams, _setSearchParams] = useSearchParams();
 
   const toastContext = useContext(ToastContext);
 

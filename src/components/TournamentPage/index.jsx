@@ -10,12 +10,12 @@ import {
   ThemeProvider,
   Typography
 } from '@mui/material';
-import { faTrash, faCirclePlus } from '@fortawesome/free-solid-svg-icons';
+import { faCirclePlus, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import './style.css';
 import { grayButton } from '@themes';
-import { UserContext, ToastContext } from '@context';
+import { ToastContext, UserContext } from '@context';
 import { challengersApi } from '@services';
 
 export const TournamentPage = () => {
@@ -38,7 +38,7 @@ export const TournamentPage = () => {
     }
   };
 
-  const removeChallenger = async (username) => {
+  const removeChallenger = async username => {
     try {
       await challengersApi.remove({
         username,
@@ -88,7 +88,7 @@ export const TournamentPage = () => {
                   direction: 'ltr'
                 }}
               >
-                {userContext.user?.challengers?.map((challenger) => (
+                {userContext.user?.challengers?.map(challenger => (
                   <li
                     key={challenger.username}
                     style={{
@@ -152,7 +152,7 @@ export const TournamentPage = () => {
                   }
                 }}
                 value={challengerUsername}
-                onChange={(e) => setChallengerUsername(e.target.value)}
+                onChange={e => setChallengerUsername(e.target.value)}
                 label="Challenger username"
                 inputProps={{ style: { color: 'rgb(120, 120, 120)' } }}
               />

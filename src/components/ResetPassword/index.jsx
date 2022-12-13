@@ -1,8 +1,8 @@
 import { useContext, useRef, useState } from 'react';
 import { Box, Button, Container, FormControl, Grid } from '@mui/material';
-import { useSearchParams, useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
-import { ReCaptcha, PasswordTextField } from '@components/common';
+import { PasswordTextField, ReCaptcha } from '@components/common';
 import { accountApi } from '@services';
 import { ToastContext } from '@context';
 import { ThemeProvider } from '@emotion/react';
@@ -13,7 +13,7 @@ export const ResetPassword = () => {
   const captchaRef = useRef(null);
   const navigate = useNavigate();
   const toastContext = useContext(ToastContext);
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams, _setSearchParams] = useSearchParams();
 
   const [captchaValue, setCaptchaValue] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -23,7 +23,9 @@ export const ResetPassword = () => {
   const handleResetPassword = async () => {
     setIsSubmitting(true);
 
-    if (password !== repeatPassword) {
+    if (
+      crypto.timingSafeEqual(Buffer.from(password), Buffer.from(repeatPassword))
+    ) {
       toastContext.errorMessage(toastMessages.error.PASSWORD_MATCH);
     } else if (!captchaValue) {
       toastContext.errorMessage(toastMessages.error.CAPTCHA);

@@ -1,18 +1,18 @@
-import { useState, useContext, useMemo } from 'react';
+import { useContext, useMemo, useState } from 'react';
 import {
   Accordion,
-  AccordionSummary,
   AccordionDetails,
-  Typography,
-  TextField,
-  MenuItem,
+  AccordionSummary,
+  Button,
   FormControl,
-  Button
+  MenuItem,
+  TextField,
+  Typography
 } from '@mui/material';
 import { ExpandMore } from '@mui/icons-material';
 import countryList from 'react-select-country-list';
 
-import { UserContext, ToastContext } from '@context';
+import { ToastContext, UserContext } from '@context';
 import { shippingAddressApi } from '@services';
 
 export const AddressForm = () => {
@@ -25,7 +25,7 @@ export const AddressForm = () => {
 
   const [country, setCountry] = useState(
     countryOptions.find(
-      (country) => country.key === userContext.user.shippingAddress?.country.key
+      country => country.key === userContext.user.shippingAddress?.country.key
     ) || ''
   );
 
@@ -82,12 +82,12 @@ export const AddressForm = () => {
             select
             value={country}
             label="Country"
-            onChange={(e) => {
+            onChange={e => {
               setCountry(e.target.value);
             }}
             sx={{ marginBottom: '0.5rem' }}
           >
-            {countryOptions.map((country) => (
+            {countryOptions.map(country => (
               <MenuItem key={country.value} value={country}>
                 {country.label}
               </MenuItem>
@@ -96,7 +96,7 @@ export const AddressForm = () => {
           <TextField
             label="Address"
             value={address}
-            onChange={(e) => {
+            onChange={e => {
               setAddress(e.target.value);
             }}
             sx={{ marginBottom: '0.5rem' }}
@@ -104,7 +104,7 @@ export const AddressForm = () => {
           <TextField
             label="Full Name"
             value={fullName}
-            onChange={(e) => {
+            onChange={e => {
               setFullName(e.target.value);
             }}
             sx={{ marginBottom: '0.5rem' }}
@@ -112,7 +112,7 @@ export const AddressForm = () => {
           <TextField
             label="State / Province / Region"
             value={city}
-            onChange={(e) => {
+            onChange={e => {
               setCity(e.target.value);
             }}
             sx={{ marginBottom: '0.5rem' }}
@@ -120,7 +120,7 @@ export const AddressForm = () => {
           <TextField
             label="Zip Code"
             value={zipCode}
-            onChange={(e) => {
+            onChange={e => {
               setZipCode(e.target.value);
             }}
             sx={{ marginBottom: '0.5rem' }}
@@ -129,7 +129,7 @@ export const AddressForm = () => {
             label="Phone Number"
             value={phoneNumber}
             helperText="May be used to assist delivery"
-            onChange={(e) => {
+            onChange={e => {
               setPhoneNumber(e.target.value);
             }}
             sx={{ marginBottom: '0.5rem' }}

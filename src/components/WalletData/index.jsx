@@ -1,4 +1,4 @@
-import { useEffect, useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useWeb3React } from '@web3-react/core';
 import { Chip } from '@mui/material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';

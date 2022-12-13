@@ -9,9 +9,7 @@ import './style.css';
 const SocialMediaCard = ({ userContext }) => {
   return (
     <div className="divSocialMedia" style={{ width: '380px' }}>
-      <Box
-        className='boxSocialMedia'
-      >
+      <Box className="boxSocialMedia">
         <FontAwesomeIcon color="#fff" icon={faUserGroup} size="3x" />
       </Box>
       <DiscordConnect userContext={userContext} />

@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { TextField, Tooltip, IconButton, InputAdornment } from '@mui/material';
+import { IconButton, InputAdornment, TextField, Tooltip } from '@mui/material';
 import {
-  VisibilityOutlined as ShowIcon,
   VisibilityOffOutlined as HideIcon,
-  InfoOutlined as InfoIcon
+  InfoOutlined as InfoIcon,
+  VisibilityOutlined as ShowIcon
 } from '@mui/icons-material';
 
 import config from '@config';
@@ -23,7 +23,7 @@ export const PasswordTextField2 = ({
         required
         label={label}
         value={password}
-        onChange={(e) => {
+        onChange={e => {
           setPassword(e.target.value);
         }}
         type={showPassword ? 'text' : 'password'}

@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useContext, useState } from 'react';
 import {
   Box,
   Button,
@@ -10,7 +10,7 @@ import {
 import { Verified } from '@mui/icons-material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelopeCircleCheck } from '@fortawesome/free-solid-svg-icons';
-import { UserContext, ToastContext } from '@context';
+import { ToastContext, UserContext } from '@context';
 import { emailApi } from '@services';
 import { ThemeProvider } from '@emotion/react';
 import { grayButton } from '@themes';
@@ -82,7 +82,7 @@ export const EmailForm = () => {
           <TextField
             label="Email"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={e => setEmail(e.target.value)}
             InputLabelProps={{
               style: { color: 'rgb(120, 120, 120)', fontSize: '18px' }
             }}

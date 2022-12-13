@@ -2,7 +2,7 @@ import { useContext, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Box, Button, FormControl } from '@mui/material';
 
-import { UserContext, ToastContext } from '@context';
+import { ToastContext, UserContext } from '@context';
 import {
   PasswordTextField,
   ReCaptcha,
@@ -13,7 +13,7 @@ import { grayButton } from '@themes';
 import { toastMessages } from '@utils';
 import './style.css';
 
-export default ({
+const AccountForm = ({
   formActionName,
   submitCallback,
   children,
@@ -23,8 +23,7 @@ export default ({
   web3 = false,
   disableWeb3,
   handleWeb3Login,
-  widthButtonBox,
-  isMobile
+  widthButtonBox
 }) => {
   const captchaRef = useRef(null);
   const navigate = useNavigate();
@@ -43,7 +42,7 @@ export default ({
 
     try {
       if (validateRepeatPassword && password !== repeatPassword) {
-        toastContext.errorMessage(toastMessages.error.WRONG_PASSWORD);
+        toastContext.errorMessage(toastMessages.error.PASSWORD_MATCH);
       } else if (useCaptcha && !captchaValue) {
         toastContext.errorMessage(toastMessages.error.CAPTCHA);
       } else {
@@ -141,3 +140,5 @@ export default ({
     </>
   );
 };
+
+export default AccountForm;

@@ -12,7 +12,7 @@ export default defineConfig({
     ViteAliases(),
     !production &&
       nodePolyfills({
-        include: ['node_modules/**/*.js', new RegExp('node_modules/.vite/.*js')]
+        include: ['node_modules/**/*.js', /node_modules\/.vite\/.*js/]
       })
   ],
   build: {

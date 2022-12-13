@@ -1,44 +1,44 @@
-.accountButton{
-    width: 182px!important;
-    background: none!important;
-    border: solid 1px!important;
+.accountButton {
+  width: 182px !important;
+  background: none !important;
+  border: solid 1px !important;
 }
-.accountButton:hover{
-    background-color: #787878!important;
-    color: white!important;
-}
-
-.loginButton{
-    width: 182px!important;
-    background: none!important;
-    border: solid 1px!important;
+.accountButton:hover {
+  background-color: #787878 !important;
+  color: white !important;
 }
 
-.loginButton:hover{
-    background-color: #787878!important;
-    color: white!important;
+.loginButton {
+  width: 182px !important;
+  background: none !important;
+  border: solid 1px !important;
 }
-.web3Button{
-    width: 182px!important;
-    border: solid 1px!important;
-    background: none!important;
+
+.loginButton:hover {
+  background-color: #787878 !important;
+  color: white !important;
 }
-.web3Button:hover{
-    background-color: #787878!important;
-    color: white!important;
+.web3Button {
+  width: 182px !important;
+  border: solid 1px !important;
+  background: none !important;
+}
+.web3Button:hover {
+  background-color: #787878 !important;
+  color: white !important;
 }
 @media screen and (max-width: 850px) {
-    .accountButton{
-        width: auto!important;
-        height:30px!important;
-    }
-    .loginButton{
-        width: 132px!important;
-        height:30px!important;
-    }
-    .web3Button{
-        width: 132px!important;
-        margin-right: 100px!important;
-        height: 30px!important;
-    }
+  .accountButton {
+    width: auto !important;
+    height: 30px !important;
+  }
+  .loginButton {
+    width: 132px !important;
+    height: 30px !important;
+  }
+  .web3Button {
+    width: 132px !important;
+    margin-right: 100px !important;
+    height: 30px !important;
+  }
 }

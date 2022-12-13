@@ -1,10 +1,10 @@
-import { useState, useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { UnsupportedChainIdError, useWeb3React } from '@web3-react/core';
 import { Box, Container } from '@mui/material';
 import { Link } from 'react-router-dom';
 
-import { UserContext, ToastContext } from '@context';
+import { ToastContext, UserContext } from '@context';
 import { accountApi, walletApi } from '@services';
 import { AccountForm } from '@components';
 import background from './style/img/cypherOutlaw.png';
@@ -21,7 +21,7 @@ export const Login = () => {
   const { active, account, library, error } = useWeb3React();
   const isUnsupportedChain = error instanceof UnsupportedChainIdError;
   const [isMobile, setIsMobile] = useState(false);
-  const handleWeb3Login = async (captchaValue) => {
+  const handleWeb3Login = async captchaValue => {
     setIsSubmitting(true);
 
     try {

@@ -1,8 +1,8 @@
 import {
+  faCalculator,
   faCloud,
-  faWallet,
   faGear,
-  faCalculator
+  faWallet
 } from '@fortawesome/free-solid-svg-icons';
 
 import { facMoshpitLogo } from '@style/img/customIcons';

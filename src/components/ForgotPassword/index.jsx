@@ -66,7 +66,7 @@ export const ForgotPassword = () => {
               <TextField
                 label="email"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={e => setEmail(e.target.value)}
                 sx={{
                   width: '100%',
                   '& label.Mui-focused': {

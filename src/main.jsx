@@ -5,7 +5,7 @@ import { Web3ReactProvider } from '@web3-react/core';
 
 import './index.css';
 import { getLibrary } from '@config/web3';
-import { UserProvider, ToastProvider } from '@context';
+import { ToastProvider, UserProvider } from '@context';
 import App from './App';
 
 ReactDOM.createRoot(document.getElementById('root')).render(

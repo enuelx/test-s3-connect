@@ -7,7 +7,7 @@ import '../style/style.css';
 const CloseItems = ({ paths }) => {
   const urlPath = window.location.pathname;
 
-  const iconIndex = paths.map((e) => e.url).indexOf(urlPath);
+  const iconIndex = paths.map(e => e.url).indexOf(urlPath);
 
   const [select, setSelect] = useState(iconIndex);
 

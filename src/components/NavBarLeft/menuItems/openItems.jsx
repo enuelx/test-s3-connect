@@ -7,7 +7,7 @@ import '../style/style.css';
 
 const OpenItems = ({ paths }) => {
   const urlPath = window.location.pathname;
-  const iconIndex = paths.map((e) => e.url).indexOf(urlPath);
+  const iconIndex = paths.map(e => e.url).indexOf(urlPath);
 
   const [select, setSelect] = useState(iconIndex);
 

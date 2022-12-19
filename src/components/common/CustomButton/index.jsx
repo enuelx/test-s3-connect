@@ -4,18 +4,17 @@ import { Button, Tooltip } from '@mui/material';
 import { whiteButton } from '@themes';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
+  faArrowRightFromBracket,
   faRotate,
-  faWallet,
-  faArrowRightFromBracket
+  faWallet
 } from '@fortawesome/free-solid-svg-icons';
-export default ({
+
+const CustomButton = ({
   text,
-  color = 'primary',
   disabled = false,
   variant = 'contained',
   onClick,
   size = 'large',
-  sx,
   tooltip,
   tooltipPlacement = 'bottom',
   login,
@@ -64,7 +63,7 @@ export default ({
         size={size}
         className={fromTop ? 'noneMobile' : 'buttonWallet'}
         sx={{
-          width: text == 'reload' || text == 'logout' ? '50px' : '250px',
+          width: text === 'reload' || text === 'logout' ? '50px' : '250px',
           marginTop: '10px',
           background: 'transparent',
           border: 'solid 1px',
@@ -75,11 +74,11 @@ export default ({
           borderRadius: '0px 10px 0px 10px'
         }}
       >
-        {text == 'reload' ? (
+        {text === 'reload' ? (
           <>
             <FontAwesomeIcon style={{ fontSize: '26px' }} icon={faRotate} />
           </>
-        ) : text == 'logout' ? (
+        ) : text === 'logout' ? (
           <>
             <FontAwesomeIcon
               style={{ fontSize: '26px' }}
@@ -100,3 +99,5 @@ export default ({
     </ThemeProvider>
   );
 };
+
+export default CustomButton;

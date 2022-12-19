@@ -2,27 +2,27 @@ import { useRef, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { UnsupportedChainIdError, useWeb3React } from '@web3-react/core';
 import {
+  Box,
   Button,
   Dialog,
-  Typography,
-  Box,
   Divider,
+  FormControl,
   Stack,
-  FormControl
+  Typography
 } from '@mui/material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-  faWallet,
-  faTrash,
   faCirclePlus,
   faFire,
-  faSnowflake
+  faSnowflake,
+  faTrash,
+  faWallet
 } from '@fortawesome/free-solid-svg-icons';
 import { facEmptyFire, facEmptySnowflake } from '@style/img/customIcons';
 import { ThemeProvider } from '@emotion/react';
 
 import './style.css';
-import { whiteButton, grayButton } from '@themes';
+import { grayButton, whiteButton } from '@themes';
 import { walletApi } from '@services';
 import { ReCaptcha } from '@components/common';
 import { toastMessages } from '@utils';
@@ -65,7 +65,7 @@ const WelcomeWalletsInfo = ({ userContext, toastContext }) => {
     captchaRef.current?.reset();
   };
 
-  const removeWallet = async (wallet) => {
+  const removeWallet = async wallet => {
     try {
       await walletApi.removeWallet(userContext.token, wallet);
       userContext.setUser(undefined);
@@ -77,7 +77,7 @@ const WelcomeWalletsInfo = ({ userContext, toastContext }) => {
     }
   };
 
-  const setHotWallet = async (wallet) => {
+  const setHotWallet = async wallet => {
     try {
       await walletApi.setHot(userContext.token, wallet);
       userContext.setUser(undefined);
@@ -89,7 +89,7 @@ const WelcomeWalletsInfo = ({ userContext, toastContext }) => {
     }
   };
 
-  const setVaultWallet = async (wallet) => {
+  const setVaultWallet = async wallet => {
     try {
       await walletApi.setVault(userContext.token, wallet);
       userContext.setUser(undefined);
@@ -238,7 +238,7 @@ const WelcomeWalletsInfo = ({ userContext, toastContext }) => {
         ) : (
           <Box style={{ textAlign: 'left', marginTop: '2vh' }}>
             <Typography style={{ fontSize: '18px', color: '#787878' }}>
-              You don't have linked wallets yet
+              You don&apos;t have linked wallets yet
             </Typography>
           </Box>
         )}
@@ -262,7 +262,7 @@ const WelcomeWalletsInfo = ({ userContext, toastContext }) => {
           <ThemeProvider theme={grayButton}>
             <Button
               onClick={
-                !active || isUnsupportedChain ? () => { } : associateWallet
+                !active || isUnsupportedChain ? () => {} : associateWallet
               }
               disabled={!active || isUnsupportedChain}
               sx={{

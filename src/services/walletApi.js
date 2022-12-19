@@ -172,7 +172,5 @@ export default {
         }
       }
     );
-
-    return;
   }
 };

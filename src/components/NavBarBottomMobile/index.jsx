@@ -5,20 +5,20 @@ import {
   Button,
   CssBaseline,
   Drawer,
-  Grid,
-  GlobalStyles
+  GlobalStyles,
+  Grid
 } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-  faRotate,
-  faArrowRightFromBracket
+  faArrowRightFromBracket,
+  faRotate
 } from '@fortawesome/free-solid-svg-icons';
 
 import { WalletData } from '@components';
-import { UserContext, ToastContext } from '@context';
+import { ToastContext, UserContext } from '@context';
 import { accountApi } from '@services';
-import { toastMessages, webAppPaths as paths } from '@utils';
+import { webAppPaths as paths, toastMessages } from '@utils';
 import './style.css';
 
 const drawerBleeding = 77;
@@ -53,7 +53,7 @@ function NavBarBottomMobile(props) {
   const [open, setOpen] = useState(false);
 
   const urlPath = window.location.pathname;
-  const iconIndex = paths.map((e) => e.url).indexOf(urlPath);
+  const iconIndex = paths.map(e => e.url).indexOf(urlPath);
   const [select, setSelect] = useState(iconIndex);
 
   const toggleDrawer = () => {

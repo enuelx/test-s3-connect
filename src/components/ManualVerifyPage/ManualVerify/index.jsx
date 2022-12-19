@@ -1,13 +1,13 @@
-import { useContext, useState, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import {
   Box,
-  Select,
-  Typography,
-  MenuItem,
+  Button,
   FormControl,
   InputLabel,
+  MenuItem,
   OutlinedInput,
-  Button
+  Select,
+  Typography
 } from '@mui/material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -15,12 +15,12 @@ import {
   faCircleXmark
 } from '@fortawesome/free-solid-svg-icons';
 
-import { UserContext, ToastContext } from '@context';
+import { ToastContext, UserContext } from '@context';
 import { Loader } from '@components';
 import { walletApi } from '@services';
 import manualValidationStatus from './manualValidationStatus';
 import { ThemeProvider } from '@emotion/react';
-import { grayButton, whiteButton, grayButtonVerify } from '@themes';
+import { grayButton, grayButtonVerify, whiteButton } from '@themes';
 import { toastMessages } from '@utils';
 import './style.css';
 const ManualVerify = ({ stepState, setStepState }) => {
@@ -43,7 +43,7 @@ const ManualVerify = ({ stepState, setStepState }) => {
       }
     };
 
-    getValidation().catch((err) => {
+    getValidation().catch(() => {
       setErrorGettingValidation(true);
       toastContext.errorMessage(toastMessages.error.VALIDATION_STATUS);
     });
@@ -310,9 +310,7 @@ const ManualVerify = ({ stepState, setStepState }) => {
     </Box>
   ) : stepState === 3 ? (
     <Box style={{ marginTop: '3vh' }}>
-      <Typography
-        className="typhoWalletStep3"
-      >
+      <Typography className="typhoWalletStep3">
         Congrats, wallet verified, check it in your wallets section
       </Typography>
       <Box
@@ -356,8 +354,9 @@ const ManualVerify = ({ stepState, setStepState }) => {
         This option allows you to associate additional wallets to your account
         without having to sign a transaction with us. Keep in mind you need at
         least one wallet already verified (i.e.: A hot wallet with a Cypher). To
-        prove ownership of the new wallet (i.e.: A cold wallet) we'll ask you to
-        send the Cypher to the new wallet you want to verify and send it back.
+        prove ownership of the new wallet (i.e.: A cold wallet) we&apos;ll ask
+        you to send the Cypher to the new wallet you want to verify and send it
+        back.
       </Typography>
       <br />
       <Box component="form">
@@ -389,17 +388,17 @@ const ManualVerify = ({ stepState, setStepState }) => {
             }}
             label="Wallet"
             value={useHolderWallet}
-            onChange={(e) => {
+            onChange={e => {
               setUseHolderWallet(e.target.value);
             }}
             style={{ color: 'rgb(120, 120, 120)' }}
             inputProps={{ style: { color: 'rgb(120, 120, 120)' } }}
           >
             {userContext.user.wallets
-              .filter((wallet) => {
+              .filter(wallet => {
                 return wallet.cypherHoldings.length > 0;
               })
-              .map((wallet) => {
+              .map(wallet => {
                 return (
                   <MenuItem key={wallet.wallet} value={wallet.wallet}>
                     {wallet.wallet}
@@ -432,7 +431,7 @@ const ManualVerify = ({ stepState, setStepState }) => {
               }
             }}
             value={toValidateWallet}
-            onChange={(e) => {
+            onChange={e => {
               setToValidateWallet(e.target.value);
             }}
             label="Wallet"

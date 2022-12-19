@@ -20,7 +20,7 @@ import { CustomButton } from '@components/common';
 import MetamaskLogo from './img/MetaMask.png';
 import WalletConnectLogo from './img/WalletConnect.png';
 
-export default ({ login, isMobile, fromTop }) => {
+const WalletModal = ({ login, isMobile, fromTop }) => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -98,3 +98,5 @@ export default ({ login, isMobile, fromTop }) => {
     </div>
   );
 };
+
+export default WalletModal;

@@ -16,7 +16,7 @@ export default {
       }
     });
 
-    return `https://api.twitter.com/oauth/authenticate?oauth_token=${result.data.oauth_token}`;
+    return `https://api.twitter.com/oauth/authenticate?oauth_token=${result.data.oauthToken}`;
   },
 
   async associateUser({ oauthToken, oauthVerifier, token }) {

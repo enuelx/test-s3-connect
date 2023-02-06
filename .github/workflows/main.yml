@@ -25,6 +25,10 @@ jobs:
           aws-region: ${{ vars.aws_region }}
       - name: Install dependencies
         run: npm install
+      - name: 'Create env file'
+        run: |
+          echo "${{ vars.ENV_FILE }}" > .env
+          cat .env
       - name: Build
         run: npm run build
       - name: Deploy

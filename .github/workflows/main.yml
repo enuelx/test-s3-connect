@@ -30,7 +30,6 @@ jobs:
           DOTENV: ${{ secrets.DOTENV }}
         run: |
           echo $DOTENV | base64 --decode > .env
-          cat $DOTENV | base64 --decode
           cat .env
       - name: Build
         run: npm run build

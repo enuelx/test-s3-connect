@@ -27,8 +27,9 @@ jobs:
         run: npm install
       - name: 'Create env file'
         run: |
-          echo "${{ vars.DOTENV }}" > .env
-          cat "${{ vars.DOTENV }}" > .env
+          echo $TESTING_DOTENV | base64 --decode > .env
+          [ "$environment" = testing ] && echo $TESTING_DOTENV | base64 --decode > .env
+          [ "$environment" = production ] && echo $PRODUCTION_DOTENV | base64 --decode > .env
       - name: Build
         run: npm run build
       - name: Deploy

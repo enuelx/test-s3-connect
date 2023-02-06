@@ -29,7 +29,8 @@ jobs:
         env:
           DOTENV: ${{ vars.DOTENV }}
         run: |
-          echo $DOTENV .env
+          echo $DOTENV > .env
+          cat .env
       - name: Build
         run: npm run build
       - name: Deploy

@@ -9,7 +9,7 @@ jobs:
     name: Deploy app in cloudfront
     runs-on: ubuntu-latest
     environment:
-      name: ${{ vars.environment }}
+      name: testing
     permissions:
       id-token: write
       contents: read
@@ -25,13 +25,13 @@ jobs:
           aws-region: ${{ vars.aws_region }}
       - name: Install dependencies
         run: npm install
-      - name: 'Create env file'
+      - name: Create env file
+        env:
+          DOTENV: ${{ secrets.DOTENV }}
         run: |
-          echo $TESTING_DOTENV | base64 --decode > .env
-          cat $TESTING_DOTENV | base64 --decode
+          echo $DOTENV | base64 --decode > .env
+          cat $DOTENV | base64 --decode
           cat .env
-          #[ "$environment" = testing ] && echo $TESTING_DOTENV | base64 --decode > .env
-          #[ "$environment" = production ] && echo $PRODUCTION_DOTENV | base64 --decode > .env
       - name: Build
         run: npm run build
       - name: Deploy

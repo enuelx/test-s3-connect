@@ -1,0 +1,36 @@
+name: Deploy app in cloudfront
+
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  deploy:
+    name: Deploy app in cloudfront
+    runs-on: ubuntu-latest
+    environment:
+      name: ${{ vars.environment }}
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: arn:aws:iam::653784090147:role/github-actions-oidc-Role-1EO4DNTXB38A
+          role-session-name: GitHubActions
+          audience: sts.amazonaws.com
+          aws-region: ${{ vars.aws_region }}
+      - name: Install dependencies
+        run: npm install
+      - name: Build
+        run: npm run build
+      - name: Deploy
+        uses: reggionick/s3-deploy@v3
+        with:
+          folder: build
+          bucket: ${{ vars.S3_BUCKET }}
+          bucket-region: ${{ vars.S3_BUCKET_REGION }}
+          delete-removed: true
